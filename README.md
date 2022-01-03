@@ -6,7 +6,8 @@
 - devise
 - AWS
 ## カリキュラム外の技術
-- Google Maps API
+- gmaps4rails
+- geocoder
 ## 実行手順
 ```
 $ git clone git@github.com:DaisukeKurita/re_timeline.git 
