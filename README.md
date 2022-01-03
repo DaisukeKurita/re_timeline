@@ -21,8 +21,8 @@ $ rails s
 ## テーブル定義書
 [Re: Timeline テーブル定義書](https://docs.google.com/spreadsheets/d/1034FTJepzzHVKPnQRCDIwXYPs29RevnoyInUAZenDnE/edit#gid=2020033787)
 ## ワイヤーフレーム
-![picture 1](images/d4d7ac92e112221036859dd821abcfca5ea989d82e5ae5d54cb531e211fad221.png)  
+![picture 5](images/d7e4052d4558893705ff811292055e81d5edc612f885802fab81595e9d7aec18.png)  
 ## ER図
-![picture 2](images/19840cd0755ea792f9f97819c6db351ea6bf9d1e4f9fbe7d614e02bd2a01798c.png)  
+![picture 6](images/c953d122ff0f782b84255279d1e2754b97fabcfb9ca1e88b444a34f370d01524.png)  
 ## 画面遷移図
-![picture 3](images/e02a7c131be5115c68311805cd54921a2ba84408944986a469bfa8fc5908bb7c.png)  
+![picture 7](images/f56674a850804c398c4067a0bd927f4ec12610a4c398ec578ba82dc0b36a7863.png)  
