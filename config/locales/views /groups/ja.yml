@@ -9,3 +9,4 @@ ja:
       group_information_details: 'グループ情報詳細'
       group_information_editing: 'グループ情報編集'
       group_deletion: 'グループ削除'
+      do_you_really_want_to_delete_this_group?: '本当にこのグループを削除しますか？'
