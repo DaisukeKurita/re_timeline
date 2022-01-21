@@ -1,0 +1,11 @@
+ja:
+  groups:
+    form:
+    index:
+      group_new_registration: 'グループ新規登録'
+      group_name: 'グループ名'
+      explanation: '説明'
+      list_of_affiliated_groups: '所属グループ一覧'
+      group_information_details: 'グループ情報詳細'
+      group_information_editing: 'グループ情報編集'
+      group_deletion: 'グループ削除'
