@@ -3,9 +3,15 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
   end
-
+  
+  def show
+  end
+  
   def new
     @group = Group.new
+  end
+  
+  def edit
   end
 
   def create
@@ -15,12 +21,6 @@ class GroupsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   def update
@@ -37,11 +37,11 @@ class GroupsController < ApplicationController
   end
 
   private
-  def group_params
-    params.require(:group).permit(:name, :explanation)
-  end
+    def group_params
+      params.require(:group).permit(:name, :explanation)
+    end
 
-  def set_group
-    @group = Group.find(params[:id])
-  end
+    def set_group
+      @group = Group.find(params[:id])
+    end
 end
