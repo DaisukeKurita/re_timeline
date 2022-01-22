@@ -1,0 +1,22 @@
+<%= form_with(model: @group, local: true) do |form| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @group.errors.count %>件のエラーがあります。</h2>
+      <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="group_name">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="group_explanation">
+    <%= form.label :explanation %>
+    <%= form.text_area :explanation %>
+  </div>
+  <%= form.submit %>
+<% end %>
+

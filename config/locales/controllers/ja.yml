@@ -1,0 +1,6 @@
+ja:
+  notice:
+    group_created: "%{name}グループが作成されました"
+    edited_the_group: "%{name}グループを編集しました"
+    edited_the_group: "%{name}グループを編集しました"
+    deleted_the_group: "%{name}グループを削除しました"

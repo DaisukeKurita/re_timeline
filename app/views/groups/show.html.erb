@@ -1,0 +1,6 @@
+<h2><%= t 'groups.index.group_information_details' %></h2>
+
+<p><%= t 'groups.index.group_name' %>: <%= @group.name %></p>
+<p><%= t 'groups.index.explanation' %>: <%= @group.explanation %></p>
+
+<%= link_to t('groups.index.group_information_editing'), edit_group_path(@group) %> | <%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %>
