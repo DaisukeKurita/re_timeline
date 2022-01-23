@@ -205,3 +205,5 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  view:
+    error_has_occurred: '件のエラーが発生しました'
