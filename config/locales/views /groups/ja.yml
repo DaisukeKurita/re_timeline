@@ -1,6 +1,5 @@
 ja:
   groups:
-    form:
     index:
       group_new_registration: 'グループ新規登録'
       group_name: 'グループ名'
