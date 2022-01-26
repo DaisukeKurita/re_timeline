@@ -9,11 +9,20 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
-  <% flash.each do |key, value| %>
-    <%= content_tag(:div, value, class: "#{key}") %>
-  <% end %>
 
   <body>
+    <header>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    
+    <% if user_signed_in? %>
+      <li><%= link_to t('view.logout'), destroy_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to t('view.login'), new_user_session_path %></li>
+      <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>
+    <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

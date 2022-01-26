@@ -2,7 +2,10 @@ ja:
   activerecord:
     models:
       group: グループ
+      user: ユーザー
     attributes:
       group:
         name: グループ名
         explanation: グループ説明
+      user:
+        name: ユーザー名

@@ -207,3 +207,6 @@ ja:
     pm: 午後
   view:
     error_has_occurred: '件のエラーが発生しました'
+    logout: 'ログアウト'
+    login: 'ログイン'
+    account_registration: 'アカウント登録'
