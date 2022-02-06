@@ -13,7 +13,7 @@
       <td><%= group.explanation %></td>
       <td><%= link_to t('.group_information_details'), group_path(group) %></td>
       <td><%= link_to t('.group_information_editing'), edit_group_path(group) %></td>
-      <td><%= link_to t('.group_deletion'), group_path(group), method: :delete, data: { confirm: t('.do_you_really_want_to_delete_this_group?') } %></td>
+      <td><%= link_to t('.group_deletion'), group_path(group), method: :delete, data: { confirm: t('.really_deleted?') } %></td>
     </tr>
   <% end %>
 </table>

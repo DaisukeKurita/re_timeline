@@ -3,4 +3,10 @@
 <p><%= t 'groups.index.group_name' %>: <%= @group.name %></p>
 <p><%= t 'groups.index.explanation' %>: <%= @group.explanation %></p>
 
+<%= t '.group_member_invitation' %>
+<%= form_with model: :grouping, scope: :post, url: group_groupings_path(@group.id), local: true do |form| %>
+  <%= text_field_tag :email, '' %>
+  <button type="submit"><%= t '.member_invitation' %></button>
+<% end %>
+
 <%= link_to t('groups.index.group_information_editing'), edit_group_path(@group) %> | <%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %>
