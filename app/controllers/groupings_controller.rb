@@ -8,9 +8,7 @@ class GroupingsController < ApplicationController
     user = User.find_by(email: grouping_params) 
     if user
       group.groupings.create(user_id: user.id)
-      redirect_to group_path(group.id)
-    else
-      redirect_to group_path(group.id)
+      redirect_to group_path(group.id), notice: t('notice.member_registration_completed', email: grouping_params)
     end
   end
   
