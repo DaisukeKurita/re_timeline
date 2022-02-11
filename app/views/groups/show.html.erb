@@ -16,10 +16,10 @@
     <th><%= t '.member_name' %></th>
     <th><%= t '.member_email' %></th>
   </tr>
-  <% @group.members.each do |member| %>
-    <td><%= member.name %></td>
-    <td><%= member.email %></td>
-    <td><%= link_to t('.delete_member'), group_grouping_path(@group, member.id), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
+  <% @group.groupings.each do |grouping| %>
+    <td><%= grouping.user.name %></td>
+    <td><%= grouping.user.email %></td>
+    <td><%= link_to t('.delete_member'), group_grouping_path(@group, grouping), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
   <% end %>
 </table>
 

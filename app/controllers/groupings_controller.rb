@@ -13,6 +13,9 @@ class GroupingsController < ApplicationController
   end
   
   def destroy
+    grouping = Grouping.find(params[:id])
+    grouping.destroy
+    redirect_to group_path(params[:group_id]), notice: t('notice.delete_member', email: grouping.user.email)
   end
   
   private
