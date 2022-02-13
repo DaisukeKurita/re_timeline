@@ -4,3 +4,8 @@ ja:
     edited_the_group: "%{name}グループを編集しました"
     edited_the_group: "%{name}グループを編集しました"
     deleted_the_group: "%{name}グループを削除しました"
+    registered_as_a_member: "%{email}は既にメンバー登録済みです"
+    no_email_create_an_account: "%{email}は存在しません、アカウント登録をお願いします"
+    email_blank: 'メールアドレスを入れてください'
+    member_registration_completed: "%{email}がメンバー登録できました"
+    delete_member: "%{email}をメンバーから削除しました"
