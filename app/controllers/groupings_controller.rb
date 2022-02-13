@@ -25,6 +25,7 @@ class GroupingsController < ApplicationController
   end
   
   # すでにメンバー登録されている場合はグループ詳細画面に遷移する
+  # リファクタリング（モデルに持っていく）
   def email_exist?
     group = find_group(params[:group_id])
     redirect_to group_path(group.id), notice: t('notice.registered_as_a_member', email: grouping_params) if group.members.exists?(email: grouping_params)
