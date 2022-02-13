@@ -16,3 +16,4 @@ ja:
       member_name: '名前'
       member_email: 'メールアドレス'
       delete_member: 'メンバー削除'
+      group_admin: 'グループ管理者'
