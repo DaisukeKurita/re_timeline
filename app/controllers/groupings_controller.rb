@@ -17,7 +17,7 @@ class GroupingsController < ApplicationController
   
   def update
     if @grouping.update(admin: params[:admin])
-      redirect_to group_path(params_grouo_id)
+      grouping_admin_grant_or_release
     else
       redirect_to group_path(params_grouo_id)
     end
@@ -54,6 +54,14 @@ class GroupingsController < ApplicationController
       redirect_to group_path(group.id), notice: t('notice.email_blank')
     elsif !User.exists?(email: params_email)
       redirect_to group_path(group.id), notice: t('notice.no_email_create_an_account', email: params_email)
+    end
+  end
+
+  def grouping_admin_grant_or_release
+    if @grouping.admin
+      redirect_to group_path(params_grouo_id), notice: t('notice.grant_admin_privilege', email: @grouping.user.email)
+    else
+      redirect_to group_path(params_grouo_id), notice: t('notice.release_admin_privilege', email: @grouping.user.email)
     end
   end
 
