@@ -1,5 +1,16 @@
 <h2><%= t 'groups.index.group_information_details' %></h2>
 
+<% if @grouping.present? %>
+  <div id="error_explanation">
+    <h2><%= @grouping.errors.count %><%= t 'view.error_has_occurred' %></h2>
+    <ul>
+      <% @grouping.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <p><%= t 'groups.index.group_name' %>: <%= @group.name %></p>
 <p><%= t 'groups.index.explanation' %>: <%= @group.explanation %></p>
 

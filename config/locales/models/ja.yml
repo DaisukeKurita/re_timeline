@@ -3,9 +3,12 @@ ja:
     models:
       group: グループ
       user: ユーザー
+      grouping: グルーピング
     attributes:
       group:
         name: グループ名
         explanation: グループ説明
       user:
         name: ユーザー名
+      grouping:
+        admin: グループ管理者
