@@ -11,14 +11,11 @@ class Grouping < ApplicationRecord
     throw(:abort) if Grouping.where(group_id: self.group_id, admin: true).length == 1 && self.admin?
   end
 
-  def admin_update_exist # リファクタリング
+  def admin_update_exist
     errors.add(:admin, :zero_admin_cannot)
-    if Grouping.where(group_id: self.group_id, admin: true).length == 1
-      if Grouping.where(group_id: self.group_id, admin: true).first.id == self.id
-        if self.admin? == false
-          throw(:abort)
-        end
-      end
-    end
+    return unless Grouping.where(group_id: self.group_id, admin: true).length == 1
+    return unless Grouping.where(group_id: self.group_id, admin: true).first.id == self.id
+    return unless self.admin? == false
+    throw(:abort)
   end
 end
