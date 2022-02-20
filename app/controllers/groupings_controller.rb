@@ -12,7 +12,7 @@ class GroupingsController < ApplicationController
       group.groupings.create(user_id: user.id)
       redirect_to group_path(group.id), notice: t('notice.member_registration_completed', email: params_email)
     else
-      redirect_to group_path(group.id)
+      render template: "groups/show"
     end
   end
   
