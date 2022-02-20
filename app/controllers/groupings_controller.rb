@@ -1,5 +1,6 @@
 class GroupingsController < ApplicationController
   before_action :set_grouping, only: %i[ update destroy ]
+  before_action :set_group, only: %i[ update destroy ]
   before_action :authenticate_user!
 
   def create
@@ -19,7 +20,7 @@ class GroupingsController < ApplicationController
     if @grouping.update(admin: params[:admin])
       grouping_admin_grant_or_release
     else
-      redirect_to group_path(params_group_id)
+      render template: "groups/show"
     end
   end
 
@@ -27,7 +28,6 @@ class GroupingsController < ApplicationController
     if @grouping.destroy
       redirect_to group_path(params_group_id), notice: t('notice.delete_member', email: @grouping.user.email)
     else
-      @group = find_group(params_group_id)
       render template: "groups/show"
     end
   end
@@ -76,5 +76,9 @@ class GroupingsController < ApplicationController
 
   def set_grouping
     @grouping = Grouping.find(params[:id])
+  end
+
+  def set_group
+    @group = find_group(params_group_id)
   end
 end
