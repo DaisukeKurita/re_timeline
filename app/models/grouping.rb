@@ -6,8 +6,9 @@ class Grouping < ApplicationRecord
 
   private
   def zero_admin_cannot
+    return if destroyed_by_association.present?
     errors.add(:admin, :zero_admin_cannot)
-    throw(:abort) if Grouping.where(group_id: self.group_id, admin:true).length == 1 && self.admin?
+    throw(:abort) if Grouping.where(group_id: self.group_id, admin: true).length == 1 && self.admin?
   end
 
   def admin_update_exist # リファクタリング
