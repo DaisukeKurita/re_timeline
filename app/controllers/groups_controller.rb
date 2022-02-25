@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   end
   
   def show
+    @groupings = Grouping.includes(:user)
   end
   
   def new
