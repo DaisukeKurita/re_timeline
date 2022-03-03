@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   end
   
   def show
+    @groupings = @group.groupings.includes(:user)
   end
   
   def new
@@ -19,6 +20,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
+      @group.groupings.create(user_id: current_user.id, admin: true)
       redirect_to group_path(@group), notice: t('notice.group_created', name: @group.name)
     else
       render :new

@@ -16,3 +16,6 @@ ja:
       member_name: '名前'
       member_email: 'メールアドレス'
       delete_member: 'メンバー削除'
+      group_admin: 'グループ管理者'
+      grant_admin_privilege: '管理者権限を付与'
+      release_admin_privilege: '管理権限を解除'

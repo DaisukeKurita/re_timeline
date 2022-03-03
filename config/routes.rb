@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :groups do
-    resources :groupings, only: %w(create destroy)
+    resources :groupings, only: %w(create update destroy )
   end
 
   if Rails.env.development?
