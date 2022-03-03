@@ -1,8 +1,9 @@
 class GroupingsController < ApplicationController
-  before_action :set_grouping, only: %i[ update destroy ]
+  before_action :set_grouping
   before_action :set_groupings, only: %i[ update destroy ]
   before_action :set_group, only: %i[ update destroy ]
   before_action :authenticate_user!
+  before_action :grouping_admin?
 
   def create
     email_exist? and return
@@ -86,5 +87,9 @@ class GroupingsController < ApplicationController
   def set_groupings
     group = Group.find(params_group_id)
     @groupings = group.groupings.includes(:user)
+  end
+
+  def grouping_admin?
+    render template: "groups/show" unless @grouping.admin == true && current_user == @grouping.user
   end
 end

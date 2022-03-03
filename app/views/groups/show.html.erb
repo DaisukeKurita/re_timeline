@@ -34,12 +34,14 @@
     <tr>
     <td><%= grouping.user.name %></td>
     <td><%= grouping.user.email %></td>
-    <% if grouping.admin %>
-      <td><%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put %></td>
-    <% else %>
-      <td><%= link_to t('.grant_admin_privilege'), group_grouping_path(@group, grouping, admin: true), method: :put %></td>
-    <% end %>
+    <% if grouping.admin == true && current_user == grouping.user %>
+      <% if grouping.admin %>
+        <td><%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put %></td>
+      <% else %>
+        <td><%= link_to t('.grant_admin_privilege'), group_grouping_path(@group, grouping, admin: true), method: :put %></td>
+      <% end %>
       <td><%= link_to t('.delete_member'), group_grouping_path(@group, grouping), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
+    <% end %>
     </tr>
   <% end %>
 </table>
