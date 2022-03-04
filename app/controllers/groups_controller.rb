@@ -41,11 +41,11 @@ class GroupsController < ApplicationController
   end
 
   private
-    def group_params
-      params.require(:group).permit(:name, :explanation)
-    end
+  def group_params
+    params.require(:group).permit(:name, :explanation)
+  end
 
-    def set_group
-      @group = Group.find(params[:id])
-    end
+  def set_group
+    @group = Group.find(params[:id])
+  end
 end

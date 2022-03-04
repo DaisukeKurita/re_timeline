@@ -34,7 +34,7 @@
     <tr>
     <td><%= grouping.user.name %></td>
     <td><%= grouping.user.email %></td>
-    <% if grouping.admin == true && current_user == grouping.user %>
+    <% if group_admin? %>
       <% if grouping.admin %>
         <td><%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put %></td>
       <% else %>

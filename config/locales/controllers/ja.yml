@@ -11,3 +11,4 @@ ja:
     delete_member: "%{email}をメンバーから削除しました"
     grant_admin_privilege: "%{email}に管理者権限を付与しました"
     release_admin_privilege: "%{email}の管理者権限を解除しました"
+    unauthorized: "権限がありません"
