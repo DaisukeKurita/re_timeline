@@ -18,6 +18,7 @@
     
     <% if user_signed_in? %>
       <li><%= link_to t('view.logout'), destroy_user_session_path, method: :delete %></li>
+      <li><%= current_user.name %></li>
     <% else %>
       <li><%= link_to t('view.login'), new_user_session_path %></li>
       <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>

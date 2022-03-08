@@ -1,18 +1,17 @@
 class GroupingsController < ApplicationController
-  before_action :set_grouping
+  before_action :set_grouping, only: %i[ update destroy ]
   before_action :set_groupings, only: %i[ update destroy ]
-  before_action :set_group, only: %i[ update destroy ]
+  before_action :set_group
   before_action :authenticate_user!
-  before_action :grouping_admin?
+  before_action :group_admin_authority?, only: %i[ update destroy ] # createアクションには実装不要か？
 
   def create
     email_exist? and return
     user_exist? and return
-    group = find_group(params_group_id)
-    user = User.find_by(email: params_email) 
+    user = User.find_by(email: params[:email]) 
     if user
-      group.groupings.create(user_id: user.id)
-      redirect_to group_path(group.id), notice: t('notice.member_registration_completed', email: params_email)
+      @group.groupings.create(user_id: user.id)
+      redirect_to group_path(@group.id), notice: t('notice.member_registration_completed', email: params[:email])
     else
       render template: "groups/show"
     end
@@ -28,7 +27,7 @@ class GroupingsController < ApplicationController
 
   def destroy
     if @grouping.destroy
-      redirect_to group_path(params_group_id), notice: t('notice.delete_member', email: @grouping.user.email)
+      redirect_to group_path(params[:group_id]), notice: t('notice.delete_member', email: @grouping.user.email)
     else
       render template: "groups/show"
     end
@@ -37,43 +36,30 @@ class GroupingsController < ApplicationController
   
   private
   
-  def params_email
-    params[:email]
-  end
-
-  def params_group_id
-    params[:group_id]
+  def email_exist? # すでにメンバー登録されている場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
+    set_group
+    redirect_to group_path(@group.id), notice: t('notice.registered_as_a_member', email: params[:email]) if @group.members.exists?(email: params[:email])
   end
   
-  # すでにメンバー登録されている場合はグループ詳細画面に遷移する
-  # リファクタリング（モデルに持っていく）
-  def email_exist?
-    group = find_group(params_group_id)
-    redirect_to group_path(group.id), notice: t('notice.registered_as_a_member', email: params_email) if group.members.exists?(email: params_email)
-  end
-  
-  # ユーザとして存在しない場合はグループ詳細画面に遷移する
-  # リファクタリング（モデルに持っていく）
-  def user_exist?
-    group = find_group(params_group_id)
-    if !params_email.present?
-      redirect_to group_path(group.id), notice: t('notice.email_blank')
-    elsif !User.exists?(email: params_email)
-      redirect_to group_path(group.id), notice: t('notice.no_email_create_an_account', email: params_email)
+  def user_exist? # ユーザとして存在しない場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
+    set_group
+    if !params[:email].present?
+      redirect_to group_path(@group.id), notice: t('notice.email_blank')
+    elsif !User.exists?(email: params[:email])
+      redirect_to group_path(@group.id), notice: t('notice.no_email_create_an_account', email: params[:email])
     end
   end
 
-  def grouping_admin_grant_or_release
+  def grouping_admin_grant_or_release # 管理者権限の付与・解除時に表示されるtoticeの条件分岐
     if @grouping.admin
-      redirect_to group_path(params_group_id), notice: t('notice.grant_admin_privilege', email: @grouping.user.email)
+      redirect_to group_path(params[:group_id]), notice: t('notice.grant_admin_privilege', email: @grouping.user.email)
     else
-      redirect_to group_path(params_group_id), notice: t('notice.release_admin_privilege', email: @grouping.user.email)
+      redirect_to group_path(params[:group_id]), notice: t('notice.release_admin_privilege', email: @grouping.user.email)
     end
   end
 
-  # Group.find(params_group_id)の共通化
-  def find_group(_group_id)
-    Group.find(params_group_id)
+  def group_admin_authority? # グループ管理者ではない場合、グループ詳細画面にリダイレクトする
+    redirect_to group_path(params[:group_id]) unless group_admin?
   end
 
   def set_grouping
@@ -81,15 +67,11 @@ class GroupingsController < ApplicationController
   end
 
   def set_group
-    @group = find_group(params_group_id)
+    @group = Group.find(params[:group_id])
   end
 
-  def set_groupings
-    group = Group.find(params_group_id)
+  def set_groupings # グループに所属しているメンバー情報を取得している
+    group = Group.find(params[:group_id])
     @groupings = group.groupings.includes(:user)
-  end
-
-  def grouping_admin?
-    render template: "groups/show" unless @grouping.admin == true && current_user == @grouping.user
   end
 end

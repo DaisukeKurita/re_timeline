@@ -1,7 +1,8 @@
 module GroupingsHelper
-  def group_admin?
-    @groupings.try!(:each) do |grouping|
-      return unless grouping.admin == true && current_user == grouping.user
+  def group_admin? # ログイン中のユーザーがグループ管理者か判別を行なっている
+    @groupings.each do |grouping|
+      return true if grouping.admin == true && current_user == grouping.user
     end
+    false
   end
 end
