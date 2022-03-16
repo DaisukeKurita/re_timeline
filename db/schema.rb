@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_13_114248) do
+ActiveRecord::Schema.define(version: 2022_03_14_204301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blogs", force: :cascade do |t|
+    t.integer "new_contributor_id"
+    t.integer "last_updater_id"
+    t.string "title"
+    t.text "content"
+    t.text "image"
+    t.datetime "event_date"
+    t.boolean "notice"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["last_updater_id"], name: "index_blogs_on_last_updater_id"
+    t.index ["new_contributor_id"], name: "index_blogs_on_new_contributor_id"
+  end
 
   create_table "groupings", force: :cascade do |t|
     t.bigint "user_id", null: false
