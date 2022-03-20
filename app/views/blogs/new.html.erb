@@ -1,2 +1,5 @@
-<h1>Blogs#new</h1>
-<p>Find me in app/views/blogs/new.html.erb</p>
+<h2><%= t 'blogs.index.new_blog_contribution' %></h2>
+
+<%= render 'form' %>
+
+<%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %>

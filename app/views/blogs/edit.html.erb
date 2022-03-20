@@ -1,2 +1,5 @@
-<h1>Blogs#edit</h1>
-<p>Find me in app/views/blogs/edit.html.erb</p>
+<h2><%= t 'blogs.index.blog_editing' %></h2>
+
+<%= render 'form' %>
+
+<%= link_to t('blogs.index.blog_detail'), group_blog_path(@group, @blog) %> | <%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %>

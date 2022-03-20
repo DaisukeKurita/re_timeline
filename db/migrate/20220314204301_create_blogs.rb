@@ -1,13 +1,10 @@
 class CreateBlogs < ActiveRecord::Migration[6.0]
   def change
     create_table :blogs do |t|
-      t.integer :new_contributor_id
+      t.integer :new_contributor_id, null: false
       t.integer :last_updater_id
-      t.string :title
+      t.string :title, null: false
       t.text :content
-      t.text :image
-      t.datetime :event_date
-      t.boolean :notice
 
       t.timestamps
     end

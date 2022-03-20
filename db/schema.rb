@@ -10,21 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_14_204301) do
+ActiveRecord::Schema.define(version: 2022_03_19_023457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "blogs", force: :cascade do |t|
-    t.integer "new_contributor_id"
+    t.integer "new_contributor_id", null: false
     t.integer "last_updater_id"
-    t.string "title"
+    t.string "title", null: false
     t.text "content"
-    t.text "image"
-    t.datetime "event_date"
-    t.boolean "notice"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_id", null: false
+    t.index ["group_id"], name: "index_blogs_on_group_id"
     t.index ["last_updater_id"], name: "index_blogs_on_last_updater_id"
     t.index ["new_contributor_id"], name: "index_blogs_on_new_contributor_id"
   end
@@ -66,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_03_14_204301) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blogs", "groups"
   add_foreign_key "groupings", "groups"
   add_foreign_key "groupings", "users"
 end
