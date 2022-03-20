@@ -1,0 +1,27 @@
+<h2><%= t '.blog_index' %></h2>
+
+<%= link_to t('.new_blog_contribution'), new_group_blog_path(@group) %>
+
+<table>
+  <tr>
+    <th><%= t '.title' %></th>
+    <th><%= t '.content' %></th>
+    <th><%= t '.new_contributor' %></th>
+    <th><%= t '.last_updater' %></th>
+  </tr>
+    <% @blogs.each do |blog| %>
+    <tr>
+      <td><%= blog.title %></td>
+      <td><%= blog.content %></td>
+      <td><%= blog.new_contributor.name %></td>
+      <% if blog.last_updater_id.present? %>
+        <td><%= blog.last_updater.name %></td>
+      <% else %>
+        <td><%= "" %></td>
+      <% end %>
+      <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
+      <td><%= link_to t('.blog_editing'),  edit_group_blog_path(@group, blog) %></td>
+      <td><%= link_to t('.blog_deletion'),  group_blog_path(@group, blog), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
+    </tr>
+  <% end %>
+</table>

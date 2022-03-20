@@ -1,0 +1,12 @@
+<h3><%= t '.is_this_content_okay?' %></h3>
+
+<%= form_with(model:[@group, @blog], local: true) do |form| %>
+  <%= form.hidden_field :title %>
+  <%= form.hidden_field :content %>
+
+  <p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
+  <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
+  
+  <%= form.submit t('.contribute') %>
+  <%= form.submit t('.back'), name: 'back' %>
+<% end %>

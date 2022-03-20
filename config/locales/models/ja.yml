@@ -4,6 +4,7 @@ ja:
       group: グループ
       user: ユーザー
       grouping: グルーピング
+      blog: ブログ
     attributes:
       group:
         name: グループ名
@@ -12,3 +13,6 @@ ja:
         name: ユーザー名
       grouping:
         admin: グループ管理者
+      blog:
+        title: タイトル
+        content: 内容

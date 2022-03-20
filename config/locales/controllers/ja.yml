@@ -12,3 +12,6 @@ ja:
     grant_admin_privilege: "%{email}に管理者権限を付与しました"
     release_admin_privilege: "%{email}の管理者権限を解除しました"
     unauthorized: "権限がありません"
+    blog_created: "%{blog_title}が投稿されました"
+    edited_the_blog: "%{blog_title}ブログを編集しました"
+    deleted_the_blog: "%{blog_title}ブログを削除しました"

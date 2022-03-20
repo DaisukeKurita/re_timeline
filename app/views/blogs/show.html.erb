@@ -1,0 +1,10 @@
+<h2><%= t 'blogs.index.blog_detail' %></h2>
+
+<p><%= t 'blogs.index.new_contributor' %>: <%= @blog.new_contributor.name %></p>
+<% if @blog.last_updater_id.present? %>
+  <p><%= t 'blogs.index.last_updater' %>: <%= @blog.last_updater.name %>
+<% end %>
+<p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
+<p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
+
+<%= link_to t('blogs.index.blog_editing'), edit_group_blog_path(@group) %> | <%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %>
