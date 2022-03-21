@@ -12,17 +12,31 @@
 
   <body>
     <header>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
-    
-    <% if user_signed_in? %>
-      <li><%= link_to t('view.logout'), destroy_user_session_path, method: :delete %></li>
-      <li><%= current_user.name %></li>
-    <% else %>
-      <li><%= link_to t('view.login'), new_user_session_path %></li>
-      <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>
-    <% end %>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+
+      <ul>
+        <li><%= link_to t('view.re_time_line'), root_path %></li>
+      </ul>
+      <% if user_signed_in? %>
+        <ul>
+          <% if controller_name == "blogs" %>
+            <li><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group) %></li>
+            <li><%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %></li>
+          <% elsif controller_name == "groups" %>
+            <li><%= link_to t('groups.index.group_new_registration'), new_group_path %></li>
+          <% end %>
+          <li><%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %></li>
+          <li><%= current_user.name %></li>
+          <li><%= link_to t('view.logout'), destroy_user_session_path, method: :delete %></li>
+        </ul>
+      <% else %>
+        <ul>
+          <li><%= link_to t('view.login'), new_user_session_path %></li>
+          <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>
+        </ul>
+      <% end %>
     </header>
     <%= yield %>
   </body>
