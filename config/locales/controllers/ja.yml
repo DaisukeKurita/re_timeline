@@ -15,3 +15,6 @@ ja:
     blog_created: "%{blog_title}が投稿されました"
     edited_the_blog: "%{blog_title}ブログを編集しました"
     deleted_the_blog: "%{blog_title}ブログを削除しました"
+    guest_user_login: "ゲストユーザーでログインしました"
+    guest_user_cannot_be_updated_deleted: "ゲストユーザーの更新・削除はできません"
+    guest_user_password_cannot_be_reset: "ゲストユーザーのパスワード再設定はできません"
