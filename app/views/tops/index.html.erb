@@ -25,6 +25,8 @@
       <ul>
         <li><%= link_to t('view.login'), new_user_session_path %></li>
         <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>
+        <li><%= link_to t('.guest_login'), users_guest_sign_in_path, method: :post %></li>
+        <li><%= link_to t('.admin_guest_login'), users_admin_guest_sign_in_path, method: :post %></li>
       </ul>
     </div>
   </article>
