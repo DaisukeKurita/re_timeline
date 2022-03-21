@@ -1,4 +1,4 @@
-<h3><%= t '.is_this_content_okay?' %></h3>
+<h3><%= @group.name%><%= t '.is_the_blog_content_okay?' %></h3>
 
 <%= form_with(model:[@group, @blog], local: true) do |form| %>
   <%= form.hidden_field :title %>

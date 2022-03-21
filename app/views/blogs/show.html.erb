@@ -1,4 +1,4 @@
-<h2><%= t 'blogs.index.blog_detail' %></h2>
+<h2><%= @group.name %><%= t 'blogs.index.blog_detail' %></h2>
 
 <p><%= t 'blogs.index.new_contributor' %>: <%= @blog.new_contributor.name %></p>
 <% if @blog.last_updater_id.present? %>
