@@ -2,3 +2,4 @@ ja:
   tops:
     index:
       guest_login: 'ゲストログイン（一般）'
+      admin_guest_login: 'ゲストログイン（管理者）'
