@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'blogs/index'
-  get 'blogs/show'
-  get 'blogs/new'
-  get 'blogs/edit'
   root to: 'tops#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users

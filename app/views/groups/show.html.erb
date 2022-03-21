@@ -11,6 +11,11 @@
   </div>
 <% end %>
 
+<ul>
+  <li><%= link_to t('.new_group_blog_contribution'), new_group_blog_path(@group) %></li>
+  <li><%= link_to t('groups.index.group_blog_index'), group_blogs_path(@group) %></li>
+</ul>
+
 <p><%= t 'groups.index.group_name' %>: <%= @group.name %></p>
 <p><%= t 'groups.index.explanation' %>: <%= @group.explanation %></p>
 
