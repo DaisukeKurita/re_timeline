@@ -1,13 +1,16 @@
 class BlogsController < ApplicationController
   before_action :login_user_group_blog?
+  before_action :blogs_new_contributor_or_group_admin?, only: %i[ edit update destroy ]
   before_action :set_group_id
   before_action :set_blog, only: %i[ show edit update destroy ]
   
   def index
     @blogs = @group.blogs.includes(:new_contributor, :last_updater)
+    @groupings = @group.groupings
   end
 
   def show
+    @groupings = @group.groupings
   end
 
   def new
@@ -63,5 +66,13 @@ class BlogsController < ApplicationController
   # 所属していないグループのブログにアクセスすると、グループ一覧にリダイレクトされる
   def login_user_group_blog?
     redirect_to groups_path unless current_user.groups.ids.include?(params[:group_id].to_i)
+  end
+
+  # ブログの新規投稿者かグループの管理者か判定をしている
+  def blogs_new_contributor_or_group_admin?
+    set_group_id
+    set_blog
+    @groupings = @group.groupings
+    redirect_to group_blogs_path(@group) unless current_user.id == @blog.new_contributor_id || group_admin?
   end
 end
