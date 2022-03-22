@@ -3,7 +3,7 @@ class GroupingsController < ApplicationController
   before_action :set_groupings, only: %i[ update destroy ]
   before_action :set_group
   before_action :authenticate_user!
-  before_action :group_admin_authority?, only: %i[ update destroy ] # createアクションには実装不要か？
+  before_action :group_admin_members?, only: %i[ update destroy ] # createアクションには実装不要か？、あった方がいい！？
 
   def create
     email_exist? and return
@@ -58,7 +58,7 @@ class GroupingsController < ApplicationController
     end
   end
 
-  def group_admin_authority? # グループ管理者ではない場合、グループ詳細画面にリダイレクトする
+  def group_admin_members? # グループ管理者ではない場合、グループ詳細画面にリダイレクトする
     redirect_to group_path(params[:group_id]) unless group_admin?
   end
 
