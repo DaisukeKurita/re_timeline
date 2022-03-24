@@ -1,7 +1,8 @@
 class GroupingsController < ApplicationController
+  include Common
   before_action :set_grouping, only: %i[ update destroy ]
   before_action :set_groupings, only: %i[ update destroy ]
-  before_action :set_group
+  before_action :set_group_id
   before_action :authenticate_user!
   before_action :group_admin_members?, only: %i[ update destroy ] # createアクションには実装不要か？、あった方がいい！？
 
@@ -37,12 +38,12 @@ class GroupingsController < ApplicationController
   private
   
   def email_exist? # すでにメンバー登録されている場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
-    set_group
+    set_group_id
     redirect_to group_path(@group.id), notice: t('notice.registered_as_a_member', email: params[:email]) if @group.members.exists?(email: params[:email])
   end
   
   def user_exist? # ユーザとして存在しない場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
-    set_group
+    set_group_id
     if !params[:email].present?
       redirect_to group_path(@group.id), notice: t('notice.email_blank')
     elsif !User.exists?(email: params[:email])
@@ -66,12 +67,8 @@ class GroupingsController < ApplicationController
     @grouping = Grouping.find(params[:id])
   end
 
-  def set_group
-    @group = Group.find(params[:group_id])
-  end
-
   def set_groupings # グループに所属しているメンバー情報を取得している
-    group = Group.find(params[:group_id])
-    @groupings = group.groupings.includes(:user)
+    set_group_id
+    @groupings = @group.groupings.includes(:user)
   end
 end

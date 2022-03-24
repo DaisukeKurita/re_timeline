@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  include Common
   before_action :login_user_group_blog?
   before_action :blogs_new_contributor_or_group_admin?, only: %i[ edit update destroy ]
   before_action :set_group_id
@@ -53,10 +54,6 @@ class BlogsController < ApplicationController
 
   def blog_params
     params.require(:blog).permit(:title, :content)
-  end
-
-  def set_group_id
-    @group = Group.find(params[:group_id])
   end
 
   def set_blog
