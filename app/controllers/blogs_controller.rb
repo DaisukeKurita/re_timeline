@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
   before_action :blogs_new_contributor_or_group_admin?, only: %i[ edit update destroy ]
   before_action :set_group_id
   before_action :set_blog, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
   
   def index
     @blogs = @group.blogs.includes(:new_contributor, :last_updater)
