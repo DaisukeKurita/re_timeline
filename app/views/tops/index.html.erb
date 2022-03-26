@@ -24,7 +24,7 @@
     <div>
       <% if user_signed_in? %>
         <ul>
-          <li><%= link_to t('.to_the_list_of_affiliated_groups') %></li>
+          <li><%= link_to t('.to_the_list_of_affiliated_groups'), groups_path %></li>
         </ul>
       <% else %>
         <ul>

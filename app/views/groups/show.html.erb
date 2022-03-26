@@ -19,7 +19,7 @@
 <p><%= t 'groups.index.group_name' %>: <%= @group.name %></p>
 <p><%= t 'groups.index.explanation' %>: <%= @group.explanation %></p>
 
-<% if group_admin? %>
+<% if @group_admin_or_general %>
   <%= t '.group_member_invitation' %>
   <%= form_with model: :grouping, scope: :post, url: group_groupings_path(@group.id), local: true do |form| %>
       <%= text_field_tag :email, '' %>
@@ -32,14 +32,14 @@
 <table>
   <th><%= t '.member_name' %></th>
   <th><%= t '.member_email' %></th>
-  <% if group_admin? %>
+  <% if @group_admin_or_general %>
     <th><%= t '.group_admin' %></th>
   <% end %>
   <% @groupings.each do |grouping| %>
     <tr>
     <td><%= grouping.user.name %></td>
     <td><%= grouping.user.email %></td>
-    <% if group_admin? %>
+    <% if @group_admin_or_general %>
       <% if grouping.admin %>
         <td><%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put %></td>
       <% else %>
