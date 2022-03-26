@@ -1,0 +1,4 @@
+<h2><%= t('.my_page', name: @user.name) %></h2>
+<p><%= t('.email') %>: <%= @user.email %></p>
+
+<%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %> | <%= link_to t('.edit_account_information'), edit_user_registration_path %>
