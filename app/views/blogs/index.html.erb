@@ -20,7 +20,7 @@
         <td><%= "" %></td>
       <% end %>
       <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
-      <% if current_user.id == blog.new_contributor_id || group_admin? %>
+      <% if current_user.id == blog.new_contributor_id || @group_admin_or_general %>
         <td><%= link_to t('.blog_editing'),  edit_group_blog_path(@group, blog) %></td>
         <td><%= link_to t('.blog_deletion'),  group_blog_path(@group, blog), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
       <% end %>
