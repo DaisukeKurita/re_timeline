@@ -1,0 +1,6 @@
+ja:
+  users:
+    show:
+      my_page: '%{name}のマイページ'
+      email: 'メールアドレス'
+      edit_account_information: 'アカウント情報編集'

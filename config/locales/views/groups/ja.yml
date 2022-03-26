@@ -1,0 +1,23 @@
+ja:
+  groups:
+    index:
+      group_new_registration: 'グループ新規登録'
+      group_name: 'グループ名'
+      explanation: '説明'
+      list_of_affiliated_groups: '所属グループ一覧'
+      group_information_details: 'グループ情報詳細'
+      group_information_editing: 'グループ情報編集'
+      group_deletion: 'グループ削除'
+      group_blog_index: 'グループブログ一覧'
+      really_deleted?: '本当に削除しますか？'
+    show:
+      member_invitation: '招待'
+      group_member_invitation: 'グループメンバー招待'
+      group_members: 'グループメンバー'
+      member_name: '名前'
+      member_email: 'メールアドレス'
+      delete_member: 'メンバー削除'
+      group_admin: 'グループ管理者'
+      grant_admin_privilege: '管理者権限を付与'
+      release_admin_privilege: '管理権限を解除'
+      new_group_blog_contribution: 'グループブログ新規投稿'
