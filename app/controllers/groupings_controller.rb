@@ -35,7 +35,6 @@ class GroupingsController < ApplicationController
     end
   end
 
-  
   private
   
   def email_exist? # すでにメンバー登録されている場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）

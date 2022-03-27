@@ -19,5 +19,7 @@ ja:
       delete_member: 'メンバー削除'
       group_admin: 'グループ管理者'
       grant_admin_privilege: '管理者権限を付与'
+      grant_admin_privilege?: '管理者権限を付与しますか？'
       release_admin_privilege: '管理権限を解除'
+      release_admin_privilege?: '管理権限を解除しますか？'
       new_group_blog_contribution: 'グループブログ新規投稿'
