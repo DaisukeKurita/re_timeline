@@ -1,9 +1,22 @@
 <h2><%= @group.name %><%= t 'blogs.index.blog_detail' %></h2>
 
-<p><%= t 'blogs.index.new_contributor' %>: <%= @blog.new_contributor.name %></p>
-<% if @blog.last_updater_id.present? %>
-  <p><%= t 'blogs.index.last_updater' %>: <%= @blog.last_updater.name %>
-<% end %>
+
+<p>
+  <%= t 'blogs.index.new_contributor' %>: 
+  <% if @blog.last_updater.present? %>
+    <%= @blog.new_contributor.name %>
+  <% else %>
+    <%= t 'blogs.index.absence' %>
+  <% end %>
+</p>
+<p>
+  <%= t 'blogs.index.last_updater' %>:
+  <% if @blog.last_updater.present? %>
+    <%= @blog.last_updater.name %>
+  <% else %>
+    <%= t 'blogs.index..absence' %>
+  <% end %>
+</p>
 <p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
 <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
 
