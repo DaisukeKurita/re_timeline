@@ -2,10 +2,15 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
   include Common
   before_action :set_group, only: %i[ show edit update destroy ]
+  before_action :group_admin_only, only: %i[ edit update destroy ]
   before_action :current_user_belong_to_groups?, only: %i[ show edit update destroy ]
 
-  def index # ログインユーザーのみのグループ一覧を表示する
+  def index
+    # ログインユーザーのみのグループ一覧を表示する
     @groups = current_user.groups
+
+    # ログインユーザーがグループ管理者のグループのidを抽出している
+    @groupings_admin = current_user.groupings.where(admin: true).pluck(:group_id)
   end
   
   def show
@@ -50,5 +55,9 @@ class GroupsController < ApplicationController
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def group_admin_only # グループ管理者以外はグループ一覧に戻る
+    redirect_to groups_path unless group_admin?
   end
 end

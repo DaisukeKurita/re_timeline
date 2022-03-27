@@ -14,7 +14,7 @@
   <% if @blog.last_updater.present? %>
     <%= @blog.last_updater.name %>
   <% else %>
-    <%= t 'blogs.index..absence' %>
+    <%= t 'blogs.index.absence' %>
   <% end %>
 </p>
 <p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>

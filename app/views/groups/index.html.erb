@@ -12,8 +12,10 @@
       <td><%= group.name %></td>
       <td><%= group.explanation %></td>
       <td><%= link_to t('.group_information_details'), group_path(group) %></td>
-      <td><%= link_to t('.group_information_editing'), edit_group_path(group) %></td>
-      <td><%= link_to t('.group_deletion'), group_path(group), method: :delete, data: { confirm: t('.really_deleted?') } %></td>
+      <% if @groupings_admin.include?(group.id) %>
+        <td><%= link_to t('.group_information_editing'), edit_group_path(group) %></td>
+        <td><%= link_to t('.group_deletion'), group_path(group), method: :delete, data: { confirm: t('.really_deleted?') } %></td>
+      <% end %>
       <td><%= link_to t('.group_blog_index'), group_blogs_path(group) %></td>
     </tr>
   <% end %>

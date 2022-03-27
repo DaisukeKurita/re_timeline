@@ -61,7 +61,7 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
   end
 
-  def blogs_new_contributor_or_group_admin?  # ブログの新規投稿者かグループの管理者か判定をしている
+  def blogs_new_contributor_or_group_admin?  # ブログの新規投稿者かグループの管理者でない場合はブログ一覧に返す
     redirect_to group_blogs_path(@group) unless current_user.id == @blog.new_contributor_id || group_admin?
   end
 end

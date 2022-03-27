@@ -41,9 +41,9 @@
     <td><%= grouping.user.email %></td>
     <% if @group_admin_or_general %>
       <% if grouping.admin %>
-        <td><%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put %></td>
+        <td><%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put, data: { confirm: t('.release_admin_privilege?') } %></td>
       <% else %>
-        <td><%= link_to t('.grant_admin_privilege'), group_grouping_path(@group, grouping, admin: true), method: :put %></td>
+        <td><%= link_to t('.grant_admin_privilege'), group_grouping_path(@group, grouping, admin: true), method: :put, data: { confirm: t('.grant_admin_privilege?') } %></td>
       <% end %>
       <td><%= link_to t('.delete_member'), group_grouping_path(@group, grouping), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
     <% end %>
