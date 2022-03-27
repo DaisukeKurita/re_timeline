@@ -21,6 +21,7 @@ class GroupingsController < ApplicationController
     if @grouping.update(admin: params[:admin])
       grouping_admin_grant_or_release
     else
+      update_destroy_else_render
       render template: "groups/show"
     end
   end
@@ -29,6 +30,7 @@ class GroupingsController < ApplicationController
     if @grouping.destroy
       redirect_to group_path(@group), notice: t('notice.delete_member', email: @grouping.user.email)
     else
+      update_destroy_else_render
       render template: "groups/show"
     end
   end
@@ -62,5 +64,10 @@ class GroupingsController < ApplicationController
 
   def set_grouping
     @grouping = Grouping.find(params[:id])
+  end
+
+  def update_destroy_else_render # update,destroyでelseの時にrenderで必要な情報
+    @groupings = @group.groupings.includes(:user)
+    group_admin_or_general
   end
 end
