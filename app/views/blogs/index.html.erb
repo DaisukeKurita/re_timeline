@@ -13,14 +13,18 @@
     <tr>
       <td><%= blog.title %></td>
       <td><%= blog.content %></td>
-      <td><%= blog.new_contributor.name %></td>
-      <% if blog.last_updater_id.present? %>
+      <% if blog.new_contributor.present? %>
+        <td><%= blog.new_contributor.name %></td>
+      <% else %>
+        <td><%= t '.absence' %></td>
+      <% end %>
+      <% if blog.last_updater.present? %>
         <td><%= blog.last_updater.name %></td>
       <% else %>
-        <td><%= "" %></td>
+        <td><%= t '.absence' %></td>
       <% end %>
       <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
-      <% if current_user.id == blog.new_contributor_id || @group_admin_or_general %>
+      <% if current_user.id == blog.new_contributor || @group_admin_or_general %>
         <td><%= link_to t('.blog_editing'),  edit_group_blog_path(@group, blog) %></td>
         <td><%= link_to t('.blog_deletion'),  group_blog_path(@group, blog), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
       <% end %>
