@@ -1,0 +1,27 @@
+<h2><%= t('.confirm_input_information') %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :name %>: <%= @user.name %>
+    <%= f.hidden_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>: <%= @user.email %>
+    <%= f.hidden_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>: <%= @user.password %>
+    <%= f.hidden_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('.sign_up') %>
+    <%= f.submit t('.correction'), name: :back %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
