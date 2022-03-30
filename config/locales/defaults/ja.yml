@@ -143,9 +143,12 @@ ja:
     select:
       prompt: 選択してください
     submit:
-      create: 登録する
-      submit: 保存する
-      update: 更新する
+      group:
+        create: 登録する
+        update: 更新する
+      blog:
+        create: 確認
+        update: 更新する
   number:
     currency:
       format:
