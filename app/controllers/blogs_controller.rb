@@ -2,7 +2,7 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!
   include Common
   before_action :set_group_id
-  before_action :set_blog, only: %i[ show edit update destroy ]
+  before_action :set_blog, only: %i[ show edit update destroy notice_switching ]
   before_action :current_user_belong_to_groups?
   before_action :group_admin_or_general, only: %i[ index show ]
   before_action :blogs_new_contributor_or_group_admin?, only: %i[ edit update destroy ]
@@ -51,10 +51,18 @@ class BlogsController < ApplicationController
     redirect_to group_blogs_path(@group), notice: t('notice.deleted_the_blog', blog_title: @blog.title)
   end
 
+  def notice_switching
+    if @blog.update(email_notice: params[:email_notice])
+      redirect_to group_blogs_path
+    else
+      render :index
+    end
+  end
+
   private
 
   def blog_params
-    params.require(:blog).permit(:title, :content, :photo, :photo_cache, :event_date)
+    params.require(:blog).permit(:title, :event_date, :content, :photo, :photo_cache, :email_notice)
   end
 
   def set_blog

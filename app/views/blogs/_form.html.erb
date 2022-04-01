@@ -28,5 +28,9 @@
     <%= form.file_field :photo %>
     <%= form.hidden_field :photo_cache %>
   </div>
+  <div class="blog_email_notice">
+    <%= form.label :email_notice %>
+    <%= form.check_box :email_notice, {checked: true}, "true", "false" %>
+  </div>
   <%= form.submit %>
 <% end %>

@@ -21,6 +21,7 @@
 </p>
 <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
 <p><%= t 'blogs.index.photo' %>: <%= image_tag @blog.photo.url if @blog.photo && @blog.photo.url %></p>
+<p><%= t 'blogs.index.email_notice' %>: <%= check_box :blog, :email_notice, {disabled: true} %></p>
 
 <% if current_user.id == @blog.new_contributor_id || @group_admin_or_general %>
   <%= link_to t('blogs.index.blog_editing'), edit_group_blog_path(@group) %> | 

@@ -10,6 +10,7 @@
     <th><%= t '.last_updater' %></th>
     <th><%= t '.content' %></th>
     <th><%= t '.photo' %></th>
+    <th><%= t '.email_notice' %></th>
   </tr>
     <% @blogs.each do |blog| %>
     <tr>
@@ -27,6 +28,11 @@
       <% end %>
       <td><%= blog.content %></td>
       <td><%= image_tag blog.photo.url if blog.photo && blog.photo.url %>
+      <% if blog.email_notice %>
+        <td><%= link_to t('.stop_notification'), notice_switching_group_blog_path(@group, blog, email_notice: false), method: :patch, data: { confirm: t('.stop_notification?') } %></td>
+      <% else %>
+        <td><%= link_to t('.notify'), notice_switching_group_blog_path(@group, blog, email_notice: true), method: :patch, data: { confirm: t('.notify?') } %></td>
+      <% end %>
       <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
       <% if current_user.id == blog.new_contributor_id || @group_admin_or_general %>
         <td><%= link_to t('.blog_editing'),  edit_group_blog_path(@group, blog) %></td>
