@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
   
   def show
     @groupings = @group.groupings.includes(:user)
-    group_admin_or_general
+    group_admin?
   end
   
   def new
