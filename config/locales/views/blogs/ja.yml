@@ -5,6 +5,7 @@ ja:
       title: 'タイトル'
       content: '内容'
       photo: '写真'
+      event_date: 'イベント年月日'
       new_contributor: '新規投稿者'
       last_updater: '最終更新者'
       blog_index: 'ブログ一覧'

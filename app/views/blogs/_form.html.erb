@@ -24,5 +24,9 @@
     <%= form.file_field :photo %>
     <%= form.hidden_field :photo_cache %>
   </div>
+  <div class="blog_event_date">
+    <%= form.label :event_date %>
+    <%= form.date_field :event_date %>
+  </div>
   <%= form.submit %>
 <% end %>

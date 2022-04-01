@@ -5,15 +5,16 @@
 <table>
   <tr>
     <th><%= t '.title' %></th>
-    <th><%= t '.content' %></th>
+    <th><%= t '.event_date' %></th>
     <th><%= t '.new_contributor' %></th>
     <th><%= t '.last_updater' %></th>
+    <th><%= t '.content' %></th>
     <th><%= t '.photo' %></th>
   </tr>
     <% @blogs.each do |blog| %>
     <tr>
       <td><%= blog.title %></td>
-      <td><%= blog.content %></td>
+      <td><%= l blog.event_date, format: :date %></td>
       <% if blog.new_contributor.present? %>
         <td><%= blog.new_contributor.name %></td>
       <% else %>
@@ -24,6 +25,7 @@
       <% else %>
         <td><%= t '.absence' %></td>
       <% end %>
+      <td><%= blog.content %></td>
       <td><%= image_tag blog.photo.url if blog.photo && blog.photo.url %>
       <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
       <% if current_user.id == blog.new_contributor_id || @group_admin_or_general %>

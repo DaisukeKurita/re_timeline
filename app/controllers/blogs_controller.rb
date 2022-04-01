@@ -42,7 +42,7 @@ class BlogsController < ApplicationController
     if @blog.update(blog_params)
       redirect_to group_blogs_path(@group), notice: t('notice.edited_the_blog', blog_title: @blog.title)
     else
-      rednder :edit
+      render :edit
     end
   end
 
@@ -54,7 +54,7 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    params.require(:blog).permit(:title, :content, :photo, :photo_cache)
+    params.require(:blog).permit(:title, :content, :photo, :photo_cache, :event_date)
   end
 
   def set_blog
