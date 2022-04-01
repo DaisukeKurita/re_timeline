@@ -8,6 +8,7 @@
     <th><%= t '.content' %></th>
     <th><%= t '.new_contributor' %></th>
     <th><%= t '.last_updater' %></th>
+    <th><%= t '.photo' %></th>
   </tr>
     <% @blogs.each do |blog| %>
     <tr>
@@ -23,6 +24,7 @@
       <% else %>
         <td><%= t '.absence' %></td>
       <% end %>
+      <td><%= image_tag blog.photo.url if blog.photo && blog.photo.url %>
       <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
       <% if current_user.id == blog.new_contributor_id || @group_admin_or_general %>
         <td><%= link_to t('.blog_editing'),  edit_group_blog_path(@group, blog) %></td>

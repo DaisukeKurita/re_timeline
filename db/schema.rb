@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_042023) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "group_id", null: false
-    t.text "image"
+    t.text "photo"
     t.datetime "event_date", default: -> { "now()" }, null: false
     t.boolean "notice", default: true, null: false
     t.index ["group_id"], name: "index_blogs_on_group_id"

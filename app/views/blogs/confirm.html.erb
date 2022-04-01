@@ -3,9 +3,11 @@
 <%= form_with(model:[@group, @blog], local: true) do |form| %>
   <%= form.hidden_field :title %>
   <%= form.hidden_field :content %>
+  <%= form.hidden_field :photo_cache %>
 
   <p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
   <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
+  <p><%= t 'blogs.index.photo' %>: <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %></p>
   
   <%= form.submit t('.contribute') %>
   <%= form.submit t('.back'), name: 'back' %>
