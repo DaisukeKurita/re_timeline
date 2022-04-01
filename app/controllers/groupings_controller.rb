@@ -67,6 +67,6 @@ class GroupingsController < ApplicationController
 
   def update_destroy_else_render # update,destroyでelseの時にrenderで必要な情報
     @groupings = @group.groupings.includes(:user)
-    group_admin_or_general
+    group_admin?
   end
 end

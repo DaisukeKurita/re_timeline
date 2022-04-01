@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   before_action :set_group_id
   before_action :set_blog, only: %i[ show edit update destroy notice_switching ]
   before_action :current_user_belong_to_groups?
-  before_action :group_admin_or_general, only: %i[ index show ]
+  before_action :group_admin?, only: %i[ index show ]
   before_action :blogs_new_contributor_or_group_admin?, only: %i[ edit update destroy ]
   
   def index
