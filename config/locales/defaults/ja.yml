@@ -143,9 +143,12 @@ ja:
     select:
       prompt: 選択してください
     submit:
-      create: 登録する
-      submit: 保存する
-      update: 更新する
+      group:
+        create: 登録する
+        update: 更新する
+      blog:
+        create: 確認
+        update: 更新する
   number:
     currency:
       format:
@@ -205,6 +208,7 @@ ja:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
+      date: "%Y年%m月%d日"
     pm: 午後
   view:
     error_has_occurred: '件のエラーが発生しました'

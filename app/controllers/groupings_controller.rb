@@ -49,7 +49,7 @@ class GroupingsController < ApplicationController
     end
   end
 
-  def grouping_admin_grant_or_release # 管理者権限の付与・解除時に表示されるtoticeの条件分岐
+  def grouping_admin_grant_or_release # 管理者権限の付与・解除時に表示されるnoticeの条件分岐
     if @grouping.admin
       redirect_to group_path(@group), notice: t('notice.grant_admin_privilege', email: @grouping.user.email)
     else

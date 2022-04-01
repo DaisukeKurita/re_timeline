@@ -14,11 +14,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :groups do
-    resources :groupings, only: %w(create update destroy )
+    resources :groupings, only: %w(create update destroy)
     resources :blogs do
-      collection do
-        post :confirm
-      end
+      post 'confirm', on: :collection
+      patch 'notice_switching', on: :member
     end
   end
 

@@ -1,9 +1,11 @@
 <h2><%= @group.name %><%= t 'blogs.index.blog_detail' %></h2>
 
 
+<p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
+<p><%= t 'blogs.index.event_date' %>: <%= l @blog.event_date, format: :date %></p>
 <p>
   <%= t 'blogs.index.new_contributor' %>: 
-  <% if @blog.last_updater.present? %>
+  <% if @blog.new_contributor.present? %>
     <%= @blog.new_contributor.name %>
   <% else %>
     <%= t 'blogs.index.absence' %>
@@ -17,8 +19,9 @@
     <%= t 'blogs.index.absence' %>
   <% end %>
 </p>
-<p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
 <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
+<p><%= t 'blogs.index.photo' %>: <%= image_tag @blog.photo.url if @blog.photo && @blog.photo.url %></p>
+<p><%= t 'blogs.index.email_notice' %>: <%= check_box :blog, :email_notice, {disabled: true} %></p>
 
 <% if current_user.id == @blog.new_contributor_id || @group_admin_or_general %>
   <%= link_to t('blogs.index.blog_editing'), edit_group_blog_path(@group) %> | 
