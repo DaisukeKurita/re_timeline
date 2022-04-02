@@ -5,4 +5,5 @@ class Blog < ApplicationRecord
   belongs_to :group
   mount_uploader :photo, PhotoUploader
   has_many :blogmaps, dependent: :destroy
+  has_many :blog_maps, through: :blogmaps, source: :map
 end

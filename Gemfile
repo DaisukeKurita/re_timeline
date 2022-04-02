@@ -17,6 +17,8 @@ gem 'rails_admin', ['>= 3.0.0.beta2', '< 4']
 gem 'cancancan'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'geocoder'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
