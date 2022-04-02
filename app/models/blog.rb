@@ -4,4 +4,5 @@ class Blog < ApplicationRecord
   belongs_to :last_updater, foreign_key: :last_updater_id, optional: true, class_name: 'User'
   belongs_to :group
   mount_uploader :photo, PhotoUploader
+  has_many :blogmaps, dependent: :destroy
 end

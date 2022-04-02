@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_02_012148) do
+ActiveRecord::Schema.define(version: 2022_04_02_033834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blogmaps", force: :cascade do |t|
+    t.bigint "blog_id", null: false
+    t.bigint "map_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blog_id"], name: "index_blogmaps_on_blog_id"
+    t.index ["map_id"], name: "index_blogmaps_on_map_id"
+  end
 
   create_table "blogs", force: :cascade do |t|
     t.integer "new_contributor_id", null: false
@@ -50,6 +59,15 @@ ActiveRecord::Schema.define(version: 2022_04_02_012148) do
     t.index ["name"], name: "index_groups_on_name", unique: true
   end
 
+  create_table "maps", force: :cascade do |t|
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.time "event_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -69,6 +87,8 @@ ActiveRecord::Schema.define(version: 2022_04_02_012148) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blogmaps", "blogs"
+  add_foreign_key "blogmaps", "maps"
   add_foreign_key "blogs", "groups"
   add_foreign_key "groupings", "groups"
   add_foreign_key "groupings", "users"
