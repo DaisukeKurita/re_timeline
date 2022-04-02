@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_042023) do
+ActiveRecord::Schema.define(version: 2022_04_02_012148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_042023) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "group_id", null: false
     t.text "photo"
-    t.datetime "event_date", default: -> { "now()" }, null: false
+    t.date "event_date", default: -> { "now()" }, null: false
     t.boolean "email_notice", default: true, null: false
     t.index ["group_id"], name: "index_blogs_on_group_id"
     t.index ["last_updater_id"], name: "index_blogs_on_last_updater_id"

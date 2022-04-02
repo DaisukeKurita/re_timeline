@@ -15,7 +15,7 @@
     <% @blogs.each do |blog| %>
     <tr>
       <td><%= blog.title %></td>
-      <td><%= l blog.event_date, format: :date %></td>
+      <td><%= l blog.event_date, format: :long %></td>
       <% if blog.new_contributor.present? %>
         <td><%= blog.new_contributor.name %></td>
       <% else %>
