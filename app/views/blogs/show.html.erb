@@ -2,7 +2,7 @@
 
 
 <p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
-<p><%= t 'blogs.index.event_date' %>: <%= l @blog.event_date, format: :date %></p>
+<p><%= t 'blogs.index.event_date' %>: <%= l @blog.event_date, format: :long %></p>
 <p>
   <%= t 'blogs.index.new_contributor' %>: 
   <% if @blog.new_contributor.present? %>
