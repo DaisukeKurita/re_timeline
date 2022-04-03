@@ -24,10 +24,13 @@ class BlogsController < ApplicationController
 
   def confirm
     @blog = Blog.new(blog_params)
+    @lat = Geocoder.coordinates(@blog.address)[0]
+    @lng = Geocoder.coordinates(@blog.address)[1]
   end
   
   def create
     @blog = @group.blogs.build(blog_params)
+    # binding.pry
     return render :new if params[:back]
     @blog.new_contributor_id = current_user.id
     if @blog.save
@@ -62,7 +65,7 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    params.require(:blog).permit(:title, :event_date, :content, :photo, :photo_cache, :email_notice)
+    params.require(:blog).permit(:title, :event_date, :content, :photo, :photo_cache, :email_notice, :address)
   end
 
   def set_blog

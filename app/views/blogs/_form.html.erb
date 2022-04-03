@@ -32,5 +32,79 @@
     <%= form.label :email_notice %>
     <%= form.check_box :email_notice, {checked: true}, "true", "false" %>
   </div>
-  <%= form.submit %>
+  <%= form.hidden_field :address, id: "hidden_address" %>
+  <%= t '.event_address' %><input id="address" type="textbox" value="">
+  <input type="button" value="<%= t '.map_search' %>" onclick="codeAddress()">
+  <div id="display"><%= t '.latitude_and_longitude_display' %></div>
+
+  <div id='map'></div>
+
+  <style>
+    #map {
+      height: 400px;
+      width: 400px;
+    }
+  </style>
+
+  <script>
+    let map
+
+    const display = document.getElementById('display')
+
+    // mapの表示関数 
+    function initMap() {
+      // geocoder = new google.maps.Geocoder()
+
+    // mapの初期位置, 縮尺を定義
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 35.6458437,
+        lng: 139.7046171
+      },
+      zoom: 12,
+    });
+  }
+
+    let geocoder
+
+    // 地図検索関数
+    function codeAddress() {
+      let inputAddress = document.getElementById('address').value;
+      geocoder = new google.maps.Geocoder()
+
+      geocoder.geocode({
+        'address': inputAddress
+      }, function (results, status) {
+        
+        if (status == 'OK') {
+          map.setCenter(results[0].geometry.location);
+          if (typeof marker != 'undefined') {
+            marker.setMap(null);
+          }
+          marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+          });
+
+          let hidden_address = document.getElementById('hidden_address');
+          hidden_address.setAttribute("value", inputAddress);
+
+          // let hidden_latitude = document.getElementById('hidden_latitude');
+          // hidden_latitude.setAttribute("value", results[ 0 ].geometry.location);
+
+          // let hidden_longitude = document.getElementById('hidden_longitude');
+          // hidden_longitude.setAttribute("value", results[ 0 ].geometry.location);
+          // debugger
+      display.textContent = "<%= t '.search_results' %>" + results[ 0 ].geometry.location
+      } else {
+        alert('<%= t '.no_search_results' %>' + status);
+        }
+    });
+  }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+
+
+  <br /><%= form.submit %>
 <% end %>

@@ -19,3 +19,5 @@ ja:
         photo: 写真
         event_date: イベント年月日
         email_notice: メール通知
+      map:
+        address: 場所

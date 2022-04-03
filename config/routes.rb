@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :blogs do
       post 'confirm', on: :collection
       patch 'notice_switching', on: :member
+      # resources :maps
     end
   end
 

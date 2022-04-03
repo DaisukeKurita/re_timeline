@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_02_033834) do
+ActiveRecord::Schema.define(version: 2022_04_03_083418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 2022_04_02_033834) do
     t.text "photo"
     t.date "event_date", default: -> { "now()" }, null: false
     t.boolean "email_notice", default: true, null: false
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["group_id"], name: "index_blogs_on_group_id"
     t.index ["last_updater_id"], name: "index_blogs_on_last_updater_id"
     t.index ["new_contributor_id"], name: "index_blogs_on_new_contributor_id"

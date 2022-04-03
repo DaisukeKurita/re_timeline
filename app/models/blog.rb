@@ -6,4 +6,6 @@ class Blog < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   has_many :blogmaps, dependent: :destroy
   has_many :blog_maps, through: :blogmaps, source: :map
+  geocoded_by :address
+  after_validation :geocode
 end
