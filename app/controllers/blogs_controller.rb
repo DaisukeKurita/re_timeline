@@ -17,6 +17,7 @@ class BlogsController < ApplicationController
 
   def new
     @blog = Blog.new
+    gon.blog = @blog
   end
 
   def edit
@@ -24,13 +25,12 @@ class BlogsController < ApplicationController
 
   def confirm
     @blog = Blog.new(blog_params)
-    @lat = Geocoder.coordinates(@blog.address)[0]
-    @lng = Geocoder.coordinates(@blog.address)[1]
+    lat_log_presetn?
   end
   
   def create
     @blog = @group.blogs.build(blog_params)
-    # binding.pry
+    gon.blog = @blog
     return render :new if params[:back]
     @blog.new_contributor_id = current_user.id
     if @blog.save
@@ -74,5 +74,12 @@ class BlogsController < ApplicationController
 
   def blogs_new_contributor_or_group_admin?  # ブログの新規投稿者かグループの管理者でない場合はブログ一覧に返す
     redirect_to group_blogs_path(@group) unless current_user.id == @blog.new_contributor_id || group_admin?
+  end
+
+  def lat_log_presetn? #緯度・経度の値が存在するか？
+    if @blog.address.present?
+      gon.lat = Geocoder.coordinates(@blog.address)[0] 
+      gon.lng = Geocoder.coordinates(@blog.address)[1]
+    end
   end
 end
