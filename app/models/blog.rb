@@ -8,4 +8,5 @@ class Blog < ApplicationRecord
   has_many :blog_maps, through: :blogmaps, source: :map
   geocoded_by :address
   after_validation :geocode
+  # acceptes_nested_attributes_for :blogmaps, allow_destroy: true, reject_if: :all_blank
 end

@@ -19,8 +19,10 @@ class BlogsController < ApplicationController
     @blog = Blog.new
     gon.blog = @blog
   end
-
+  
   def edit
+    gon.blog = @blog
+    lat_log_presetn?
   end
 
   def confirm

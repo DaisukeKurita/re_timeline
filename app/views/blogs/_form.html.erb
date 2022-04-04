@@ -56,9 +56,9 @@
   </style>
 
   <script>
-    let map
+      var map
 
-    const display = document.getElementById('display')
+    var display = document.getElementById('display')
 
     // mapの表示関数 
     function initMap() {
@@ -74,7 +74,7 @@
 
       // 確認画面から戻ってきた時の処理、@blog.addressに入っている住所を
       // 使い再度マーカーを立てている
-      if (gon.blog.address != null) {
+      if (!!gon.blog.address) {
         geocoder = new google.maps.Geocoder()
 
         geocoder.geocode({
@@ -89,11 +89,11 @@
       }
     }
 
-    let geocoder
+    var geocoder
 
     // 地図検索関数
     function codeAddress() {
-      let inputAddress = document.getElementById('address').value;
+      var inputAddress = document.getElementById('address').value;
       geocoder = new google.maps.Geocoder()
 
       // geocodeを使い住所から緯度・経度を割り出す
@@ -114,7 +114,7 @@
           });
 
           // form.hidden_field :addressに検索窓に入れた値を送っている
-          let hidden_address = document.getElementById('hidden_address');
+          var hidden_address = document.getElementById('hidden_address');
           hidden_address.setAttribute("value", inputAddress);
 
       display.textContent = "<%= t '.search_results' %>" + results[ 0 ].geometry.location
