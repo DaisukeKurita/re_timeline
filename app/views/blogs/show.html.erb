@@ -1,3 +1,6 @@
+<% content_for(:body_attributes) do %>
+  data-turbolinks="false"
+<% end %>
 <h2><%= @group.name %><%= t 'blogs.index.blog_detail' %></h2>
 
 
@@ -22,6 +25,44 @@
 <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
 <p><%= t 'blogs.index.photo' %>: <%= image_tag @blog.photo.url if @blog.photo && @blog.photo.url %></p>
 <p><%= t 'blogs.index.email_notice' %>: <%= check_box :blog, :email_notice, {disabled: true} %></p>
+<% @maps.each do |map| %>
+  <p><%= t 'blogs.form.event_time' %>: <%= map.event_time.to_s(:time) if map.event_time.present? %></p>
+  <p><%= t 'blogs.form.event_address' %>: <%= map.address %></p>
+<% end %>
+
+<% if @search_addresses.present? %>
+  <div id='map'></div>
+
+  <style>
+    #map {
+      height: 400px;
+      width: 400px;
+    }
+  </style>
+
+  <script>
+    var map
+
+    var display = document.getElementById('display')
+
+    // mapの表示関数 
+    function initMap() {
+      geocoder = new google.maps.Geocoder()
+  
+    // mapの初期位置, 縮尺を定義
+    var lat_lng = {lat: gon.lat, lng: gon.lng};
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: lat_lng,
+      zoom: 12,
+    });
+    var marker = new google.maps.Marker({
+      position: lat_lng,
+      map: map
+    });
+  }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+  <% end %>
 
 <% if current_user.id == @blog.new_contributor_id || @group_admin_or_general %>
   <%= link_to t('blogs.index.blog_editing'), edit_group_blog_path(@group) %> | 

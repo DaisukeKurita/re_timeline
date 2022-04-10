@@ -11,8 +11,10 @@ class BlogsController < ApplicationController
     @blogs = @group.blogs.includes(:new_contributor, :last_updater)
   end
 
-  def show
+  def show # lat_log_present?の共通化処理をしたい
+    lat_log_present?
     @groupings = @group.groupings
+    @maps = @blog.maps
   end
 
   def new

@@ -1,3 +1,6 @@
+<% content_for(:body_attributes) do %>
+  data-turbolinks="false"
+<% end %>
 <%= form_with(model: [@group, @blog], local: true, url: choose_new_or_edit) do |form| %>
   <% if @blog.errors.any? %>
     <div id="error_explanation">
