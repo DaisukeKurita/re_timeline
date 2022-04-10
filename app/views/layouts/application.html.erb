@@ -5,8 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= include_gon(init: true) %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= include_gon %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
@@ -23,7 +23,8 @@
       <% if user_signed_in? %>
         <ul>
           <% if controller_name == "blogs" %>
-            <li><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group) %></li>
+          <%  %>
+            <li><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></li>
             <li><%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %></li>
           <% elsif controller_name == "groups" %>
             <li><%= link_to t('groups.index.group_new_registration'), new_group_path %></li>

@@ -1,4 +1,4 @@
-<h3><%= @group.name%><%= t '.is_the_blog_content_okay?' %></h3>
+<h3><%= @group.name %><%= t '.is_the_blog_content_okay?' %></h3>
 
 <%= form_with(model:[@group, @blog], local: true) do |form| %>
   <%= form.hidden_field :title %>
@@ -6,47 +6,55 @@
   <%= form.hidden_field :content %>
   <%= form.hidden_field :photo_cache %>
   <%= form.hidden_field :email_notice %>
-  <%= form.hidden_field :address %>
 
   <p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
-  <p><%= t 'blogs.index.event_date' %>: <%= l @blog.event_date, format: :date if @blog.event_date %></p>
+  <p><%= t 'blogs.index.event_date' %>: <%= l @blog.event_date, format: :long if @blog.event_date %></p>
   <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
   <p><%= t 'blogs.index.photo' %>: <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %></p>
   <p><%= t 'blogs.index.email_notice' %>: <%= form.check_box :email_notice, {disabled: :true} %></p>
-  <p><%= t 'blogs.form.event_address' %>: <%= @blog.address %></p>
-<% if @blog.address.present? %>
-  <div id='map'></div>
 
-  <style>
-    #map {
-      height: 400px;
-      width: 400px;
+  <%= form.fields_for :maps do |map| %>
+    <%= map.hidden_field :event_time %>
+    <%= map.hidden_field :address %>
+    <% @maps.each do |map| %>
+      <p><%= t 'blogs.form.event_time' %>: <%= map.event_time.to_s(:time) %></p>
+      <p><%= t 'blogs.form.event_address' %>: <%= map.address %></p>
+    <% end %>
+  <% end %>
+
+  <% if @search_addresses.present? %>
+    <div id='map'></div>
+
+    <style>
+      #map {
+        height: 400px;
+        width: 400px;
+      }
+    </style>
+
+    <script>
+      let map
+
+      const display = document.getElementById('display')
+
+      // mapの表示関数 
+      function initMap() {
+        geocoder = new google.maps.Geocoder()
+    
+      // mapの初期位置, 縮尺を定義
+      let lat_lng = {lat: gon.lat, lng: gon.lng};
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: lat_lng,
+        zoom: 12,
+      });
+      let marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+      });
     }
-  </style>
-
-  <script>
-    let map
-
-    const display = document.getElementById('display')
-
-    // mapの表示関数 
-    function initMap() {
-      geocoder = new google.maps.Geocoder()
-  
-    // mapの初期位置, 縮尺を定義
-    let lat_lng = {lat: gon.lat, lng: gon.lng};
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: lat_lng,
-      zoom: 12,
-    });
-    let marker = new google.maps.Marker({
-      position: lat_lng,
-      map: map
-    });
-  }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
-<% end %>
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+  <% end %>
   
   <%= form.submit t('.contribute') %>
   <%= form.submit t('.back'), name: 'back' %>

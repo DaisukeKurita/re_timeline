@@ -4,9 +4,6 @@ class Blog < ApplicationRecord
   belongs_to :last_updater, foreign_key: :last_updater_id, optional: true, class_name: 'User'
   belongs_to :group
   mount_uploader :photo, PhotoUploader
-  has_many :blogmaps, dependent: :destroy
-  has_many :blog_maps, through: :blogmaps, source: :map
-  geocoded_by :address
-  after_validation :geocode
-  # acceptes_nested_attributes_for :blogmaps, allow_destroy: true, reject_if: :all_blank
+  has_many :maps, dependent: :destroy
+  accepts_nested_attributes_for :maps, allow_destroy: true, reject_if: :all_blank
 end
