@@ -1,3 +1,6 @@
+<% content_for(:body_attributes) do %>
+  data-turbolinks="false"
+<% end %>
 <%= form_with(model: [@group, @blog], local: true, url: choose_new_or_edit) do |form| %>
   <% if @blog.errors.any? %>
     <div id="error_explanation">
@@ -32,5 +35,90 @@
     <%= form.label :email_notice %>
     <%= form.check_box :email_notice, {checked: true}, "true", "false" %>
   </div>
-  <%= form.submit %>
+
+  <%= form.fields_for :maps do |map| %>
+    <div>
+      <%= map.label :event_time %>
+      <%= map.time_field :event_time %>
+    </div>
+    <%# Google mapsで指定した住所を送るコード %>
+    <%= map.hidden_field :address, id: "hidden_address" %> 
+  <% end %>
+
+    <%# 住所検索の為の検索窓を作るコード %>
+    <%= t '.event_address' %><input id="address" type="textbox" value="">
+
+    <%# クリックすると地図検索をするボタンを作るコード %>
+    <input type="button" value="<%= t '.map_search' %>" onclick="codeAddress()">
+
+    <%# 地図検索後に緯度・経度が表示されるコード %>
+    <div id="display"><%= t '.latitude_and_longitude_display' %></div>
+
+    <%# 地図を表示している %>
+    <div id='map' style='height: 400px; width: 400px;'></div>
+
+  <script>
+    var display = document.getElementById('display')
+    // mapの表示関数 
+    function initMap() {
+      // mapの初期位置, 縮尺を定義
+      map = new google.maps.Map(document.getElementById(`map`), {
+        center: {
+          lat: 35.6458437,
+          lng: 139.7046171
+        },
+        zoom: 12,
+      });
+      // 確認画面から戻ってきた時の処理、gon.search_addressesに入っている住所を
+      // 使い再度マーカーを立てている
+      if (!!gon.search_addresses) {
+        geocoder = new google.maps.Geocoder()
+        geocoder.geocode({
+            'address' : gon.search_addresses
+          }, function(results, status) {
+            map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+        });
+      }
+    }
+
+    var geocoder
+
+    // 地図検索関数
+    function codeAddress() {
+      var inputAddress = document.getElementById('address').value;
+      geocoder = new google.maps.Geocoder()
+
+      // geocodeを使い住所から緯度・経度を割り出す
+      geocoder.geocode({
+        'address': inputAddress
+      }, function (results, status) {
+        if (status == 'OK') {
+          map.setCenter(results[0].geometry.location);
+          // markerが未定義でないのであれば、一度markerをnullにする
+          if (typeof marker != 'undefined') {
+            marker.setMap(null);
+          }
+          marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+          });
+          // form.hidden_field :addressに検索窓に入れた値を送っている
+          var hidden_address = document.getElementById('hidden_address');
+          hidden_address.setAttribute("value", inputAddress);
+
+        display.textContent = "<%= t '.search_results' %>" + results[ 0 ].geometry.location
+        } else {
+        alert('<%= t '.no_search_results' %>' + status);
+        }
+      });
+    }  
+  </script>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+
+  <br /><%= form.submit %>
 <% end %>

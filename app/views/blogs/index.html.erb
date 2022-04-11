@@ -1,6 +1,7 @@
 <h2><%= @group.name %><%= t '.blog_index' %></h2>
 
-<%= link_to t('.new_blog_contribution'), new_group_blog_path(@group) %>
+<%= link_to t('.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %>
+<%= link_to t('.google_maps_list'), group_maps_path(@group) %>
 
 <table>
   <tr>

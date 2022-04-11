@@ -3,4 +3,5 @@ class Group < ApplicationRecord
   has_many :groupings, dependent: :destroy
   has_many :members, through: :groupings, source: :user
   has_many :blogs, dependent: :destroy
+  has_many :maps
 end

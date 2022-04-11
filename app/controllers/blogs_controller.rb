@@ -11,23 +11,30 @@ class BlogsController < ApplicationController
     @blogs = @group.blogs.includes(:new_contributor, :last_updater)
   end
 
-  def show
+  def show # lat_log_present?の共通化処理をしたい
+    lat_log_present?
     @groupings = @group.groupings
+    @maps = @blog.maps
   end
 
   def new
     @blog = Blog.new
+    @blog.maps.build
   end
-
+  
   def edit
+    lat_log_present?
   end
 
   def confirm
     @blog = Blog.new(blog_params)
+    @maps = @blog.maps
+    lat_log_present?
   end
   
   def create
     @blog = @group.blogs.build(blog_params)
+    lat_log_present?
     return render :new if params[:back]
     @blog.new_contributor_id = current_user.id
     if @blog.save
@@ -62,7 +69,8 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    params.require(:blog).permit(:title, :event_date, :content, :photo, :photo_cache, :email_notice)
+    params.require(:blog).permit(:title, :event_date, :content, :photo, :photo_cache, :email_notice,
+      maps_attributes: [:id, :address, :event_time, :group_id])
   end
 
   def set_blog
@@ -71,5 +79,15 @@ class BlogsController < ApplicationController
 
   def blogs_new_contributor_or_group_admin?  # ブログの新規投稿者かグループの管理者でない場合はブログ一覧に返す
     redirect_to group_blogs_path(@group) unless current_user.id == @blog.new_contributor_id || group_admin?
+  end
+
+  def lat_log_present? #緯度・経度の値が存在するか？ 複数検索にも対応できるようにする!!!
+    search_addresses = @blog.maps.map(& :address)
+    @search_addresses = search_addresses[0]
+    if @search_addresses.present?
+      gon.search_addresses = @search_addresses
+      gon.lat = Geocoder.coordinates(@search_addresses)[0] 
+      gon.lng = Geocoder.coordinates(@search_addresses)[1]
+    end
   end
 end
