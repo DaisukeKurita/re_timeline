@@ -22,8 +22,7 @@
       </ul>
       <% if user_signed_in? %>
         <ul>
-          <% if controller_name == "blogs" %>
-          <%  %>
+          <% if controller_name == "blogs" || controller_name == "maps" %>
             <li><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></li>
             <li><%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %></li>
           <% elsif controller_name == "groups" %>

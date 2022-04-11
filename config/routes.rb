@@ -15,10 +15,10 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :groupings, only: %w(create update destroy)
+    resources :maps, only: %w(index)
     resources :blogs do
       post 'confirm', on: :collection
       patch 'notice_switching', on: :member
-      # resources :maps
     end
   end
 

@@ -70,7 +70,7 @@ class BlogsController < ApplicationController
 
   def blog_params
     params.require(:blog).permit(:title, :event_date, :content, :photo, :photo_cache, :email_notice,
-      maps_attributes: [:id, :address, :event_time])
+      maps_attributes: [:id, :address, :event_time, :group_id])
   end
 
   def set_blog
@@ -83,11 +83,11 @@ class BlogsController < ApplicationController
 
   def lat_log_present? #緯度・経度の値が存在するか？ 複数検索にも対応できるようにする!!!
     search_addresses = @blog.maps.map(& :address)
-    if search_addresses[0].present?
-      @search_addresses = search_addresses[0]
+    @search_addresses = search_addresses[0]
+    if @search_addresses.present?
       gon.search_addresses = @search_addresses
-      gon.lat = Geocoder.coordinates(search_addresses[0])[0] 
-      gon.lng = Geocoder.coordinates(search_addresses[0])[1]
+      gon.lat = Geocoder.coordinates(@search_addresses)[0] 
+      gon.lng = Geocoder.coordinates(@search_addresses)[1]
     end
   end
 end
