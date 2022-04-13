@@ -20,6 +20,10 @@ Rails.application.routes.draw do
       post 'confirm', on: :collection
       patch 'notice_switching', on: :member
     end
+    get 'delivery_setup', on: :member
+    member do
+      patch :delivery_period
+    end
   end
 
   if Rails.env.development?

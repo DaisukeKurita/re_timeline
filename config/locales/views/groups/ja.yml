@@ -23,3 +23,7 @@ ja:
       release_admin_privilege: '管理権限を解除'
       release_admin_privilege?: '管理権限を解除しますか？'
       new_group_blog_contribution: 'グループブログ新規投稿'
+    delivery_setup:
+      group_delivery_setup: "%{group_name}の配信設定"
+      delivery_start_year: '配信開始年'
+      setup: '設定'

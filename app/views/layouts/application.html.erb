@@ -25,6 +25,7 @@
           <% if controller_name == "blogs" || controller_name == "maps" %>
             <li><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></li>
             <li><%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %></li>
+            <li><%= link_to t('blogs.index.delivery_setup'),  delivery_setup_group_path(@group) %></li>
           <% elsif controller_name == "groups" %>
             <li><%= link_to t('groups.index.group_new_registration'), new_group_path %></li>
           <% end %>

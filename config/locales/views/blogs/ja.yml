@@ -19,6 +19,7 @@ ja:
       notify? : '通知をしますか？'
       stop_notification: '通知を止める'
       stop_notification?: '通知を止めますか？'
+      delivery_setup: '配信設定'
       google_maps_list: 'Google Maps 登録一覧'
     form:
       map_search: '地図検索'
