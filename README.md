@@ -24,7 +24,7 @@ $ rails s
 ## ワイヤーフレーム
 ![picture 3](images/89d28e4319846ef682f1f82c96e24f50868377d1c1c017b427b4f82aef8b59c9.png)  
 ## ER図
-![picture 4](images/08730b67898dfea040281715b61346502816d1545aa7c52a7035464c2a83f4e5.png)  
+![picture 6](images/0ee0e97bcd68ffe90ad9b6428d8952e6b48acc28a7f8f323c43f062844d04562.png)  
 ## 画面遷移図
 ![picture 2](images/1981bf3683103df08c0faaa55915bee41ddfdf17bd5bb5146af1ece2d72a36de.png)  
 

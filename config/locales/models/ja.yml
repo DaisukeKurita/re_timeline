@@ -5,10 +5,13 @@ ja:
       user: ユーザー
       grouping: グルーピング
       blog: ブログ
+      map: 地図
     attributes:
       group:
         name: グループ名
         explanation: グループ説明
+        delivery_start_year: '配信開始年'
+        receiving_date: '受信日'
       user:
         name: ユーザー名
       grouping:

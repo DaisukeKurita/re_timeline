@@ -1,4 +1,12 @@
 ja:
+  enums:
+    group:
+      receiving_date:
+        no_notice: '通知なし'
+        one_month_ago: '１ヶ月前'
+        two_month_ago: '２ヶ月前'
+        three_months_ago: '３ヶ月前'
+        after_ten_seconds: '１０秒後'
   groups:
     index:
       group_new_registration: 'グループ新規登録'
@@ -25,5 +33,4 @@ ja:
       new_group_blog_contribution: 'グループブログ新規投稿'
     delivery_setup:
       group_delivery_setup: "%{group_name}の配信設定"
-      delivery_start_year: '配信開始年'
       setup: '設定'

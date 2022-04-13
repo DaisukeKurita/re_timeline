@@ -56,20 +56,13 @@ class GroupsController < ApplicationController
   end
 
   def delivery_period
-    @group.delivery_start_year = date_params
-    @group.save
+    @group = Group.update(group_params)
     redirect_to delivery_setup_group_path(@group)
   end
 
   private
   def group_params
-    params.require(:group).permit(:name, :explanation)
-  end
-
-  def date_params
-    params.require(:group).permit(:delivery_start_year)
-    date = (params[:group])
-    Date.new(date["delivery_start_year(1i)"].to_i, date["delivery_start_year(2i)"].to_i, date["delivery_start_year(3i)"].to_i)
+    params.require(:group).permit(:name, :explanation, :delivery_start_year, :receiving_date)
   end
 
   def set_group
