@@ -56,10 +56,10 @@ class GroupsController < ApplicationController
   end
 
   def delivery_period
-    @group = Group.update(group_params)
+    @group.update(group_params)
     redirect_to delivery_setup_group_path(@group)
   end
-
+  
   private
   def group_params
     params.require(:group).permit(:name, :explanation, :delivery_start_year, :receiving_date)
