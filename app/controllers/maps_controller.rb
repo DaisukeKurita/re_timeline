@@ -5,6 +5,6 @@ class MapsController < ApplicationController
   def index
     set_group_id
     current_user_belong_to_groups?
-    gon.group_maps = Map.find(Blog.where(group_id: @group.id).ids)
+    gon.group_maps = @group.maps
   end
 end

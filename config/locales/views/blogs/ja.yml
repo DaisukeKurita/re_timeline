@@ -19,6 +19,7 @@ ja:
       notify? : '通知をしますか？'
       stop_notification: '通知を止める'
       stop_notification?: '通知を止めますか？'
+      delivery_setup: '配信設定'
       google_maps_list: 'Google Maps 登録一覧'
     form:
       map_search: '地図検索'
@@ -31,3 +32,7 @@ ja:
       is_the_blog_content_okay?: 'ブログ以下の内容で投稿して良いでしょうか？'
       contribute: '投稿する'
       back: '戻る'
+    blogs_notice:
+      post_new_memories!: '新しい思い出を投稿しよう！'
+      what_happened: '%{month}月にあったイベント'
+

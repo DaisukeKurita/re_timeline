@@ -20,6 +20,9 @@ gem 'mini_magick'
 gem 'geocoder'
 gem 'dotenv-rails'
 gem 'gon'
+gem 'whenever', require: false
+gem 'enum_help'
+gem 'rexml'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

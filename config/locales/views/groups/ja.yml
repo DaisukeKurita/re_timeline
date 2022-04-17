@@ -1,4 +1,11 @@
 ja:
+  enums:
+    group:
+      receiving_date:
+        no_notice: '通知なし'
+        one_month_ago: '１ヶ月前'
+        two_months_ago: '２ヶ月前'
+        three_months_ago: '３ヶ月前'
   groups:
     index:
       group_new_registration: 'グループ新規登録'
@@ -23,3 +30,6 @@ ja:
       release_admin_privilege: '管理権限を解除'
       release_admin_privilege?: '管理権限を解除しますか？'
       new_group_blog_contribution: 'グループブログ新規投稿'
+    delivery_setup:
+      group_delivery_setup: "%{group_name}の配信設定"
+      setup: '設定'

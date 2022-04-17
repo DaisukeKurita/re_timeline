@@ -1,0 +1,9 @@
+<h2><%= t '.group_delivery_setup', group_name: @group.name %></h2>
+
+<%= form_with(model: @group, url: delivery_period_group_path(@group), local: true) do |form| %>
+  <%= form.label :receiving_date %>
+  <%= form.select :receiving_date, Group.receiving_dates_i18n.invert.to_a %>
+  <%= form.label :delivery_start_year %>
+  <%= form.date_select :delivery_start_year, {discard_month: true, start_year: @one_hundred_years_ago, end_year: @this_year, default: { month: 1, day: 1 }} %>
+  <%= form.submit t('.setup')%>
+<% end %>
