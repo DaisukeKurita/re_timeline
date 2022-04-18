@@ -33,6 +33,6 @@ ja:
       contribute: '投稿する'
       back: '戻る'
     blogs_notice:
-      post_new_memories!: '新しい思い出を投稿しよう！'
-      what_happened: '%{month}月にあったイベント'
+      top_page_is_here_new_posts: 'Re: Timelineのトップページはこちらから！新しい思い出を記録しよう'
+      what_happened: '過去の%{month}月はこんな事があったよ！'
 
