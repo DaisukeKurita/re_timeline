@@ -4,7 +4,7 @@ class BlogsNoticeMailer < ApplicationMailer
   def blogs_notice_mail(group, blogs, blogs_month)
     @group = group
     @blogs = blogs
-    @blogs_month = blogs_month.to_s
+    @blogs_month = blogs_month
     # mail(to: @group.members.pluck(:email), subject: default_i18n_subject(group: @group.name))
     mail to: @group.members.pluck(:email), subject: "#{@group.name}の過去の#{@blogs_month}月のブログをお知らせします！"
   end
@@ -15,7 +15,7 @@ class BlogsNoticeMailer < ApplicationMailer
   def email_sending_settings
     today = Date.today
     one_week_later = today + 7
-    # return if today.mon == one_week_later.mon
+    return if today.mon == one_week_later.mon
     groups = Group.all
     groups.each do |group|
       case group.receiving_date 
@@ -25,11 +25,8 @@ class BlogsNoticeMailer < ApplicationMailer
         blog_search_by_year_and_month(2, group, today)
       when "three_months_ago"
         blog_search_by_year_and_month(3, group, today)
-      else
-        next
       end
-    end 
-    exit
+    end
   end
   
   # blogsテーブルから数年分の指定月のレコードを取得するメソッド
@@ -39,7 +36,7 @@ class BlogsNoticeMailer < ApplicationMailer
     for num in 1..many_years_ago do  
       months_by_year << today.ago(num.years).since(how_many_months.month).all_month
     end
-    blogs = group.blogs.where(email_notice: true, event_date: months_by_year)
+    blogs = group.blogs.where(email_notice: true, event_date: months_by_year).order(event_date: "DESC")
     blogs_month = today.since(how_many_months.month).mon
     blogs_notice_mail(group, blogs, blogs_month).deliver
   end
