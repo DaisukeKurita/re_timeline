@@ -23,6 +23,7 @@ gem 'gon'
 gem 'whenever', require: false
 gem 'enum_help'
 gem 'rexml'
+gem 'fog-aws'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
