@@ -15,6 +15,7 @@ class BlogsController < ApplicationController
     lat_log_present?
     @groupings = @group.groupings
     @maps = @blog.maps
+    BlogsNoticeMailer.blogs_notice_mail.deliver
   end
 
   def new

@@ -15,7 +15,7 @@ class BlogsNoticeMailer < ApplicationMailer
   def email_sending_settings
     today = Date.today
     one_week_later = today + 7
-    return if today.mon == one_week_later.mon
+    # return if today.mocn == one_week_later.mon
     groups = Group.all
     groups.each do |group|
       case group.receiving_date 
