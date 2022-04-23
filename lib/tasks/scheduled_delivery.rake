@@ -16,7 +16,7 @@ namespace :scheduled_delivery do
     # 月内の最終金曜日かを判断後、メールを送る内容を取得
     today = Date.today
     one_week_later = today + 7
-    # exit if today.mon == one_week_later.mon
+    exit if today.mon == one_week_later.mon
     groups = Group.all
     groups.each do |group|
       case group.receiving_date 
