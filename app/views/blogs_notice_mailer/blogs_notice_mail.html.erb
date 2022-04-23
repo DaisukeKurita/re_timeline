@@ -1,4 +1,4 @@
-<%# <%= link_to t('blogs.blogs_notice.top_page_is_here_new_posts'), root_url %> %>
+<%= link_to t('blogs.blogs_notice.top_page_is_here_new_posts'), root_url %>
 <h3><%= t 'blogs.blogs_notice.what_happened', month: @blogs_month %></h3>
 <table>
   <tr>
@@ -9,7 +9,7 @@
     <tr>
       <td><%= blog.title %></td>
       <td><%= l blog.event_date, format: :long %></td>
-      <%# <td><%= link_to t('blogs.index.blog_detail'), group_blog_url(@group, blog) %></td> %>
+      <td><%= link_to t('blogs.index.blog_detail'), group_blog_url(@group, blog) %></td>
     </tr>
   <% end %>
 </table>
