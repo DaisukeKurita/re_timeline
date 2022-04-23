@@ -7,7 +7,3 @@ set :output, "#{Rails.root}/log/cron.log"
 every :friday, at: '7pm' do
   rake 'scheduled_delivery:email_scheduled_delivery'
 end
-
-every 1.minute do
-  rake 'scheduled_delivery:email_scheduled_delivery'
-end
