@@ -10,6 +10,7 @@ module ReTimeline
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
     config.load_defaults 6.0
+    config.paths.add 'lib', eager_load: true
 
     config.generators do |g|
       g.assets false

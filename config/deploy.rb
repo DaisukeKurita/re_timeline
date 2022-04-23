@@ -30,6 +30,8 @@ set :rbenv_type, :system
 # ただし挙動をしっかり確認したいのであれば :debug に設定する。
 set :log_level, :info
 
+set :whenever_roles, -> { :app }
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
