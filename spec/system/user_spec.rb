@@ -16,13 +16,6 @@ RSpec.describe User, type: :system do
           expect(page).to have_content 'user1'
         end
       end
-
-      context '一般ユーザーを登録しない場合' do
-        it 'グループ一覧画面に飛ぼうとするとログイン画面に遷移する' do
-          visit groups_path
-          expect(page).to have_content 'ログイン'
-        end
-      end
     end
 
     describe 'ログイン機能' do
@@ -43,17 +36,25 @@ RSpec.describe User, type: :system do
         end
       end
 
-      context '一般ユーザーが他人の詳細画面に飛ぼうとする場合' do
+      context '一般ユーザーがログアウトする場合' do
+        it 'ログアウトする' do
+          click_link 'ログアウト'
+          expect(page).to have_content 'ゲストログイン（一般）'
+        end
+      end
+
+      context '他人の詳細画面に飛ぼうとする場合' do
         it '自分の詳細画面に遷移する' do
           visit user_path(user2)
           expect(page).to have_content 'user1'
         end
       end
 
-      context '一般ユーザーがログアウトする場合' do
-        it 'ログアウトする' do
+      context 'ログインをせずグループ一覧画面に遷移をしようとした場合' do
+        it 'ログイン画面に遷移する' do
           click_link 'ログアウト'
-          expect(page).to have_content 'ゲストログイン（一般）'
+          visit groups_path
+          expect(page).to have_content 'ログイン'
         end
       end
     end
