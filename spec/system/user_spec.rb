@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User', type: :system do
+RSpec.describe User, type: :system do
   describe 'ユーザー機能' do
     describe 'ユーザー新規登録' do
       context '一般ユーザーを新規登録した場合' do
