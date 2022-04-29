@@ -24,6 +24,7 @@ gem 'whenever', require: false
 gem 'enum_help'
 gem 'fog-aws'
 gem 'unicorn'
+gem 'seed-fu'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
