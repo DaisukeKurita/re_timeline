@@ -14,31 +14,31 @@
   <% end %>
 
   <div class="blog_title">
-    <%= form.label :title %>
+    <%= form.label :title %> <br/>
     <%= form.text_field :title %>
   </div>
   <div class="blog_event_date">
-    <%= form.label :event_date %>
+    <%= form.label :event_date %> <br/>
     <%= form.date_field :event_date %>
   </div>
   <div class="blog_content">
-    <%= form.label :content %>
+    <%= form.label :content %> <br/>
     <%= form.text_area :content %>
   </div>
   <div class="blog_image">
-    <%= form.label :photo %>
+    <%= form.label :photo %> <br/>
     <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %>
     <%= form.file_field :photo %>
     <%= form.hidden_field :photo_cache %>
   </div>
   <div class="blog_email_notice">
-    <%= form.label :email_notice %>
+    <%= form.label :email_notice %> <br/>
     <%= form.check_box :email_notice, {checked: true}, "true", "false" %>
   </div>
 
   <%= form.fields_for :maps do |map| %>
     <div>
-      <%= map.label :event_time %>
+      <%= map.label :event_time %> <br/>
       <%= map.time_field :event_time %>
     </div>
     <%# Google mapsで指定した住所を送るコード %>
@@ -55,7 +55,7 @@
     <div id="display"><%= t '.latitude_and_longitude_display' %></div>
 
     <%# 地図を表示している %>
-    <div id='map' style='height: 400px; width: 400px;'></div>
+    <div id='map' class="mx-auto" style='height: 400px; width: 1200px;'></div>
 
   <script>
     var display = document.getElementById('display')

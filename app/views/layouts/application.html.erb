@@ -13,40 +13,43 @@
 
   <body>
     <header>
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key}") %>
-      <% end %>
-
-      <ul>
-        <li><%= link_to t('view.re_time_line'), root_path %></li>
-      </ul>
-      <% if user_signed_in? %>
-        <ul>
+      <div class="d-flex flex-row bg-warning mb-3">
+        <div class="p-1"><%= link_to t('view.re_time_line'), root_path %></div>
+        <% if user_signed_in? %>
           <% if controller_name == "blogs" || controller_name == "maps" %>
-            <li><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></li>
-            <li><%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %></li>
-            <li><%= link_to t('blogs.index.delivery_setup'),  delivery_setup_group_path(@group) %></li>
+            <div class="p-1"><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></div>
+            <div class="p-1"><%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %></div>
+            <div class="p-1"><%= link_to t('blogs.index.delivery_setup'),  delivery_setup_group_path(@group) %></div>
           <% elsif controller_name == "groups" %>
-            <li><%= link_to t('groups.index.group_new_registration'), new_group_path %></li>
+            <div  class="p-1"><%= link_to t('groups.index.group_new_registration'), new_group_path %></div>
           <% end %>
-            <li><%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %></li>
-            <li><%= link_to current_user.name, user_path(current_user) %></li>
+            <div class="p-1"><%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %></div>
+            <div class="p-1"><%= link_to current_user.name, user_path(current_user) %></div>
           <% if current_user.admin == true %>
-            <li><%= link_to t('view.admin_screen'), rails_admin_path %></li>
+            <div class="p-1"><%= link_to t('view.admin_screen'), rails_admin_path %></div>
           <% end %>
-          <li><%= link_to t('view.logout'), destroy_user_session_path, method: :delete %></li>
-        </ul>
-      <% else %>
-        <ul>
-          <li><%= link_to t('view.login'), new_user_session_path %></li>
-          <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>
-        </ul>
+          <div class="p-1"><%= link_to t('view.logout'), destroy_user_session_path, method: :delete %></div>
+        <% else %>
+          <div class='p-1'><%= link_to t('view.login'), new_user_session_path %></div>
+          <div class='p-1'><%= link_to t('view.account_registration'), new_user_registration_path %></div>
       <% end %>
+      </div>
     </header>
-    <div <% if content_for?(:body_attributes) %>
-      <%= yield(:body_attributes) %> <% end %>
-    >
-      <%= yield %>
+    <main>
+    <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    <div class='text-center'>
+      <div <% if content_for?(:body_attributes) %>
+        <%= yield(:body_attributes) %> <% end %>
+      >
+        <%= yield %>
+      </div>
     </div>
+    <footer class="footer bg-light">
+      <p class="text-dark text-center text-secondary text-muted">©2022 Frugality</p>
+      </main>
+</footer>
+  </div>
   </body>
 </html>

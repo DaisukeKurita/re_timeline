@@ -11,10 +11,9 @@
   </div>
 <% end %>
 
-<ul>
-  <li><%= link_to t('.new_group_blog_contribution'), new_group_blog_path(@group) %></li>
-  <li><%= link_to t('groups.index.group_blog_index'), group_blogs_path(@group) %></li>
-</ul>
+
+<div><%= link_to t('.new_group_blog_contribution'), new_group_blog_path(@group) %></div>
+<div><%= link_to t('groups.index.group_blog_index'), group_blogs_path(@group) %></div>
 
 <p><%= t 'groups.index.group_name' %>: <%= @group.name %></p>
 <p><%= t 'groups.index.explanation' %>: <%= @group.explanation %></p>
@@ -29,11 +28,12 @@
 
 <%= t '.group_members' %>
 
-<table>
+<table class="table">
   <th><%= t '.member_name' %></th>
   <th><%= t '.member_email' %></th>
   <% if @group_admin %>
     <th><%= t '.group_admin' %></th>
+    <th></th>
   <% end %>
   <% @groupings.each do |grouping| %>
     <tr>

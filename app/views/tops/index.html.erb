@@ -1,38 +1,29 @@
 <div class="container">
   <h1 class="title">Re: Timeline</h1>
     <nav class="menu">
-      <ul>
-        <li>top</li>
-        <li>menu1</li>
-        <li>menu2</li>
-      </ul>
+      top
+      menu1
+      menu2
     </nav>
   <article>
     <div class="contents">
-      <ul>
-        <li>contents1</li>
-        <li>contents2</li>
-      </ul>
+      contents1
+      contents2
     </div>
     <div class="topic">
-      <h4>Re: Timelineの使い方</h4>
-      <ul>
-        <li>家族で使う</li>
-        <li>友達と使う</li>
-      </ul>
+      Re: Timelineの使い方
+      
+      家族で使う
+      友達と使う
     </div>
-    <div>
+    <div class="d-flex flex-column bd-highlight mb-3">
       <% if user_signed_in? %>
-        <ul>
-          <li><%= link_to t('.to_the_list_of_affiliated_groups'), groups_path %></li>
-        </ul>
+        <div class="p-2"><%= link_to t('.to_the_list_of_affiliated_groups'), groups_path %></div>
       <% else %>
-        <ul>
-          <li><%= link_to t('view.login'), new_user_session_path %></li>
-          <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>
-          <li><%= link_to t('.guest_login'), users_guest_sign_in_path, method: :post %></li>
-          <li><%= link_to t('.admin_guest_login'), users_admin_guest_sign_in_path, method: :post %></li>
-        </ul>
+        <div class="p-2"><%= link_to t('view.login'), new_user_session_path %></div>
+        <div class="p-2"><%= link_to t('view.account_registration'), new_user_registration_path %></div>
+        <div class="p-2"><%= link_to t('.guest_login'), users_guest_sign_in_path, method: :post %></div>
+        <div><%= link_to t('.admin_guest_login'), users_admin_guest_sign_in_path, method: :post %></div>
       <% end %>
     </div>
   </article>
