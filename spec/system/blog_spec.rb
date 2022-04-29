@@ -17,7 +17,8 @@ RSpec.describe Blog, type: :system do
       click_button '登録する'
       find("body header").click_link '所属グループ一覧'
       click_link 'グループブログ一覧'
-      find("body header").click_link 'ブログ新規投稿'
+      find('#blog_new_link').click
+      sleep 1
       fill_in 'タイトル', with: 'aaaaaa'
       fill_in 'イベント年月日', with: '002017/07/12'
       fill_in '内容', with: 'bbbbbb'

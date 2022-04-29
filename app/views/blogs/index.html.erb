@@ -1,8 +1,10 @@
 <h2><%= @group.name %><%= t '.blog_index' %></h2>
 
-<%= link_to t('.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %>
-<%= link_to t('.delivery_setup'),  delivery_setup_group_path(@group) %>
-<%= link_to t('.google_maps_list'), group_maps_path(@group) %>
+<div class="d-flex flex-row bd-highlight mb-3">
+  <div class="p-2 bd-highlight" id="blog_new_link"><%= link_to t('.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></div>
+  <div class="p-2 bd-highlight"><%= link_to t('.delivery_setup'),  delivery_setup_group_path(@group) %></div>
+  <div class="p-2 bd-highlight"><%= link_to t('.google_maps_list'), group_maps_path(@group) %></div>
+</div>
 
 <table class='table'>
   <tr>
