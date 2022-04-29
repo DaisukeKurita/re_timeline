@@ -36,7 +36,7 @@
         <td><%= link_to t('.notify'), notice_switching_group_blog_path(@group, blog, email_notice: true), method: :patch, data: { confirm: t('.notify?') } %></td>
       <% end %>
       <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
-      <% if current_user.id == blog.new_contributor_id || @group_admin_or_general %>
+      <% if current_user.id == blog.new_contributor_id || @group_admin %>
         <td><%= link_to t('.blog_editing'),  edit_group_blog_path(@group, blog) %></td>
         <td><%= link_to t('.blog_deletion'),  group_blog_path(@group, blog), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
       <% end %>
