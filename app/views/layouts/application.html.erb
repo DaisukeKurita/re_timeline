@@ -9,8 +9,6 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  
-
   <body>
     <header>
       <div class="d-flex flex-row bg-warning mb-3">
@@ -36,20 +34,20 @@
       </div>
     </header>
     <main>
-    <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
-    <div class='text-center'>
-      <div <% if content_for?(:body_attributes) %>
-        <%= yield(:body_attributes) %> <% end %>
-      >
-        <%= yield %>
+      <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+      <div class='text-center'>
+        <div <% if content_for?(:body_attributes) %>
+          <%= yield(:body_attributes) %> <% end %>
+        >
+          <%= yield %>
+        </div>
       </div>
-    </div>
+    </main>
     <footer class="footer bg-light">
       <p class="text-dark text-center text-secondary text-muted">©2022 Re: Timeline</p>
-      </main>
-</footer>
+    </footer>
   </div>
   </body>
 </html>
