@@ -6,6 +6,7 @@ RSpec.describe Map, type: :system do
     let!(:group) { FactoryBot.create(:group) }
 
     before do
+      FactoryBot.build(:grouping, user: user, group: group)
       visit root_path
       find("body header").click_link 'ログイン'
       fill_in 'Eメール', with: user.email
@@ -18,7 +19,6 @@ RSpec.describe Map, type: :system do
       find("body header").click_link '所属グループ一覧'
       click_link 'グループブログ一覧'
       find("body header").click_link 'ブログ新規投稿'
-      sleep 0.5
       fill_in 'タイトル', with: 'aaaaaa'
       fill_in 'イベント年月日', with: '002017/07/12'
       fill_in '内容', with: 'bbbbbb'
@@ -41,7 +41,7 @@ RSpec.describe Map, type: :system do
 
       context '所属していないグループの地図情報に飛ぼうとした場合' do
         it '所属グループ一覧画面に遷移する' do
-          visit delivery_setup_group_path(group)
+          visit group_maps_path(group)
           expect(page).to have_content '所属グループ一覧'
         end
       end
