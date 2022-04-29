@@ -1,8 +1,37 @@
 FactoryBot.define do
   factory :map do
-    address { "MyString" }
-    latitude { 1.5 }
-    longitude { 1.5 }
-    event_time { "2022-04-02 11:24:04" }
+    address { "沼津駅" }
+    latitude { 35.1026494 }
+    longitude { 138.8598006 }
+    event_time { "2000-01-01 13:00:00" }
+    association :blog
+    association :group
+  end
+
+  factory :map2, class: Map do
+    address { "偕楽園" }
+    latitude { 36.37262630000001 }
+    longitude { 140.4521765 }
+    event_time { "2000-01-01 11:40:00" }
+    association :blog
+    association :group
+  end
+
+  factory :map3, class: Map do
+    address { "ユニバーサルスタジオ" }
+    latitude { 34.665442 }
+    longitude { 135.4323382 }
+    event_time { "2000-01-01 10:30:00" }
+    association :blog2
+    association :group2
+  end
+
+  factory :map4, class: Map do
+    address { "草津温泉湯畑" }
+    latitude { 36.6229647 }
+    longitude { 138.5967231 }
+    event_time { "2000-01-01 15:00:00" }
+    association :blog2
+    association :group2
   end
 end
