@@ -64,7 +64,7 @@ RSpec.describe Group, type: :system do
           expect{
             click_on 'グループ削除', match: :first
             page.accept_confirm "本当に削除しますか？"
-            sleep 0.1
+            sleep 0.5
           }.to change{Group.count}.by(-1)
         end
       end

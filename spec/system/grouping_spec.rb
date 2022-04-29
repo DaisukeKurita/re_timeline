@@ -44,7 +44,7 @@ RSpec.describe Grouping, type: :system do
         it 'メンバーが削除される' do
           all('tbody tr')[2].click_link 'メンバー削除'
           page.accept_confirm '本当に削除しますか？'
-          sleep 0.1
+          sleep 0.5
           expect(page).to have_content 'user2@gmail.comをメンバーから削除しました'
         end
       end
@@ -53,7 +53,7 @@ RSpec.describe Grouping, type: :system do
         it 'グループ管理者は削除されない' do
           all('tbody tr')[1].click_link 'メンバー削除'
           page.accept_confirm '本当に削除しますか？'
-          sleep 0.1
+          sleep 0.5
           expect(page).to have_content user.email
         end
       end
@@ -62,10 +62,10 @@ RSpec.describe Grouping, type: :system do
         it 'グループ管理者でも削除する事ができる' do
           all('tbody tr')[2].click_link '管理者権限を付与'
           page.accept_confirm '管理者権限を付与しますか？'
-          sleep 0.1
+          sleep 0.5
           all('tbody tr')[1].click_link 'メンバー削除'
           page.accept_confirm '本当に削除しますか？'
-          sleep 0.1
+          sleep 0.5
           expect(page).to have_content 'user1@gmail.comをメンバーから削除しました'
         end
       end
@@ -76,9 +76,9 @@ RSpec.describe Grouping, type: :system do
         it 'メンバーがグループ管理者になる' do
           all('tbody tr')[2].click_link '管理者権限を付与'
           page.accept_confirm '管理者権限を付与しますか？'
-          sleep 0.1
+          sleep 0.5
           expect(Grouping.where(admin: true).count).to eq 2
-          sleep 0.1
+          sleep 0.5
         end
       end
 
@@ -86,12 +86,12 @@ RSpec.describe Grouping, type: :system do
         it 'グループ管理者がメンバーになる' do
           all('tbody tr')[2].click_link '管理者権限を付与'
           page.accept_confirm '管理者権限を付与しますか？'
-          sleep 0.1
+          sleep 0.5
           all('tbody tr')[1].click_link '管理権限を解除'
           page.accept_confirm '管理権限を解除しますか？'
-          sleep 0.1
+          sleep 0.5
           expect(Grouping.where(admin: true).count).to eq 1
-          sleep 0.1
+          sleep 0.5
         end
       end
     end
