@@ -18,7 +18,8 @@ RSpec.describe Map, type: :system do
       click_button '登録する'
       find("body header").click_link '所属グループ一覧'
       click_link 'グループブログ一覧'
-      find("body header").click_link 'ブログ新規投稿'
+      find('#blog_new_link').click
+      sleep 1
       fill_in 'タイトル', with: 'aaaaaa'
       fill_in 'イベント年月日', with: '002017/07/12'
       fill_in '内容', with: 'bbbbbb'
@@ -48,7 +49,7 @@ RSpec.describe Map, type: :system do
     end
 
     describe 'マップ情報編集・更新機能' do
-      context 'マップ情報を新規登録した場合' do
+      context 'マップ情報を編集・更新した場合' do
         it 'マップ情報が登録される' do
           click_link 'ブログ編集'
           fill_in 'address', with: '沼津駅'
