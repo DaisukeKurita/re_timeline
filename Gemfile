@@ -22,7 +22,6 @@ gem 'dotenv-rails'
 gem 'gon'
 gem 'whenever', require: false
 gem 'enum_help'
-gem 'rexml'
 gem 'fog-aws'
 gem 'unicorn'
 

@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   include Common
   before_action :set_group, only: %i[ show edit update destroy delivery_setup delivery_period]
   before_action :group_admin_only, only: %i[ edit update destroy ]
-  before_action :current_user_belong_to_groups?, only: %i[ show edit update destroy ]
+  before_action :current_user_belong_to_groups?, only: %i[ show edit update destroy delivery_setup ]
 
   def index
     # ログインユーザーのみのグループ一覧を表示する
