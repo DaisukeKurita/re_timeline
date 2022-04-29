@@ -2,10 +2,14 @@
 
 <%= link_to t('.group_new_registration'), new_group_path %>
 
-<table>
+<table class="table">
   <tr>
     <th><%= t '.group_name' %></th>
     <th><%= t '.explanation' %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
     <% @groups.each do |group| %>
     <tr>

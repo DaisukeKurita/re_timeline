@@ -1,38 +1,23 @@
 <div class="container">
-  <h1 class="title">Re: Timeline</h1>
-    <nav class="menu">
-      <ul>
-        <li>top</li>
-        <li>menu1</li>
-        <li>menu2</li>
-      </ul>
-    </nav>
-  <article>
+  <h1 class="title">Re: Timeline</h1><br/>
     <div class="contents">
-      <ul>
-        <li>contents1</li>
-        <li>contents2</li>
-      </ul>
+      <h3>このアプリの使い方</h3>
+      <p>
+        行ったイベント事を、家族・友人・仲間とブログとして共有し記録します。<br/>
+        <br/>
+        メール通知設定をすると、翌年毎以降の同月数ヶ月前（1〜3ヶ月前）に<br/>
+        「yyyy年mm月はこういうイベントを行っていたよ！」と通知するをしてくれます。<br/>
+      </p>
+        <h4>さあ、みんなと思い出を共有しよう！</h4>
     </div>
-    <div class="topic">
-      <h4>Re: Timelineの使い方</h4>
-      <ul>
-        <li>家族で使う</li>
-        <li>友達と使う</li>
-      </ul>
-    </div>
-    <div>
+    <div class="d-flex flex-column bd-highlight mb-3">
       <% if user_signed_in? %>
-        <ul>
-          <li><%= link_to t('.to_the_list_of_affiliated_groups'), groups_path %></li>
-        </ul>
+        <div class="p-2"><%= link_to t('.to_the_list_of_affiliated_groups'), groups_path %></div>
       <% else %>
-        <ul>
-          <li><%= link_to t('view.login'), new_user_session_path %></li>
-          <li><%= link_to t('view.account_registration'), new_user_registration_path %></li>
-          <li><%= link_to t('.guest_login'), users_guest_sign_in_path, method: :post %></li>
-          <li><%= link_to t('.admin_guest_login'), users_admin_guest_sign_in_path, method: :post %></li>
-        </ul>
+        <div class="p-2"><%= link_to t('view.login'), new_user_session_path %></div>
+        <div class="p-2"><%= link_to t('view.account_registration'), new_user_registration_path %></div>
+        <div class="p-2"><%= link_to t('.guest_login'), users_guest_sign_in_path, method: :post %></div>
+        <div><%= link_to t('.admin_guest_login'), users_admin_guest_sign_in_path, method: :post %></div>
       <% end %>
     </div>
   </article>
