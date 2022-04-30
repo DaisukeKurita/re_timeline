@@ -21,7 +21,7 @@
 <% if @group_admin %>
   <%= t '.group_member_invitation' %>
   <%= form_with model: :grouping, scope: :post, url: group_groupings_path(@group.id), local: true do |form| %>
-      <%= text_field_tag :email, '' %>
+      <%= text_field_tag :email, '', placeholder: "メールアドレス" %>
       <button type="submit"><%= t '.member_invitation' %></button>
   <% end %>
 <% end %>

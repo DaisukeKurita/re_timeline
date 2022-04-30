@@ -15,7 +15,7 @@
 
   <div class="blog_title">
     <%= form.label :title %> <br/>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, placeholder: "ブログタイトル" %>
   </div>
   <div class="blog_event_date">
     <%= form.label :event_date %> <br/>
@@ -23,7 +23,7 @@
   </div>
   <div class="blog_content">
     <%= form.label :content %> <br/>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, placeholder: "ブログの内容" %>
   </div>
   <div class="blog_image">
     <%= form.label :photo %> <br/>
@@ -46,7 +46,7 @@
   <% end %>
 
     <%# 住所検索の為の検索窓を作るコード %>
-    <%= t '.event_address' %><input id="address" type="textbox" value="">
+    <%= t '.event_address' %><input id="address" type="textbox" value="" placeholder="イベント先住所">
 
     <%# クリックすると地図検索をするボタンを作るコード %>
     <input type="button" value="<%= t '.map_search' %>" onclick="codeAddress()">
