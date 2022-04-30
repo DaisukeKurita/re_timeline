@@ -13,10 +13,7 @@
     <%= f.hidden_field :email %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>: <%= @user.password %>
-    <%= f.hidden_field :password %>
-  </div>
+  <%= f.hidden_field :password %>
 
   <div class="actions">
     <%= f.submit t('.sign_up') %>
