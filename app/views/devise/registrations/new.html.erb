@@ -1,6 +1,6 @@
 <h2><%= t('.enter_account_information') %></h2>
 
-<%= form_for(@user, url: {action: "confirm"}) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
@@ -27,7 +27,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit t('.confirmation') %>
+    <%= f.submit t('.sign_up') %>
   </div>
 <% end %>
 
