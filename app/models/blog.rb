@@ -5,5 +5,5 @@ class Blog < ApplicationRecord
   belongs_to :group
   mount_uploader :photo, PhotoUploader
   has_many :maps, dependent: :destroy
-  accepts_nested_attributes_for :maps, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :maps, allow_destroy: true
 end
