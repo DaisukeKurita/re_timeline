@@ -27,9 +27,16 @@ class BlogsController < ApplicationController
   end
 
   def confirm
-    @blog = Blog.new(blog_params)
+    @blog = @group.blogs.build(blog_params)
+    @blog.new_contributor_id = current_user.id
     @maps = @blog.maps
     lat_log_present?
+    num = 0
+    @blog.maps.size.times do
+      @blog.maps[num][:group_id] = @group.id
+      num += 1
+    end
+    render :new if @blog.invalid?
   end
   
   def create
@@ -37,6 +44,11 @@ class BlogsController < ApplicationController
     lat_log_present?
     return render :new if params[:back]
     @blog.new_contributor_id = current_user.id
+    num = 0
+    @blog.maps.size.times do
+      @blog.maps[num][:group_id] = @group.id
+      num += 1
+    end
     if @blog.save
       redirect_to group_blogs_path(@group), notice: t('notice.blog_created', blog_title: @blog.title)
     else

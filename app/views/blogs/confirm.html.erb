@@ -19,7 +19,6 @@
   <%= form.fields_for :maps do |map| %>
     <%= map.hidden_field :event_time %>
     <%= map.hidden_field :address %>
-    <%= map.hidden_field :group_id, value: @group.id %>
     <% @maps.each do |map| %>
       <p><%= t 'blogs.form.event_time' %>: <%= map.event_time.to_s(:time) if map.event_time.present? %></p>
       <p><%= t 'blogs.form.event_address' %>: <%= map.address %></p>
