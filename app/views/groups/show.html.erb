@@ -1,55 +1,99 @@
-<h2><%= t 'groups.index.group_information_details' %></h2>
-
 <% if @grouping.present? %>
-  <div id="error_explanation">
-    <h2><%= @grouping.errors.count %><%= t 'view.error_has_occurred' %></h2>
-    <ul>
-      <% @grouping.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+  <div id="error_explanation" class="text-left text-danger font-weight-bold">
+    <%= @grouping.errors.count %><%= t 'view.error_has_occurred' %>
+    <br>
+    <% @grouping.errors.full_messages.each do |msg| %>
+      <%= msg %>
+      <br>
+    <% end %>
   </div>
 <% end %>
 
+<div class="notice text-left text-danger font-weight-bold"></div>
 
-<div><%= link_to t('.new_group_blog_contribution'), new_group_blog_path(@group) %></div>
-<div><%= link_to t('groups.index.group_blog_index'), group_blogs_path(@group) %></div>
+<h1><%= t 'groups.index.group_information_details' %></h1>
 
-<p><%= t 'groups.index.group_name' %>: <%= @group.name %></p>
-<p><%= t 'groups.index.explanation' %>: <%= @group.explanation %></p>
+<div class="d-flex flex-row">
+  <div class="d-flex flex-column ">
+    <p class="text-left">
+      <span class="font-weight-bold"><%= t 'groups.index.group_name' %>:</span> <%= @group.name %>
+    <p class="text-left">
+      <span class="font-weight-bold"><%= t 'groups.index.explanation' %>:</span> <%= @group.explanation %>
+    </p>
+  </div>
+</div>
+
+<div class="d-flex flex-row">
+  <div class="p-3">
+    <%= link_to t('.new_group_blog_contribution_from_here'), new_group_blog_path(@group), class: "btn btn-primary btn-lg bi bi-pencil-fill" %>
+  </div>
+  <div class="p-3">
+    <%= link_to t('.group_blog_index_from_here'), group_blogs_path(@group), class: "btn btn-secondary btn-lg bi bi-clipboard-data" %>
+  </div>
+</div>
+<br>
+
 
 <% if @group_admin %>
-  <%= t '.group_member_invitation' %>
+  <p><%= t '.email_address_group_member_invitation' %></p>
   <%= form_with model: :grouping, scope: :post, url: group_groupings_path(@group.id), local: true do |form| %>
-      <%= text_field_tag :email, '', placeholder: "メールアドレス" %>
-      <button type="submit"><%= t '.member_invitation' %></button>
+    <div class="input-group">
+      <%= text_field_tag :email, '', placeholder: "招待したいメンバーのメールアドレスを入力してください", class: 'form-control font-size-ch' %>
+      <span class="input-group-btn">
+        <button type="submit", class="btn btn-secondary font-size-ch"><%= t '.member_invitation' %></button>
+      </span>
+    </div>
   <% end %>
+<p class="text-left">
+  <%= t '.only_group_admin_can_invite_authorize_and_delete' %><br>
+  <%= t '.at_least_one_group_admin_no_maximum_limit' %>
+</p>
 <% end %>
+<br>
 
-<%= t '.group_members' %>
+<h2><%= t '.group_members' %></h2><br>
 
-<table class="table">
-  <th><%= t '.member_name' %></th>
-  <th><%= t '.member_email' %></th>
-  <% if @group_admin %>
-    <th><%= t '.group_admin' %></th>
-    <th></th>
-  <% end %>
-  <% @groupings.each do |grouping| %>
+<table class="table table-striped table-hover">
+  <thead>
     <tr>
-    <td><%= grouping.user.name %></td>
-    <td><%= grouping.user.email %></td>
-    <% if @group_admin %>
-      <% if grouping.admin %>
-        <td><%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put, data: { confirm: t('.release_admin_privilege?') } %></td>
-      <% else %>
-        <td><%= link_to t('.grant_admin_privilege'), group_grouping_path(@group, grouping, admin: true), method: :put, data: { confirm: t('.grant_admin_privilege?') } %></td>
+      <th class="align-middle">#</th>
+      <th class="align-middle"><%= t '.member_name' %></th>
+      <th class="align-middle"><%= t '.member_email' %></th>
+      <% if @group_admin %>
+        <th class="align-middle"><%= t '.group_admin_granting_releasing' %></th>
+        <th></th>
       <% end %>
-      <td><%= link_to t('.delete_member'), group_grouping_path(@group, grouping), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
-    <% end %>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+     <% num = 0 %>
+    <% @groupings.each do |grouping| %>
+      <tr>
+        <td class="align-middle"><%= num += 1%></td>
+        <td class="align-middle"><%= grouping.user.name %></td>
+        <td class="align-middle"><%= grouping.user.email %></td>
+      <% if @group_admin %>
+        <% if grouping.admin %>
+          <td class="align-middle">
+            <%= link_to t('.release_admin_privilege'), group_grouping_path(@group, grouping, admin: false), method: :put, data: { confirm: t('.release_admin_privilege?') }, class: "btn btn-dark btn-lg bi bi-person-dash-fill font-weight-bold" %>
+          </td>
+        <% else %>
+          <td class="align-middle">
+            <%= link_to t('.grant_admin_privilege'), group_grouping_path(@group, grouping, admin: true), method: :put, data: { confirm: t('.grant_admin_privilege?') }, class: "btn btn-warning btn-lg bi bi-person-plus-fill font-weight-bold" %>
+          </td>
+        <% end %>
+        <td class="align-middle">
+          <%= link_to t('.delete_member'), group_grouping_path(@group, grouping), method: :delete, data: { confirm: t('groups.index.really_deleted?') }, class: "btn btn-outline-danger btn-lg bi bi-x font-weight-bold" %>
+        </td>
+      <% end %>
+      </tr>
+    <% end %>
+  <tbody>
 </table>
 
-<br>
-<%= link_to t('groups.index.group_information_editing'), edit_group_path(@group) %> | <%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %>
+<div class="text-right p-4">
+  <% if @group_admin %>
+    <%= link_to t('groups.index.group_information_editing'), edit_group_path(@group), class: "bi bi-pencil-square" %> | 
+  <% end %>
+  <%= link_to t('groups.index.list_of_affiliated_groups'), groups_path, class: "bi bi-person-video2" %>
+</div>

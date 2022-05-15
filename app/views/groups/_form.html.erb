@@ -1,23 +1,27 @@
 <%= form_with(model: @group, local: true) do |form| %>
   <% if @group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @group.errors.count %><%= t 'view.error_has_occurred' %></h2>
-      <ul>
+    <div id="error_explanation" class="text-left text-danger font-weight-bold">
+      <%= @group.errors.count %><%= t 'view.error_has_occurred' %>
+      <br>
         <% @group.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <%= msg %>
+          <br>
         <% end %>
-      </ul>
     </div>
   <% end %>
   
-  <div class="group_name">
-    <%= form.label :name %>  <br/>
-    <%= form.text_field :name, placeholder: "グループ名" %>
-  </div>
-  <div class="group_explanation">
+  <br>
+  <div class="text-left">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name, placeholder: "グループ名を入力してください（必須）", class: 'form-control font-size-ch'  %>
+    <br>
     <%= form.label :explanation %> <br/>
-    <%= form.text_area :explanation, placeholder: "グループ説明" %>
+    <%= form.text_area :explanation, placeholder: "グループ説明を入力してください", class: 'form-control font-size-ch line-height-ch', rows: 8 %>
   </div>
-  <%= form.submit %>
+  <br>
+  <div class="text-right">
+    <%= form.submit class: "btn font-size-ch btn-primary" %>
+  <div>
 <% end %>
+<br>
 

@@ -8,16 +8,13 @@ html {
 body {
   font-size: 1.6rem;
   font-family: 'Noto Sans JP', sans-serif;
+  color: #313131;
 }
 
 header {
   background-color: #f3f3f3;
   width: 100%;
   padding: 10px;
-  a {
-    color: #5b5c76;
-    font-weight: bold;
-  }
 }
 
 main {
@@ -37,10 +34,22 @@ footer {
   text-align: center;
 }
 
-// ボタンサイズ
-.btn-font-size {
+// aタグの基本色
+a {
+  color: #5b5c76;
+  font-weight: bold;
+}
+
+// フォントカスタム
+.font-size-ch {
   font-size: 1.6rem;
 }
+
+// 行間カスタム
+.line-height-ch {
+  line-height: 1.7;
+}
+
 // トップ画面
 main {
   h1 {

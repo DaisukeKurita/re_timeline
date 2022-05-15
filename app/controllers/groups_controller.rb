@@ -29,7 +29,8 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     if @group.save
       @group.groupings.create(user_id: current_user.id, admin: true)
-      redirect_to group_path(@group), notice: t('notice.group_created', name: @group.name)
+      flash[:success] = t('notice.group_created', name: @group.name)
+      redirect_to group_path(@group)
     else
       render :new
     end
@@ -37,7 +38,8 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to group_path(@group), notice: t('notice.edited_the_group', name: @group.name)
+      flash[:info] = t('notice.edited_the_group', name: @group.name)
+      redirect_to group_path(@group)
     else
       render :edit
     end
@@ -45,7 +47,8 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to groups_path, notice: t('notice.deleted_the_group', name: @group.name)
+    flash[:danger] = t('notice.deleted_the_group', name: @group.name)
+    redirect_to groups_path
   end
 
   def delivery_setup
