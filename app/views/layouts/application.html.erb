@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= include_gon(init: true) %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +60,7 @@
     </header>
     <main>
       <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "#{key}") %>
+          <%= content_tag(:div, value, class:"alert alert-#{key}", role: "alert") %>
       <% end %>
       <div class='text-center'>
         <div <% if content_for?(:body_attributes) %>

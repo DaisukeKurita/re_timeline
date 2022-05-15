@@ -1,4 +1,21 @@
 <h2><%= t('.my_page', name: @user.name) %></h2>
-<p><%= t('.email') %>: <%= @user.email %></p>
+<br>
+<div class="d-flex flex-row">
+  <div class="d-flex flex-column ">
+    <p class="text-left">
+      <span class="font-weight-bold"><%= t('.name') %>:</span> <%= @user.name %>
+    </p>
+    <p class="text-left">
+      <span class="font-weight-bold"><%= t('.email') %>:</span> <%= @user.email %>
+    </p>
+    <p class="text-left">
+      <%= link_to t('groups.index.list_of_affiliated_groups'), groups_path, class: "bi bi-person-video2" %>
+    </p>
+    <p class="text-left">
+      <%= link_to t('.edit_account_information'), edit_user_registration_path, class: "bi bi-pencil-square" %>
+    </p>
+  </div>
+</div>
 
-<%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %> | <%= link_to t('.edit_account_information'), edit_user_registration_path %>
+<div class="text-right p-4">
+</div>
