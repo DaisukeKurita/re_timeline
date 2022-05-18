@@ -1,5 +1,6 @@
 <h2><%= t('.enter_account_information') %></h2>
- 
+<br>
+<div class="form-size-ch text-left mx-auto">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -17,14 +18,15 @@
     <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワードを入力してください（必須）", class: 'form-control font-size-ch' %>
     <br>
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード確認（必須）", class: 'form-control font-size-ch' %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード確認用（必須）", class: 'form-control font-size-ch' %>
   </div>
   <br>
-  <div class="text-right">
+  <div class="text-left">
     <%= f.submit t('.sign_up'), class: "btn font-size-ch btn-primary" %>
   </div>
 <% end %>
 <br>
-<div class="text-right">
+<div class="text-left">
   <%= render "devise/shared/links" %>
+</div>
 </div>

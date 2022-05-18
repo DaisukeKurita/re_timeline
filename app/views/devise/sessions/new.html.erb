@@ -1,26 +1,28 @@
 <h2><%= t('.sign_in') %></h2>
+<br>
+<div class="form-size-ch text-left mx-auto">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
-  </div>
-
-  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力してください", class: 'form-control font-size-ch' %>
+    <br>
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード確認" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
+    <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワードを入力してください", class: 'form-control font-size-ch' %>
+    <br>
+    <% if devise_mapping.rememberable? %>
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+    <% end %>
+    <br>
+    <br>
+    <%= link_to t('tops.index.guest_login'), users_guest_sign_in_path, method: :post, class: "btn font-size-ch btn-light bi bi-person-plus" %>
+    <br>
+    <br>
+     <%= link_to t('tops.index.admin_guest_login'), users_admin_guest_sign_in_path, method: :post, class: "btn font-size-ch btn-light bi bi-person-workspace" %>
+    <br>
+    <br>
+    <%= f.submit t('.sign_in'), class: "btn font-size-ch btn-primary" %>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit t('.sign_in') %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <br>
+  <%= render "devise/shared/links" %>
+</div>
