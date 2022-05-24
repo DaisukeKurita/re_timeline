@@ -9,6 +9,8 @@ class BlogsController < ApplicationController
   
   def index
     @blogs = @group.blogs.includes(:new_contributor, :last_updater)
+    # グループ日記新規投稿者
+    @new_group_diary_contributor = Blog.find_by(new_contributor: current_user.id, group_id: @group.id).present?
   end
 
   def show

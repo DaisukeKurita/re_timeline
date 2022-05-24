@@ -23,5 +23,5 @@ ja:
         event_date: イベント年月日
         email_notice: メール通知
       map:
-        address: 住所
+        address: イベント先
         event_time: イベント時間

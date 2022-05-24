@@ -1,27 +1,26 @@
 <%= form_with(model: @group, local: true) do |form| %>
   <% if @group.errors.any? %>
     <div id="error_explanation" class="text-left text-danger font-weight-bold">
-      <%= @group.errors.count %><%= t 'view.error_has_occurred' %>
-      <br>
-        <% @group.errors.full_messages.each do |msg| %>
-          <%= msg %>
-          <br>
-        <% end %>
+      <%= @group.errors.count %><%= t 'view.error_has_occurred' %><br>
+      <% @group.errors.full_messages.each do |msg| %>
+        <%= msg %><br>
+      <% end %>
     </div>
   <% end %>
   
-  <br>
-  <div class="text-left">
-    <%= form.label :name %><br/>
-    <%= form.text_field :name, placeholder: "グループ名を入力してください（必須）", class: 'form-control font-size-ch'  %>
-    <br>
-    <%= form.label :explanation %> <br/>
-    <%= form.text_area :explanation, placeholder: "グループ説明を入力してください", class: 'form-control font-size-ch line-height-ch', rows: 8 %>
+  <div class="text-left mb-4">
+    <div class="mb-4">
+      <%= form.label :name %><br>
+      <%= form.text_field :name, placeholder: "グループ名を入力してください（必須）", class: 'form-control font-size-ch' %>
+    </div>
+    
+    <div>
+      <%= form.label :explanation %><br>
+      <%= form.text_area :explanation, placeholder: "グループ説明を入力してください", class: 'form-control font-size-ch line-height-ch', rows: 8 %>
+    <div>
   </div>
-  <br>
-  <div class="text-left">
+
+  <div class="text-left mt-4">
     <%= form.submit class: "btn font-size-ch btn-primary" %>
   <div>
 <% end %>
-<br>
-

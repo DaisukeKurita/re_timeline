@@ -9,7 +9,7 @@
     <tr>
       <td><%= blog.title %></td>
       <td><%= l blog.event_date, format: :long %></td>
-      <td><%= link_to t('blogs.index.blog_detail'), group_blog_url(@group, blog) %></td>
+      <td><%= link_to t('blogs.index.diary_detail'), group_blog_url(@group, blog) %></td>
     </tr>
   <% end %>
 </table>
