@@ -28,6 +28,8 @@ ja:
       button_to_stop_an_email_notice_for_the_corresponding_diary: 'ボタンを押すと、該当する日記のメール通知を停止します。'
       button_to_initiate_an_email_notice_for_the_corresponding_diary: 'ボタンを押すと、該当する日記のメール通知を開始します。'
       refer_to_the_top_page_for_details_of_the_delivery_contents: '※配信内容の詳細については、トップページの「グループの日記をメールで自動配信」をご参照ください。'
+      event_location_map_index: 'イベント先地図一覧'
+      do_you_want_to_set_up_with_this?: 'こちらで設定をしますか？'
     form:
       map_search: '地図検索'
       if_the_search_is_successful_longitude_and_latitude_are_displayed_here: '◎検索に成功すると経度・緯度がこちらに表示されます'

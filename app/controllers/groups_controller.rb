@@ -54,12 +54,21 @@ class GroupsController < ApplicationController
   def delivery_setup
     # 配信開始年の情報を取得
     today = Date.today
-    @this_year = today.year
+    @last_year = today.year - 1
     @one_hundred_years_ago = today.prev_year(100).year
+    
+    # @current_time = Time.now
+    if last_friday_of_the_month(0) < @now
+      last_friday_of_the_month(1)
+      diary_delivery_range(1)
+    else
+      diary_delivery_range(0)
+    end
   end
 
   def delivery_period
     @group.update(group_params)
+    flash[:success] = t('notice.delivery_setup_complete')
     redirect_to delivery_setup_group_path(@group)
   end
   
@@ -74,5 +83,35 @@ class GroupsController < ApplicationController
 
   def group_admin_only # グループ管理者以外はグループ一覧に戻る
     redirect_to groups_path unless group_admin?
+  end
+
+  def last_friday_of_the_month(how_many_months)
+    @now = Time.now
+    relevant_date = @now.since(how_many_months.months)
+    (0..6).each do |num|
+      friday_check = relevant_date.end_of_month - num.days
+      if friday_check.wday == 5
+        return @last_friday = friday_check.beginning_of_day + 60 * 60 * 19
+      end
+    end
+  end
+
+  def diary_delivery_range(how_many_months)
+    case @group.receiving_date 
+    when "one_month_ago"
+      diary_of_which_year_and_month(how_many_months, 1)
+    when "two_months_ago"
+      diary_of_which_year_and_month(how_many_months, 2)
+    when "three_months_ago"
+      diary_of_which_year_and_month(how_many_months, 3)
+    end
+  end
+
+  def diary_of_which_year_and_month(how_many_months, how_many_months_ago)
+    @start_year = @group.delivery_start_year.year
+    @prev_year = @now.prev_year.year
+    @months = @now.since((how_many_months + how_many_months_ago).months).mon
+    
+    # @delivery_range = "#{@group.delivery_start_year.year}年〜#{@now.prev_year.year}年間の#{@now.since((how_many_months + how_many_months_ago).months).mon}月の日記"
   end
 end

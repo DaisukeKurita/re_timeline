@@ -2,9 +2,9 @@
   data-turbolinks="false"
 <% end %>
 
-<h2><%= @group.name %><%= t 'blogs.index.google_maps_list' %></h2>
+<h2 class="mb-5"><%= @group.name %> <%= t 'blogs.index.event_location_map_index' %></h2>
 
-<div id='map' class='mx-auto' style='height: 400px; width: 1400px;'></div>
+<div id='map' class="mx-auto container-fluid" style='height: 600px;'></div>
 
 <script>
 var map;
@@ -16,7 +16,7 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 35.6458437, lng: 139.7046171 },
-    zoom: 7,
+    zoom: 6,
   });
 
   for (var i = 0; i < markerData.length; i++) {
@@ -37,4 +37,6 @@ function initMap() {
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
 
-<%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %>
+<div class="text-right p-4">
+  <%= link_to t('blogs.index.diary_index'), group_blogs_path(@group) %>
+</div>

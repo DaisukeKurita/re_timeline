@@ -19,7 +19,7 @@
         <%= link_to t('view.re_time_line'), root_path, class: "bi bi-house-fill" %>
       </div>
       <% if user_signed_in? %>
-        <% if controller_name == "blogs" || controller_name == "maps" %>
+        <% if controller_name == "blogs" || controller_name == "maps" || action_name == "delivery_setup" %>
           <div class="p-3">
             <%= link_to t('blogs.index.new_diary_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false}, class: "bi bi-pencil-fill" %>
           </div>
