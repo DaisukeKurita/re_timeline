@@ -111,7 +111,5 @@ class GroupsController < ApplicationController
     @start_year = @group.delivery_start_year.year
     @prev_year = @now.prev_year.year
     @months = @now.since((how_many_months + how_many_months_ago).months).mon
-    
-    # @delivery_range = "#{@group.delivery_start_year.year}年〜#{@now.prev_year.year}年間の#{@now.since((how_many_months + how_many_months_ago).months).mon}月の日記"
   end
 end
