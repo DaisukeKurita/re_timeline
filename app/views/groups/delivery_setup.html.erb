@@ -1,9 +1,39 @@
-<h2><%= t '.group_delivery_setup', group_name: @group.name %></h2>
+<h1 class="mb-5"><%= t '.group_delivery_setup', group_name: @group.name %></h1>
+  <p><%= t '.can_be_set_up_for_email_delivery' %></p>
 
-<%= form_with(model: @group, url: delivery_period_group_path(@group), local: true) do |form| %>
-  <%= form.label :receiving_date %>
-  <%= form.select :receiving_date, Group.receiving_dates_i18n.invert.to_a %>
-  <%= form.label :delivery_start_year %>
-  <%= form.date_select :delivery_start_year, {discard_month: true, start_year: @one_hundred_years_ago, end_year: @this_year, default: { month: 1, day: 1 }} %>
-  <%= form.submit t('.setup')%>
+<div class="date-form-size-ch text-left mx-auto pb-4">
+  <%= form_with(model: @group, url: delivery_period_group_path(@group), local: true) do |form| %>
+    <div class="mb-4">
+      <%= form.label :receiving_date %><br>
+      <%= form.select :receiving_date, Group.receiving_dates_i18n.invert.to_a, {}, class: 'form-control font-size-ch' %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :delivery_start_year %><br>
+      <%= form.date_select :delivery_start_year, {discard_month: true, start_year: @one_hundred_years_ago, end_year: @last_year, default: { year: @last_year, month: 1, day: 1 }}, class: 'form-control font-size-ch' %>
+    </div>
+    <div class="text-right">
+    <%= form.submit t('.setup'), data: {confirm: t('blogs.index.do_you_want_to_set_up_with_this?')}, class: "btn font-size-ch btn-primary" %>
+    </div >
+  <% end %>
+</div>
+
+<p><%= t '.the_setting_results_are_displayed_below' %></p>
+
+<% if @group.no_notice? %>
+  <p><%= t '.not_yet_set_up' %></p>
+<% else %>
+  <p>
+    <%= t '.next_delivery' %>
+    「<%= l @last_friday, format: :long_change %>」
+    <%= t '.be_done_on' %>
+  </p>
+  <p>
+    <%= t '.diaries_delivered_by', delivery_range: @delivery_range, start_year: @start_year, prev_year: @prev_year, months: @months %>
+  </p>
 <% end %>
+
+
+<div class="text-right p-4">
+  <%= link_to t('blogs.index.diary_index'), group_blogs_path(@group) %>
+</div>

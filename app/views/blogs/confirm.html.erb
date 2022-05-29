@@ -1,39 +1,59 @@
 <% content_for(:body_attributes) do %>
   data-turbolinks="false"
 <% end %>
-<h3><%= @group.name %><%= t '.is_the_blog_content_okay?' %></h3>
+
+<h2 class="mb-5"><%= @group.name %><%= t '.is_the_diary_content_okay?' %></h2>
 
 <%= form_with(model:[@group, @blog], local: true) do |form| %>
+  <div class="text-left mb-4">
+    <fieldset disabled>
+      <div class="blog_title mb-4">
+        <%= form.label :title %> <br>
+        <%= form.text_field :title, class: 'form-control font-size-ch' %>
+      </div>
+
+      <div class="blog_event_date mb-4 date-form-size-ch">
+        <%= form.label :event_date %> <br>
+        <%= form.date_field :event_date, class: 'form-control font-size-ch' %>
+      </div>
+
+      <div class="blog_content mb-4">
+        <%= form.label :content %> <br>
+        <%= form.text_area :content, class: 'form-control font-size-ch line-height-ch', rows: 8 %>
+      </div>
+
+      <div class="blog_image mb-4">
+        <%= form.label :photo %>
+        <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %>
+        <%= form.file_field :photo, class: 'd-none' %>
+        <%= form.hidden_field :photo_cache %>
+      </div>
+
+      <%= form.fields_for :maps do |map| %>
+        <div class="date-form-size-ch mb-4">
+          <%= map.label :event_time %>
+          <%= map.time_field :event_time, class: 'form-control font-size-ch' %>
+        </div>
+        <%# Google mapsで指定した住所を送るコード %>
+        <%= map.label :address, id: "hidden_address" %> 
+        <%= map.text_field :address, class: 'form-control font-size-ch' %> 
+      <% end %>
+    <fieldset>
+  </div>
+  
+  <%#  <fieldset disabled>を使用するとhidden_fieldが無いとデータが送れない %>
   <%= form.hidden_field :title %>
   <%= form.hidden_field :event_date %>
   <%= form.hidden_field :content %>
   <%= form.hidden_field :photo_cache %>
-  <%= form.hidden_field :email_notice %>
-
-  <p><%= t 'blogs.index.title' %>: <%= @blog.title %></p>
-  <p><%= t 'blogs.index.event_date' %>: <%= l @blog.event_date, format: :long if @blog.event_date %></p>
-  <p><%= t 'blogs.index.content' %>: <%= @blog.content %></p>
-  <p><%= t 'blogs.index.photo' %>: <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %></p>
-  <p><%= t 'blogs.index.email_notice' %>: <%= form.check_box :email_notice, {disabled: :true} %></p>
-
+  
   <%= form.fields_for :maps do |map| %>
     <%= map.hidden_field :event_time %>
     <%= map.hidden_field :address %>
-    <% @maps.each do |map| %>
-      <p><%= t 'blogs.form.event_time' %>: <%= map.event_time.to_s(:time) if map.event_time.present? %></p>
-      <p><%= t 'blogs.form.event_address' %>: <%= map.address %></p>
-    <% end %>
   <% end %>
 
   <% if @search_addresses.present? %>
-    <div id='map' class="mx-auto"></div>
-
-    <style>
-      #map {
-        height: 400px;
-        width: 1200px;
-      }
-    </style>
+    <div id='map' class="mx-auto container-fluid" style='height: 600px;'></div>
 
     <script>
       var map
@@ -48,7 +68,7 @@
       var lat_lng = {lat: gon.lat, lng: gon.lng};
       map = new google.maps.Map(document.getElementById('map'), {
         center: lat_lng,
-        zoom: 12,
+        zoom: 9,
       });
       var marker = new google.maps.Marker({
         position: lat_lng,
@@ -59,6 +79,8 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
   <% end %>
   
-  <%= form.submit t('.contribute') %>
-  <%= form.submit t('.back'), name: 'back' %>
+  <div class="text-left mt-4 mb-4 ">
+    <%= form.submit t('.contribute'), class: "btn font-size-ch btn-primary" %>
+    <%= form.submit t('.back'), name: 'back', class: "btn font-size-ch btn-secondary" %>
+  </div>
 <% end %>

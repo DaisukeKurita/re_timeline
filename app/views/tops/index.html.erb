@@ -1,44 +1,115 @@
-<div class="container">
-  <h1 class="title">Re: Timeline</h1><br/>
-    <div class="contents">
-      <h3>このアプリの使い方</h3>
+<section>
+  <div class="d-flex flex-row justify-content-around mb-5">
+    <div class="d-flex flex-column col">
+      <h1 class="title text-info mb-3">
+        <i class="bi bi-app text-primary"></i>
+        Re: Timeline
+      </h1>
       <p>
-        行ったイベント事を、家族・友人・仲間とブログとして共有し記録します。<br/>
-        <br/>
-        メール通知設定をすると、翌年毎以降の同月数ヶ月前（1〜3ヶ月前）に<br/>
-        「yyyy年mm月はこういうイベントを行っていたよ！」と通知するをしてくれます。<br/>
-      </p><br/>
-        <h4>グループ機能</h4>
-        <p>
-        ユーザー同士でグループを組むことができます、家族・友達・同僚など仲間とメンバー組をしましょう。<br/>
-        メンバーはグループ詳細設定画面でメールアドレスを入力し、メンバーを組を行う事ができます。
-        </p><br/>
-        <h4>ブログ機能</h4>
-        <p>
-        グループを作成した後は、ブログを投稿しましょう。このブログはグループで共有する事ができます。<br/>
-        投稿者がわかりやすいよう新規投稿者、最終更新者が表示されます。
-        </p><br/>
-        <h4>メール通知機能</h4>
-        <p>
-        配信設定画面より、過去のブログをメールで配信する事ができます、毎月最終金曜日19:00〜こちらの<br/>
-        サイトより自動でメール配信を行います。過去最大100年前のブログ情報のデータを取得できます、<br/>
-        配信時期は、1〜３ヶ月前より選ぶ事が可能です。<br/>
-        例：5月最終金曜日に配信されるブログは、過去の6月・7月・8月のどれかから選ぶ事ができる。<br/>
-        <br/>
-        全てのブログを通知オフ、ブログ１つ１つを通知するかどうか選ぶことも可能です！<br/>
-        </p><br/>
+        家族・友達など仲間との過去のイベントを<br>
+        自動メール配信で共有してくれるアプリ<br>
+      <p>
+        <i class="bi bi-heart-fill text-danger"></i>
+        好きなメンバー同士でグループ組<br>
+        <i class="bi bi-clipboard-data text-warning"></i>
+        グループ内で日記を投稿・共有<br>
+        <i class="bi bi-envelope"></i>
+        毎月過去のグループの日記をメンバーへメールで自動配信
+      </p>
+    </div>
 
-        <h4>さあ、みんなと思い出を共有しよう！</h4>
+    <div class="d-flex flex-column col">
+      <h1 class="text-info mb-3">
+        <i class="bi bi-person-hearts text-danger"></i>
+        Re: Timelineとは
+      </h1>
+      <p>
+        家族・友達など仲間とのグループで行ったイベント...<br>
+        数々のイベントがありました。イベントを重ねた結果...<br>
+        この時期はどんなイベントがあったっけ？どこに行っていたっけ？<br>
+        という事が増えてきました。そういった経験から、過去のイベントを<br>
+        グループで管理・共有・配信ができるアプリがあったら<br>
+        良いなという想いで、このアプリを開発しました。
+      </p>
     </div>
-    <div class="d-flex flex-column bd-highlight mb-3">
-      <% if user_signed_in? %>
-        <div class="p-2"><%= link_to t('.to_the_list_of_affiliated_groups'), groups_path %></div>
-      <% else %>
-        <div class="p-2"><%= link_to t('view.login'), new_user_session_path %></div>
-        <div class="p-2"><%= link_to t('view.account_registration'), new_user_registration_path %></div>
-        <div class="p-2"><%= link_to t('.guest_login'), users_guest_sign_in_path, method: :post %></div>
-        <div><%= link_to t('.admin_guest_login'), users_admin_guest_sign_in_path, method: :post %></div>
-      <% end %>
+  </div>
+
+  <h1 class="text-info mb-3">
+    <i class="bi bi-lightbulb text-warning"></i>
+    このアプリの使い方
+  </h1>
+
+  <div class="d-flex flex-row justify-content-around">
+    <div class="d-flex flex-column col">
+      <h1 class="bi bi-emoji-heart-eyes p-3 text-danger"></h1>
+      <h2 class="font-weight-bold">
+        好きな人とグループを組む
+      </h2>
+      <p class="text-left">
+        ユーザー同士でグループを組むことができます、
+        家族・友達など仲間とメンバー組をしましょう。
+        グループメンバー登録はグループ情報詳細画面で、
+        メールアドレスを入力する事により行うことができます。
+        メンバーの招待は、グループ管理者のみ可能です。
+      </p>
     </div>
-  </article>
-</div>
+    <div class="d-flex flex-column col">
+      <h1 class="bi bi-pen-fill p-3"></h1>
+      <h2 class="font-weight-bold">
+        グループ内で日記を投稿
+      </h2>
+      <p class="text-left">
+        グループを作成した後は、日記を投稿しましょう。
+        この日記はグループ内のみで共有する事ができます。
+        日記の編集・削除は日記の新規投稿者・グループ管理者のみ
+        行うことができます（グループ管理者はグループ内、全ての
+        日記を編集・削除することが可能です）。誰が新規投稿・更新をしたのか
+        分かりやすいように、新規投稿者・最終更新者が表示されます。
+      </p>
+    </div>
+    <div class="d-flex flex-column col">
+      <h1 class="bi bi-envelope p-3"></h1>
+      <h2 class="font-weight-bold">
+        グループの日記をメールで自動配信
+      </h2>
+      <p class="text-left">
+        配信設定画面で、過去のグループの日記をメンバーに対し、
+        メールで自動配信する設定が行えます。
+        毎月最終金曜日19:00〜、Re: Timelineより自動でメール配信を行います。
+        過去最大100年前のグループ日記のデータを、配信することができます。
+        配信月は、1〜3ヶ月前のパターンから選択する事が可能です。
+        配信設定は、グループ管理者のみ設定を行うことができます。
+        <br>
+        <br>
+        例えば...5月最終金曜日19:00〜配信される日記は、過去の6月・7月・8月から選択可能です。<br>
+        <br>
+        配信設定画面で全ての日記を通知されないように設定することができます、
+        日記毎に通知をするかどうは、日記一覧画面で選択することが可能です！
+      </p><br>
+    </div>
+  </div>
+      <h1>さあ、みんなと思い出を共有しよう！</h1>
+</section>
+
+<article>
+  <div class="d-flex flex-column bd-highlight mb-3">
+    <% if user_signed_in? %>
+      <div class="p-2">
+        <%= link_to t('.to_the_list_of_affiliated_groups'), groups_path, class: "btn font-size-ch btn-outline-success  bi bi-person-video2" %>
+      </div>
+    <% else %>
+      <div class="p-2">
+        <%= link_to t('view.login'), new_user_session_path, class: "btn font-size-ch btn-primary bi bi-arrow-right-square-fill" %>
+      </div>
+      <div class="p-2">
+        <%= link_to t('view.account_registration'), new_user_registration_path, class: "btn font-size-ch btn-primary bi bi-person-plus-fill" %>
+      </div>
+      <div class="p-2">
+        <%= link_to t('.guest_login'), users_guest_sign_in_path, method: :post, class: "btn font-size-ch btn-light bi bi-person-plus" %>
+      </div>
+      <div class="p-2">
+        <%= link_to t('.admin_guest_login'), users_admin_guest_sign_in_path, method: :post, class: "btn font-size-ch btn-light bi bi-person-workspace" %>
+      </div>
+    <% end %>
+  </div>
+</article>

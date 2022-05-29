@@ -1,47 +1,102 @@
-<h2><%= @group.name %><%= t '.blog_index' %></h2>
+<h1 class="mb-5"><%= @group.name %><%= t '.diary_index' %></h1> 
 
-<div class="d-flex flex-row bd-highlight mb-3">
-  <div class="p-2 bd-highlight" id="blog_new_link"><%= link_to t('.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></div>
-  <div class="p-2 bd-highlight"><%= link_to t('.delivery_setup'),  delivery_setup_group_path(@group) %></div>
-  <div class="p-2 bd-highlight"><%= link_to t('.google_maps_list'), group_maps_path(@group) %></div>
+<div class="d-flex flex-row m-3">
+  <div class="p-2" id="blog_new_link">
+    <%= link_to t('.new_diary_contribution_here'), new_group_blog_path(@group), data: {"turbolinks"=>false}, class: "btn btn-primary btn-lg bi bi-pencil-fill" %>
+  </div>
+
+  <div class="p-2">
+    <%= link_to t('.diary_delivery_setting_here'), delivery_setup_group_path(@group), class: "btn btn-secondary btn-lg bi bi-stopwatch-fill" %>
+  </div>
+
+  <div class="p-2">
+    <%= link_to t('.the_event_address_here'), group_maps_path(@group), data: {"turbolinks"=>false}, class: "btn btn-info btn-lg bi bi-map-fill" %>
+  </div>
 </div>
 
-<table class='table'>
-  <tr>
-    <th><%= t '.title' %></th>
-    <th><%= t '.event_date' %></th>
-    <th><%= t '.new_contributor' %></th>
-    <th><%= t '.last_updater' %></th>
-    <th><%= t '.content' %></th>
-    <th><%= t '.photo' %></th>
-    <th><%= t '.email_notice' %></th>
-  </tr>
-    <% @blogs.each do |blog| %>
+<% if @group_admin %>
+  <h3 class="text-left bi bi-envelope">
+    <%= t '.about_email_notice' %>
+  </h3>
+  <p class="text-left">
+    <button class="btn btn-dark btn-lg bi bi-envelope-slash-fill font-weight-bold">
+      <%= t '.stop_notification' %>  
+    </button>
+    <%= t '.button_to_stop_an_email_notice_for_the_corresponding_diary' %><br>
+    <button class="btn btn-warning btn-lg bi bi-envelope-plus-fill font-weight-bold">
+      <%= t '.notify' %>  
+    </button>
+    <%= t '.button_to_initiate_an_email_notice_for_the_corresponding_diary' %><br>
+    <%= t '.email_notice_are_set_only_for_group_admins' %><br>
+    <%= t '.refer_to_the_top_page_for_details_of_the_delivery_contents' %>
+  </p>
+<% end %>
+
+<table class='table table-striped table-hover'>
+  <thead>
     <tr>
-      <td><%= blog.title %></td>
-      <td><%= l blog.event_date, format: :long %></td>
-      <% if blog.new_contributor.present? %>
-        <td><%= blog.new_contributor.name %></td>
+      <th class="align-middle">#</th>
+      <th class="align-middle"><%= t '.title' %></th>
+      <th class="align-middle"><%= t '.event_date' %></th>
+      <th class="align-middle"><%= t '.new_contributor' %></th>
+      <th class="align-middle"><%= t '.last_updater' %></th>
+      <th class="align-middle"><%= t '.photo' %></th>
+      <% if @group_admin %>
+        <th class="align-middle"><%= t '.email_notice' %></th>
+        <th></th>
+        <th></th>
+      <% elsif !@group_admin && @new_group_diary_contributor %>
+        <th></th>
+        <th></th>
       <% else %>
-        <td><%= t '.absence' %></td>
-      <% end %>
-      <% if blog.last_updater.present? %>
-        <td><%= blog.last_updater.name %></td>
-      <% else %>
-        <td><%= t '.absence' %></td>
-      <% end %>
-      <td><%= blog.content %></td>
-      <td><%= image_tag blog.photo.url if blog.photo && blog.photo.url %>
-      <% if blog.email_notice %>
-        <td><%= link_to t('.stop_notification'), notice_switching_group_blog_path(@group, blog, email_notice: false), method: :patch, data: { confirm: t('.stop_notification?') } %></td>
-      <% else %>
-        <td><%= link_to t('.notify'), notice_switching_group_blog_path(@group, blog, email_notice: true), method: :patch, data: { confirm: t('.notify?') } %></td>
-      <% end %>
-      <td><%= link_to t('.blog_detail'),  group_blog_path(@group, blog) %></td>
-      <% if current_user.id == blog.new_contributor_id || @group_admin %>
-        <td><%= link_to t('.blog_editing'),  edit_group_blog_path(@group, blog) %></td>
-        <td><%= link_to t('.blog_deletion'),  group_blog_path(@group, blog), method: :delete, data: { confirm: t('groups.index.really_deleted?') } %></td>
+        <th></th>
+        <th></th>
       <% end %>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% num = 0 %>
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td class="align-middle"><%= num += 1 %></td>
+        <td class="align-middle">
+          <%= link_to blog.title, group_blog_path(@group, blog), data: {"turbolinks"=>false}, class: "text-primary" %>
+        </td>
+        <td class="align-middle"><%= l blog.event_date, format: :long %></td>
+        <% if blog.new_contributor.present? %>
+          <td class="align-middle"><%= blog.new_contributor.name %></td>
+        <% else %>
+          <td class="align-middle"><%= t '.absence' %></td>
+        <% end %>
+        <% if blog.last_updater.present? %>
+          <td class="align-middle"><%= blog.last_updater.name %></td>
+        <% else %>
+          <td class="align-middle"><%= t '.absence' %></td>
+        <% end %>
+        <td class="align-middle"><%= image_tag blog.photo.url if blog.photo && blog.photo.url %>
+        <% if @group_admin %>
+          <% if blog.email_notice %>
+            <td class="align-middle">
+              <%= link_to t('.stop_notification'), notice_switching_group_blog_path(@group, blog, email_notice: false), method: :patch, data: { confirm: t('.stop_notification?') }, class: "btn btn-dark btn-lg bi bi-envelope-slash-fill font-weight-bold" %>
+            </td>
+          <% else %>
+            <td class="align-middle">
+              <%= link_to t('.notify'), notice_switching_group_blog_path(@group, blog, email_notice: true), method: :patch, data: { confirm: t('.notify?') }, class: "btn btn-warning btn-lg bi bi-envelope-plus-fill font-weight-bold" %>
+            </td>
+          <% end %>
+        <% end %>
+        <% if current_user.id == blog.new_contributor_id || @group_admin %>
+          <td class="align-middle">
+            <%= link_to t('.diary_editing'),  edit_group_blog_path(@group, blog), data: {"turbolinks"=>false}, class: "btn btn-outline-secondary btn-lg bi bi-pencil font-weight-bold" %>
+          </td>
+          <td class="align-middle">
+            <%= link_to t('.diary_deletion'),  group_blog_path(@group, blog), method: :delete, data: { confirm: t('groups.index.really_deleted?') }, class: "btn btn-outline-danger btn-lg bi bi-eraser font-weight-bold" %>
+          </td>
+        <% elsif current_user.id != blog.new_contributor_id && !@group_admin %>
+          <td></td>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

@@ -1,5 +1,8 @@
-<h2><%= @group.name %><%= t 'blogs.index.blog_editing' %></h2>
+<h1 class="mb-5"><%= @group.name %><%= t 'blogs.index.diary_editing' %></h1>
 
 <%= render 'form' %>
 
-<%= link_to t('blogs.index.blog_detail'), group_blog_path(@group, @blog) %> | <%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %>
+<div class="text-right p-4">
+  <%= link_to t('blogs.index.diary_detail'), group_blog_path(@group, @blog), class: 'bi bi-clipboard-check' %> |
+  <%= link_to t('blogs.index.diary_index'), group_blogs_path(@group), class: 'bi bi-clipboard-data' %>
+</div>

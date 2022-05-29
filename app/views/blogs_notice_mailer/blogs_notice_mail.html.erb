@@ -4,12 +4,11 @@
   <tr>
     <th><%= t 'blogs.index.title' %></th>
     <th><%= t 'blogs.index.event_date' %></th>
-    </tr>
+  </tr>
   <% @blogs.each do |blog| %>
     <tr>
-      <td><%= blog.title %></td>
+      <td><%= link_to blog.title, group_blog_url(@group, blog) %></td>
       <td><%= l blog.event_date, format: :long %></td>
-      <td><%= link_to t('blogs.index.blog_detail'), group_blog_url(@group, blog) %></td>
     </tr>
   <% end %>
 </table>

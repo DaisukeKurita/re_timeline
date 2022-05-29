@@ -1,26 +1,46 @@
-<h2><%= t '.list_of_affiliated_groups' %></h2>
+<h1><%= t '.list_of_affiliated_groups' %></h1><br>
 
-<%= link_to t('.group_new_registration'), new_group_path %>
+<p class="text-left">
+  <%= link_to t('.new_group_registration_here'), new_group_path, class: "btn btn-primary bi bi-plus-circle btn-lg m-2" %>
+</p>
 
-<table class="table">
-  <tr>
-    <th><%= t '.group_name' %></th>
-    <th><%= t '.explanation' %></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-    <% @groups.each do |group| %>
+<p class="text-left">
+  <%= t '.to_add_members_to_a_group_click_on_the_appropriate_group_name' %>
+</p>
+
+<table class="table table-striped table-hover">
+  <thead>
     <tr>
-      <td><%= group.name %></td>
-      <td><%= group.explanation %></td>
-      <td><%= link_to t('.group_information_details'), group_path(group) %></td>
-      <% if @groupings_admin.include?(group.id) %>
-        <td><%= link_to t('.group_information_editing'), edit_group_path(group) %></td>
-        <td><%= link_to t('.group_deletion'), group_path(group), method: :delete, data: { confirm: t('.really_deleted?') } %></td>
-      <% end %>
-      <td><%= link_to t('.group_blog_index'), group_blogs_path(group) %></td>
+      <th class="align-middle">#</th>
+      <th class="align-middle"><%= t '.group_name' %></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% num = 0 %>
+    <% @groups.each do |group| %>
+      <tr>
+        <td class="align-middle"><%= num += 1 %></td>
+        <td class="align-middle">
+          <%= link_to group.name, group_path(group), class: "text-primary"  %>
+        </td>
+        <% if @groupings_admin.include?(group.id) %>
+          <td class="align-middle">
+            <%= link_to t('.group_information_editing'), edit_group_path(group), class: "btn btn-outline-secondary btn-lg bi bi-pencil-square font-weight-bold" %>
+          </td>
+          <td class="align-middle">
+            <%= link_to t('.group_deletion'), group_path(group), method: :delete, data: { confirm: t('.really_deleted?') }, class: "btn btn-outline-danger btn-lg bi bi-trash font-weight-bold" %>
+          </td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
+        <td class="align-middle">
+          <%= link_to t('.group_diary_index'), group_blogs_path(group), class: "btn btn-warning btn-lg bi bi-clipboard-data font-weight-bold" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

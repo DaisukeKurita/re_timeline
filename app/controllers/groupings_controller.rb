@@ -11,7 +11,8 @@ class GroupingsController < ApplicationController
     email_exist? and return
     if @user
       @group.groupings.create(user_id: @user.id)
-      redirect_to group_path(@group), notice: t('notice.member_registration_completed', email: @user.email)
+      flash[:success] = t('notice.member_registration_completed', email: @user.email)
+      redirect_to group_path(@group)
     else
       render template: "groups/show"
     end
@@ -28,7 +29,8 @@ class GroupingsController < ApplicationController
 
   def destroy
     if @grouping.destroy
-      redirect_to group_path(@group), notice: t('notice.delete_member', email: @grouping.user.email)
+      flash[:danger] = t('notice.delete_member', email: @grouping.user.email)
+      redirect_to group_path(@group)
     else
       update_destroy_else_render
       render template: "groups/show"
@@ -38,22 +40,29 @@ class GroupingsController < ApplicationController
   private
   
   def email_exist? # すでにメンバー登録されている場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
-    redirect_to group_path(@group), notice: t('notice.registered_as_a_member', email: @user.email) if @group.members.exists?(email: @user.email)
+    if @group.members.exists?(email: @user.email)
+      flash[:warning] = t('notice.registered_as_a_member', email: @user.email) 
+      redirect_to group_path(@group)
+    end
   end
   
   def user_exist? # ユーザとして存在しない場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
     if !params[:email].present?
-      redirect_to group_path(@group), notice: t('notice.email_blank')
+      flash[:warning] = t('notice.email_blank')
+      redirect_to group_path(@group)
     elsif !User.exists?(email: params[:email])
-      redirect_to group_path(@group), notice: t('notice.no_email_create_an_account', email: params[:email])
+      flash[:warning] = t('notice.no_email_create_an_account', email: params[:email])
+      redirect_to group_path(@group)
     end
   end
 
   def grouping_admin_grant_or_release # 管理者権限の付与・解除時に表示されるnoticeの条件分岐
     if @grouping.admin
-      redirect_to group_path(@group), notice: t('notice.grant_admin_privilege', email: @grouping.user.email)
+      flash[:success] = t('notice.grant_admin_privilege', email: @grouping.user.email)
+      redirect_to group_path(@group)
     else
-      redirect_to group_path(@group), notice: t('notice.release_admin_privilege', email: @grouping.user.email)
+      flash[:danger] = t('notice.release_admin_privilege', email: @grouping.user.email)
+      redirect_to group_path(@group)
     end
   end
 

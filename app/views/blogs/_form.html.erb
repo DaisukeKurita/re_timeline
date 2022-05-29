@@ -1,61 +1,71 @@
 <% content_for(:body_attributes) do %>
   data-turbolinks="false"
 <% end %>
+
 <%= form_with(model: [@group, @blog], local: true, url: choose_new_or_edit) do |form| %>
   <% if @blog.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @blog.errors.count %><%= t 'view.error_has_occurred' %></h2>
-      <ul>
-        <% @blog.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <div id="error_explanation" class="text-left text-danger font-weight-bold">
+      <%= @blog.errors.count %><%= t 'view.error_has_occurred' %><br>
+      <% @blog.errors.full_messages.each do |msg| %>
+        <%= msg %><br>
+      <% end %>
     </div>
   <% end %>
 
-  <div class="blog_title">
-    <%= form.label :title %> <br/>
-    <%= form.text_field :title, placeholder: "ブログタイトル" %>
-  </div>
-  <div class="blog_event_date">
-    <%= form.label :event_date %> <br/>
-    <%= form.date_field :event_date %>
-  </div>
-  <div class="blog_content">
-    <%= form.label :content %> <br/>
-    <%= form.text_area :content, placeholder: "ブログの内容" %>
-  </div>
-  <div class="blog_image">
-    <%= form.label :photo %> <br/>
-    <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %>
-    <%= form.file_field :photo %>
-    <%= form.hidden_field :photo_cache %>
-  </div>
-  <div class="blog_email_notice">
-    <%= form.label :email_notice %> <br/>
-    <%= form.check_box :email_notice, {checked: true}, "true", "false" %>
-  </div>
-
-  <%= form.fields_for :maps do |map| %>
-    <div>
-      <%= map.label :event_time %> <br/>
-      <%= map.time_field :event_time %>
+  <div class="text-left mb-4">
+    <div class="blog_title mb-4">
+      <%= form.label :title %> <br>
+      <%= form.text_field :title, placeholder: "日記タイトルを入力してください（必須）", class: 'form-control font-size-ch' %>
     </div>
-    <%# Google mapsで指定した住所を送るコード %>
-    <%= map.hidden_field :address, id: "hidden_address" %> 
-  <% end %>
+
+    <div class="blog_event_date mb-4 date-form-size-ch">
+      <%= form.label :event_date %> <br>
+      <%= form.date_field :event_date, class: 'form-control font-size-ch' %>
+    </div>
+
+    <div class="blog_content mb-4">
+      <%= form.label :content %> <br>
+      <%= form.text_area :content, placeholder: "日記の内容を入力してください", class: 'form-control font-size-ch line-height-ch', rows: 8 %>
+    </div>
+
+    <div class="blog_image mb-4">
+      <%= form.label :photo %>
+      <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %>
+      <% if @blog.photo.url %>
+        <%= form.file_field :photo, class: 'd-none' %>
+      <% else %>
+        <%= form.file_field :photo %>
+      <% end %>
+      <%= form.hidden_field :photo_cache %>
+    </div>
+
+    <%= form.fields_for :maps do |map| %>
+      <div class="date-form-size-ch mb-4">
+        <%= map.label :event_time %>
+        <%= map.time_field :event_time, class: 'form-control font-size-ch' %>
+      </div>
+      <%# Google mapsで指定した住所を送るコード %>
+      <%= map.hidden_field :address, id: "hidden_address" %> 
+    <% end %>
 
     <%# 住所検索の為の検索窓を作るコード %>
-    <%= t '.event_address' %><input id="address" type="textbox" value="" placeholder="イベント先住所">
+    <div class="mb-4">
+      <%= t '.event_destination' %><br>
+      <input id="address" type="textbox" value="" placeholder="イベント先を入力してください 例：東京タワー または 東京都港区芝公園４丁目２−８ など", class='form-control font-size-ch' >
+    </div>
 
     <%# クリックすると地図検索をするボタンを作るコード %>
     <input type="button" value="<%= t '.map_search' %>" onclick="codeAddress()">
+    <%= t '.after_entering_the_event_destination_press_the_map_search_button' %>
 
     <%# 地図検索後に緯度・経度が表示されるコード %>
-    <div id="display"><%= t '.latitude_and_longitude_display' %></div>
+    <div id="display">
+      <%= t '.if_the_search_is_successful_longitude_and_latitude_are_displayed_here' %>
+    </div>
+  </div>
 
     <%# 地図を表示している %>
-    <div id='map' class="mx-auto" style='height: 400px; width: 1200px;'></div>
+    <div id='map' class="mx-auto container-fluid" style='height: 600px;'></div>
 
   <script>
     var display = document.getElementById('display')
@@ -67,7 +77,7 @@
           lat: 35.6458437,
           lng: 139.7046171
         },
-        zoom: 12,
+        zoom: 9,
       });
       // 確認画面から戻ってきた時の処理、gon.search_addressesに入っている住所を
       // 使い再度マーカーを立てている
@@ -119,6 +129,8 @@
   </script>
   
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
-
-  <br /><%= form.submit %>
+  
+  <div class="text-left mt-4">
+    <%= form.submit class: "btn font-size-ch btn-primary" %>
+  </div>
 <% end %>

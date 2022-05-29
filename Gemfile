@@ -13,7 +13,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rexml'
 gem 'devise'
 gem 'devise-i18n'
-gem 'rails_admin', ['>= 3.0.0.beta2', '< 4']
+# gem 'rails_admin', ['>= 3.0.0.beta2', '< 4']
+gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
 gem 'carrierwave'
 gem 'mini_magick'
@@ -25,8 +26,6 @@ gem 'enum_help'
 gem 'fog-aws'
 gem 'unicorn'
 gem 'seed-fu'
-gem 'bootstrap', '~> 4.4.1'
-gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

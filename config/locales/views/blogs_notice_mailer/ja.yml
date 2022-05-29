@@ -1,0 +1,4 @@
+ja:
+  blogs_notice_mailer:
+    blogs_notice_mail:
+      subject: "%{group_name}の過去の%{blogs_month}月の日記をお知らせします！"

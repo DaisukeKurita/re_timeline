@@ -21,3 +21,4 @@ ja:
     admin_guest_user_cannot_be_updated_deleted: "管理者ゲストユーザーの更新・削除はできません"
     guest_user_password_cannot_be_reset: "ゲストユーザーのパスワード再設定はできません"
     admin_guest_user_password_cannot_be_reset: "管理者ゲストユーザーのパスワード再設定はできません"
+    delivery_setup_complete: '配信設定が完了しました'

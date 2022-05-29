@@ -1,0 +1,75 @@
+// 全体
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #313131;
+}
+
+.field_with_errors {
+  display: contents;
+}
+
+header {
+  background-color: #f3f3f3;
+  width: 100%;
+  padding: 10px;
+}
+
+main {
+  padding: 30px 15px 60px;
+}
+
+footer {
+  width: 100%;
+  background-color: #f3f3f3;
+  padding: 20px 0 10px 0;
+  color: #5b5c76;
+  margin: auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+// aタグの基本色
+a {
+  color: #5b5c76;
+  font-weight: bold;
+}
+
+// フォントカスタム
+.font-size-ch {
+  font-size: 1.6rem;
+}
+
+// 行間カスタム
+.line-height-ch {
+  line-height: 1.7;
+}
+
+// ログイン・アカウント入力フォームサイズカスタム
+.form-size-ch {
+  width: 400px;
+}
+
+// date入力フォームサイズカスタム
+.date-form-size-ch {
+  width: 200px;
+}
+
+// トップ画面
+main {
+  h1 {
+    font-weight: bold;
+  }
+  p {
+    line-height: 1.9;
+  }
+}

@@ -4,38 +4,63 @@
     <title>ReTimeline</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= include_gon(init: true) %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
   </head>
+  
   <body>
-    <header>
-      <div class="d-flex flex-row bg-warning mb-3">
-        <div class="p-1"><%= link_to t('view.re_time_line'), root_path %></div>
-        <% if user_signed_in? %>
-          <% if controller_name == "blogs" || controller_name == "maps" %>
-            <div class="p-1"><%= link_to t('blogs.index.new_blog_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false} %></div>
-            <div class="p-1"><%= link_to t('blogs.index.blog_index'), group_blogs_path(@group) %></div>
-            <div class="p-1"><%= link_to t('blogs.index.delivery_setup'),  delivery_setup_group_path(@group) %></div>
-          <% elsif controller_name == "groups" %>
-            <div  class="p-1"><%= link_to t('groups.index.group_new_registration'), new_group_path %></div>
-          <% end %>
-            <div class="p-1"><%= link_to t('groups.index.list_of_affiliated_groups'), groups_path %></div>
-            <div class="p-1"><%= link_to current_user.name, user_path(current_user) %></div>
-          <% if current_user.admin == true %>
-            <div class="p-1"><%= link_to t('view.admin_screen'), rails_admin_path %></div>
-          <% end %>
-          <div class="p-1"><%= link_to t('view.logout'), destroy_user_session_path, method: :delete %></div>
-        <% else %>
-          <div class='p-1'><%= link_to t('view.login'), new_user_session_path %></div>
-          <div class='p-1'><%= link_to t('view.account_registration'), new_user_registration_path %></div>
-      <% end %>
+    <header class="d-flex flex-row">
+      <div class="p-3 mr-auto">
+        <%= link_to t('view.re_time_line'), root_path, class: "bi bi-house-fill" %>
       </div>
+      <% if user_signed_in? %>
+        <% if controller_name == "blogs" || controller_name == "maps" || action_name == "delivery_setup" %>
+          <div class="p-3">
+            <%= link_to t('blogs.index.new_diary_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false}, class: "bi bi-pencil-fill" %>
+          </div>
+          <div class="p-3">
+            <%= link_to t('blogs.index.diary_index'), group_blogs_path(@group), class: "bi bi-clipboard-data" %>
+          </div>
+          <div class="p-3">
+            <%= link_to t('blogs.index.delivery_setup'),  delivery_setup_group_path(@group), class: "bi bi-stopwatch-fill" %>
+          </div>
+        <% elsif controller_name == "groups" %>
+          <div  class="p-3">
+            <%= link_to t('groups.index.group_new_registration'), new_group_path, class: "bi bi-plus-circle" %>
+          </div>
+        <% end %>
+          <div class="p-3">
+            <%= link_to t('groups.index.list_of_affiliated_groups'), groups_path, class: "bi bi-person-video2" %>
+          </div>
+          <div class="p-3">
+            <%= link_to current_user.name, user_path(current_user), class: "bi bi-person-circle" %>
+          </div>
+        <% if current_user.admin == true %>
+          <div class="p-3">
+            <%= link_to t('view.admin_screen'), rails_admin_path, class: "bi bi-person-workspace" %>
+          </div>
+        <% end %>
+        <div class="p-3">
+          <%= link_to t('view.logout'), destroy_user_session_path, method: :delete, class: "bi bi-arrow-left-square" %>
+        </div>
+      <% else %>
+        <div class='p-3'>
+          <%= link_to t('view.login'), new_user_session_path, class: "bi bi-arrow-right-square-fill" %>
+        </div>
+        <div class='p-3'>
+          <%= link_to t('view.account_registration'), new_user_registration_path, class: "bi bi-person-plus-fill" %>
+        </div>
+      <% end %>
     </header>
     <main>
       <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "#{key}") %>
+      <% key = devise_bootstrap_alert(key) %>
+          <%= content_tag(:div, value, class:"alert alert-#{key}", role: "alert") %>
       <% end %>
       <div class='text-center'>
         <div <% if content_for?(:body_attributes) %>
@@ -45,9 +70,8 @@
         </div>
       </div>
     </main>
-    <footer class="footer bg-light">
-      <p class="text-dark text-center text-secondary text-muted">©2022 Re: Timeline</p>
+    <footer class="footer" >
+      <p>©2022 Re: Timeline</p>
     </footer>
-  </div>
   </body>
 </html>

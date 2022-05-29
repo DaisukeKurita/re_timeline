@@ -5,13 +5,15 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show edit update destroy notice_switching ]
   before_action :current_user_belong_to_groups?
   before_action :group_admin?, only: %i[ index show ]
-  before_action :blogs_new_contributor_or_group_admin?, only: %i[ edit update destroy ]
+  before_action :blogs_new_contributor_or_group_admin?, only: %i[ edit ]
   
   def index
     @blogs = @group.blogs.includes(:new_contributor, :last_updater)
+    # グループ日記新規投稿者
+    @new_group_diary_contributor = Blog.find_by(new_contributor: current_user.id, group_id: @group.id).present?
   end
 
-  def show # lat_log_present?の共通化処理をしたい
+  def show
     lat_log_present?
     @groupings = @group.groupings
     @maps = @blog.maps
@@ -93,7 +95,7 @@ class BlogsController < ApplicationController
     redirect_to group_blogs_path(@group) unless current_user.id == @blog.new_contributor_id || group_admin?
   end
 
-  def lat_log_present? #緯度・経度の値が存在するか？ 複数検索にも対応できるようにする!!!
+  def lat_log_present? #緯度・経度の値が存在するか？ 複数検索にも対応できるようにする。
     search_addresses = @blog.maps.map(& :address)
     @search_addresses = search_addresses[0]
     if @search_addresses.present?
