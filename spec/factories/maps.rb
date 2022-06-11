@@ -4,7 +4,7 @@ FactoryBot.define do
     latitude { 35.1026494 }
     longitude { 138.8598006 }
     event_time { "2000-01-01 13:00:00" }
-    association :blog
+    association :diary
     association :group
   end
 
@@ -13,7 +13,7 @@ FactoryBot.define do
     latitude { 36.37262630000001 }
     longitude { 140.4521765 }
     event_time { "2000-01-01 11:40:00" }
-    association :blog
+    association :diary
     association :group
   end
 
@@ -22,7 +22,7 @@ FactoryBot.define do
     latitude { 34.665442 }
     longitude { 135.4323382 }
     event_time { "2000-01-01 10:30:00" }
-    association :blog2
+    association :diary2
     association :group2
   end
 
@@ -31,7 +31,7 @@ FactoryBot.define do
     latitude { 36.6229647 }
     longitude { 138.5967231 }
     event_time { "2000-01-01 15:00:00" }
-    association :blog2
+    association :diary2
     association :group2
   end
 end

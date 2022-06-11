@@ -4,7 +4,7 @@ ja:
       group: グループ
       user: ユーザー
       grouping: グルーピング
-      blog: ブログ
+      diary: 日記
       map: 地図
     attributes:
       group:
@@ -16,7 +16,7 @@ ja:
         name: ユーザー名
       grouping:
         admin: グループ管理者
-      blog:
+      diary:
         title: タイトル
         content: 内容
         photo: 写真

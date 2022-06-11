@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Blog, type: :system do
-  describe 'ブログ機能' do
+RSpec.describe Diary, type: :system do
+  describe '日記機能' do
     let!(:user) { FactoryBot.create(:user) }
     let!(:group) { FactoryBot.create(:group) }
 
@@ -16,8 +16,8 @@ RSpec.describe Blog, type: :system do
       fill_in 'グループ説明', with: 'cat'
       click_button '登録する'
       find("body header").click_link '所属グループ一覧'
-      click_link 'グループブログ一覧'
-      find('#blog_new_link').click
+      click_link 'グループ日記一覧'
+      find('#diary_new_link').click
       sleep 1
       fill_in 'タイトル', with: 'aaaaaa'
       fill_in 'イベント年月日', with: '002017/07/12'
@@ -31,49 +31,49 @@ RSpec.describe Blog, type: :system do
       click_button '投稿する'
     end
 
-    describe 'ブログ投稿機能' do
-      context 'ブログを新規投稿した場合' do
-        it 'ブログが投稿される' do
+    describe '日記投稿機能' do
+      context '日記を新規投稿した場合' do
+        it '日記が投稿される' do
           expect(page).to have_content 'aaaaaaが投稿されました'
         end
       end
       
-      context '所属していないグループのブログに飛ぼうとした場合' do
+      context '所属していないグループの日記に飛ぼうとした場合' do
         it '所属グループ一覧画面に遷移する' do
-          visit group_blogs_path(group.id)
+          visit group_diaries_path(group.id)
           expect(page).to have_content 'komugi'
         end
       end
     end
 
-    describe 'ブログ詳細' do
-      context 'ブログ詳細リンクをクリック' do
-        it 'ブログ詳細ページに遷移する' do
-          click_link 'ブログ詳細'
-          expect(page).to have_content 'komugiブログ詳細'
+    describe '日記詳細' do
+      context '日記詳細リンクをクリック' do
+        it '日記詳細ページに遷移する' do
+          click_link '日記詳細'
+          expect(page).to have_content 'komugi日記詳細'
         end
       end
     end
 
-    describe 'ブログ編集・更新' do
-      context 'ブログ情報編集・更新をする' do
-        it 'ブログ情報が更新される' do
-          click_link 'ブログ編集'
+    describe '日記編集・更新' do
+      context '日記情報編集・更新をする' do
+        it '日記情報が更新される' do
+          click_link '日記編集'
           fill_in 'タイトル', with: 'kkkkkk'
           click_button '更新する'
-          expect(page).to have_content 'kkkkkkブログを編集しました'
+          expect(page).to have_content 'kkkkkk日記を編集しました'
         end
       end
     end
 
-    describe 'ブログ削除' do
-      context 'ブログを削除する' do
-        it 'ブログが削除される' do
+    describe '日記削除' do
+      context '日記を削除する' do
+        it '日記が削除される' do
           expect{
-            click_link 'ブログ削除'
+            click_link '日記削除'
             page.accept_confirm "本当に削除しますか？"
             sleep 0.5
-          }.to change{Blog.count}.by(-1)
+          }.to change{Diary.count}.by(-1)
         end
       end
     end

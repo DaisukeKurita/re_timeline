@@ -2,36 +2,36 @@
   data-turbolinks="false"
 <% end %>
 
-<%= form_with(model: [@group, @blog], local: true, url: choose_new_or_edit) do |form| %>
-  <% if @blog.errors.any? %>
+<%= form_with(model: [@group, @diary], local: true, url: choose_new_or_edit) do |form| %>
+  <% if @diary.errors.any? %>
     <div id="error_explanation" class="text-left text-danger font-weight-bold">
-      <%= @blog.errors.count %><%= t 'view.error_has_occurred' %><br>
-      <% @blog.errors.full_messages.each do |msg| %>
+      <%= @diary.errors.count %><%= t 'view.error_has_occurred' %><br>
+      <% @diary.errors.full_messages.each do |msg| %>
         <%= msg %><br>
       <% end %>
     </div>
   <% end %>
 
   <div class="text-left mb-4">
-    <div class="blog_title mb-4">
+    <div class="diary_title mb-4">
       <%= form.label :title %> <br>
       <%= form.text_field :title, placeholder: "日記タイトルを入力してください（必須）", class: 'form-control font-size-ch' %>
     </div>
 
-    <div class="blog_event_date mb-4 date-form-size-ch">
+    <div class="diary_event_date mb-4 date-form-size-ch">
       <%= form.label :event_date %> <br>
       <%= form.date_field :event_date, class: 'form-control font-size-ch' %>
     </div>
 
-    <div class="blog_content mb-4">
+    <div class="diary_content mb-4">
       <%= form.label :content %> <br>
       <%= form.text_area :content, placeholder: "日記の内容を入力してください", class: 'form-control font-size-ch line-height-ch', rows: 8 %>
     </div>
 
-    <div class="blog_image mb-4">
+    <div class="diary_image mb-4">
       <%= form.label :photo %>
-      <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %>
-      <% if @blog.photo.url %>
+      <%= image_tag(@diary.photo.url) if @diary.photo && @diary.photo.url %>
+      <% if @diary.photo.url %>
         <%= form.file_field :photo, class: 'd-none' %>
       <% else %>
         <%= form.file_field :photo %>

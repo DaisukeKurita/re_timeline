@@ -19,15 +19,15 @@
         <%= link_to t('view.re_time_line'), root_path, class: "bi bi-house-fill" %>
       </div>
       <% if user_signed_in? %>
-        <% if controller_name == "blogs" || controller_name == "maps" || action_name == "delivery_setup" %>
-          <div class="p-3">
-            <%= link_to t('blogs.index.new_diary_contribution'), new_group_blog_path(@group), data: {"turbolinks"=>false}, class: "bi bi-pencil-fill" %>
+        <% if controller_name == "diaries" || controller_name == "maps" || action_name == "delivery_setup" %>
+          <div class="p-3"> 
+            <%= link_to t('diaries.index.new_diary_contribution'), new_group_diary_path(@group), data: {"turbolinks"=>false}, class: "bi bi-pencil-fill" %>
           </div>
           <div class="p-3">
-            <%= link_to t('blogs.index.diary_index'), group_blogs_path(@group), class: "bi bi-clipboard-data" %>
+            <%= link_to t('diaries.index.diary_index'), group_diaries_path(@group), class: "bi bi-clipboard-data" %>
           </div>
           <div class="p-3">
-            <%= link_to t('blogs.index.delivery_setup'),  delivery_setup_group_path(@group), class: "bi bi-stopwatch-fill" %>
+            <%= link_to t('diaries.index.delivery_setup'),  delivery_setup_group_path(@group), class: "bi bi-stopwatch-fill" %>
           </div>
         <% elsif controller_name == "groups" %>
           <div  class="p-3">

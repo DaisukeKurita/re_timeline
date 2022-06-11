@@ -4,27 +4,27 @@
 
 <h2 class="mb-5"><%= @group.name %><%= t '.is_the_diary_content_okay?' %></h2>
 
-<%= form_with(model:[@group, @blog], local: true) do |form| %>
+<%= form_with(model:[@group, @diary], local: true) do |form| %>
   <div class="text-left mb-4">
     <fieldset disabled>
-      <div class="blog_title mb-4">
+      <div class="diary_title mb-4">
         <%= form.label :title %> <br>
         <%= form.text_field :title, class: 'form-control font-size-ch' %>
       </div>
 
-      <div class="blog_event_date mb-4 date-form-size-ch">
+      <div class="diary_event_date mb-4 date-form-size-ch">
         <%= form.label :event_date %> <br>
         <%= form.date_field :event_date, class: 'form-control font-size-ch' %>
       </div>
 
-      <div class="blog_content mb-4">
+      <div class="diary_content mb-4">
         <%= form.label :content %> <br>
         <%= form.text_area :content, class: 'form-control font-size-ch line-height-ch', rows: 8 %>
       </div>
 
-      <div class="blog_image mb-4">
+      <div class="diary_image mb-4">
         <%= form.label :photo %>
-        <%= image_tag(@blog.photo.url) if @blog.photo && @blog.photo.url %>
+        <%= image_tag(@diary.photo.url) if @diary.photo && @diary.photo.url %>
         <%= form.file_field :photo, class: 'd-none' %>
         <%= form.hidden_field :photo_cache %>
       </div>

@@ -1,0 +1,87 @@
+<% content_for(:body_attributes) do %>
+  data-turbolinks="false"
+<% end %>
+
+<h1 class="mb-5"><%= @group.name %><%= t 'diaries.index.diary_detail' %></h1>
+
+<div class="text-left mb-4">
+  <p>
+    <span class="font-weight-bold"><%= t 'diaries.index.title' %>:</span>
+    <%= @diary.title %>
+  </p>
+  <p>
+    <span class="font-weight-bold"><%= t 'diaries.index.event_date' %>:</span>
+    <%= l @diary.event_date, format: :long %>
+  </p>
+  <p>
+    <span class="font-weight-bold"><%= t 'diaries.index.new_contributor' %>:</span>
+    <% if @diary.new_contributor.present? %>
+      <%= @diary.new_contributor.name %>
+    <% else %>
+      <%= t 'diaries.index.absence' %>
+    <% end %>
+  </p>
+  <p>
+    <span class="font-weight-bold"><%= t 'diaries.index.last_updater' %>:</span>
+    <% if @diary.last_updater.present? %>
+      <%= @diary.last_updater.name %>
+    <% else %>
+      <%= t 'diaries.index.absence' %>
+    <% end %>
+  </p>
+  <p>
+    <span class="font-weight-bold"><%= t 'diaries.index.content' %>:</span>
+    <%= @diary.content %>
+  </p>
+  <p>
+    <span class="font-weight-bold"><%= t 'diaries.index.photo' %>:</span>
+    <%= image_tag @diary.photo.url if @diary.photo && @diary.photo.url %></p>
+  <p>
+    <span class="font-weight-bold"><%= t 'diaries.index.email_notice' %>:</span>
+    <%= check_box :diary, :email_notice, {disabled: true} %><br>
+    <%= t 'diaries.index.email_notice_are_set_only_for_group_admins' %><br>
+    <%= t 'diaries.index.refer_to_the_top_page_for_details_of_the_delivery_contents' %>
+  </p>
+  <% @maps.each do |map| %>
+    <p>
+      <span class="font-weight-bold"><%= t 'diaries.form.event_time' %>:</span>
+      <%= map.event_time.to_s(:time) if map.event_time.present? %>
+    </p>
+    <p>
+      <span class="font-weight-bold"><%= t 'diaries.form.event_destination' %>:</span>
+      <%= map.address %></p>
+  <% end %>
+</div>
+
+<% if @search_addresses.present? %>
+  <div id='map' class="mx-auto container-fluid" style='height: 600px;'></div>
+
+  <script>
+    var map
+
+    var display = document.getElementById('display')
+
+    function initMap() {
+      geocoder = new google.maps.Geocoder()
+  
+      var lat_lng = {lat: gon.lat, lng: gon.lng};
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: lat_lng,
+        zoom: 12,
+      });
+      var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+      });
+    }
+  </script>
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
+  <% end %>
+
+<div class="text-right p-4">
+  <% if current_user.id == @diary.new_contributor_id || @group_admin %>
+    <%= link_to t('diaries.index.diary_editing'), edit_group_diary_path(@group), class: "bi bi-pencil" %> | 
+  <% end %>
+  <%= link_to t('diaries.index.diary_index'), group_diaries_path(@group), class: 'bi bi-clipboard-data' %>
+</div>

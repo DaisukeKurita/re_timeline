@@ -146,7 +146,7 @@ ja:
       group:
         create: 登録する
         update: 更新する
-      blog:
+      diary:
         create: 確認
         update: 更新する
   number:

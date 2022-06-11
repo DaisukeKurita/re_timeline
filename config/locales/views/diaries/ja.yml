@@ -1,5 +1,5 @@
 ja:
-  blogs:
+  diaries:
     index:
       new_diary_contribution: '日記新規投稿'
       new_diary_contribution_here: 'ここから日記の新規投稿ができます'
@@ -42,7 +42,7 @@ ja:
       is_the_diary_content_okay?: '日記を以下の内容で投稿して良いでしょうか？'
       contribute: '投稿する'
       back: '戻る'
-    blogs_notice:
+    diaries_notice:
       top_page_is_here_new_posts: 'Re: Timelineのトップページはこちらから！新しい思い出を記録しよう'
       what_happened: '過去の%{month}月はこんな事があったよ！'
 

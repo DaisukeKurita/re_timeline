@@ -76,7 +76,7 @@ $ rails s
 ![picture 3](images/89d28e4319846ef682f1f82c96e24f50868377d1c1c017b427b4f82aef8b59c9.png)  
 
 ## ER図
-![picture 7](images/59a2db6c1fb7afb38cb711fd191004aaf544f1f7a73a99b126cda0df089f3eeb.png)  
+![picture 1](images/632963b4baed7a8c899559bac4a7b7d151b4eff64a167a0af60bdb3eadadd373.png)  
 
 ## 画面遷移図
 ![picture 2](images/1981bf3683103df08c0faaa55915bee41ddfdf17bd5bb5146af1ece2d72a36de.png)  
