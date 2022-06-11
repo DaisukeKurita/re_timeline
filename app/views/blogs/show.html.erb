@@ -61,22 +61,21 @@
 
     var display = document.getElementById('display')
 
-    // mapの表示関数 
     function initMap() {
       geocoder = new google.maps.Geocoder()
   
-    // mapの初期位置, 縮尺を定義
-    var lat_lng = {lat: gon.lat, lng: gon.lng};
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: lat_lng,
-      zoom: 12,
-    });
-    var marker = new google.maps.Marker({
-      position: lat_lng,
-      map: map
-    });
-  }
-    </script>
+      var lat_lng = {lat: gon.lat, lng: gon.lng};
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: lat_lng,
+        zoom: 12,
+      });
+      var marker = new google.maps.Marker({
+        position: lat_lng,
+        map: map
+      });
+    }
+  </script>
+  
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
   <% end %>
 

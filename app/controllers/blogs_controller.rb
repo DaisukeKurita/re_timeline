@@ -9,7 +9,6 @@ class BlogsController < ApplicationController
   
   def index
     @blogs = @group.blogs.includes(:new_contributor, :last_updater)
-    # グループ日記新規投稿者
     @new_group_diary_contributor = Blog.find_by(new_contributor: current_user.id, group_id: @group.id).present?
   end
 
@@ -91,11 +90,11 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
   end
 
-  def blogs_new_contributor_or_group_admin?  # ブログの新規投稿者かグループの管理者でない場合はブログ一覧に返す
+  def blogs_new_contributor_or_group_admin?
     redirect_to group_blogs_path(@group) unless current_user.id == @blog.new_contributor_id || group_admin?
   end
 
-  def lat_log_present? #緯度・経度の値が存在するか？ 複数検索にも対応できるようにする。
+  def lat_log_present?
     search_addresses = @blog.maps.map(& :address)
     @search_addresses = search_addresses[0]
     if @search_addresses.present?

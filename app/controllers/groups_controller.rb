@@ -6,10 +6,7 @@ class GroupsController < ApplicationController
   before_action :current_user_belong_to_groups?, only: %i[ show edit delivery_setup ]
 
   def index
-    # ログインユーザーのみのグループ一覧を表示する
     @groups = current_user.groups
-
-    # ログインユーザーがグループ管理者のグループのidを抽出している
     @groupings_admin = current_user.groupings.where(admin: true).pluck(:group_id)
   end
   
@@ -52,12 +49,10 @@ class GroupsController < ApplicationController
   end
 
   def delivery_setup
-    # 配信開始年の情報を取得
     today = Date.today
     @last_year = today.year - 1
     @one_hundred_years_ago = today.prev_year(100).year
     
-    # @current_time = Time.now
     if last_friday_of_the_month(0) < @now
       last_friday_of_the_month(1)
       diary_delivery_range(1)
@@ -81,7 +76,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  def group_admin_only # グループ管理者以外はグループ一覧に戻る
+  def group_admin_only
     redirect_to groups_path unless group_admin?
   end
 

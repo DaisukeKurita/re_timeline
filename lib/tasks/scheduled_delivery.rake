@@ -1,7 +1,6 @@
 namespace :scheduled_delivery do
   desc '月の最終金曜日だった時、設定されている月の過去のグループブログ情報を取得し、メールを配信'
   task email_scheduled_delivery: :environment do
-    # blogsテーブルから数年分の指定月のレコードを取得するメソッド
     def blog_search_by_year_and_month(how_many_months, group, today)
       many_years_ago = today.year - group.delivery_start_year.year
       months_by_year = []
@@ -13,13 +12,12 @@ namespace :scheduled_delivery do
       BlogsNoticeMailer.blogs_notice_mail(group, blogs, blogs_month).deliver
     end
 
-    # 月内の最終金曜日かを判断後、メールを送る内容を取得
     today = Date.today
     one_week_later = today + 7
     exit if today.mon == one_week_later.mon
     groups = Group.all
     groups.each do |group|
-      case group.receiving_date 
+      case group.receiving_date
       when "one_month_ago"
         blog_search_by_year_and_month(1, group, today)
       when "two_months_ago"

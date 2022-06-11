@@ -34,14 +34,13 @@
           <%= map.label :event_time %>
           <%= map.time_field :event_time, class: 'form-control font-size-ch' %>
         </div>
-        <%# Google mapsで指定した住所を送るコード %>
+
         <%= map.label :address, id: "hidden_address" %> 
         <%= map.text_field :address, class: 'form-control font-size-ch' %> 
       <% end %>
     <fieldset>
   </div>
   
-  <%#  <fieldset disabled>を使用するとhidden_fieldが無いとデータが送れない %>
   <%= form.hidden_field :title %>
   <%= form.hidden_field :event_date %>
   <%= form.hidden_field :content %>
@@ -60,22 +59,21 @@
 
       var display = document.getElementById('display')
 
-      // mapの表示関数 
       function initMap() {
         geocoder = new google.maps.Geocoder()
     
-      // mapの初期位置, 縮尺を定義
-      var lat_lng = {lat: gon.lat, lng: gon.lng};
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: lat_lng,
-        zoom: 9,
-      });
-      var marker = new google.maps.Marker({
-        position: lat_lng,
-        map: map
-      });
-    }
-      </script>
+        var lat_lng = {lat: gon.lat, lng: gon.lng};
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: lat_lng,
+          zoom: 9,
+        });
+        var marker = new google.maps.Marker({
+          position: lat_lng,
+          map: map
+        });
+      }
+    </script>
+    
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>
   <% end %>
   
