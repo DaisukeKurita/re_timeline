@@ -1,0 +1,14 @@
+<%= link_to t('diaries.diaries_notice.top_page_is_here_new_posts'), root_url %>
+<h3><%= t 'diaries.diaries_notice.what_happened', month: @diaries_month %></h3>
+<table>
+  <tr>
+    <th><%= t 'diaries.index.title' %></th>
+    <th><%= t 'diaries.index.event_date' %></th>
+  </tr>
+  <% @diaries.each do |diary| %>
+    <tr>
+      <td><%= link_to diary.title, group_diary_url(@group, diary) %></td>
+      <td><%= l diary.event_date, format: :long %></td>
+    </tr>
+  <% end %>
+</table>

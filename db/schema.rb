@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_13_100047) do
+ActiveRecord::Schema.define(version: 2022_06_11_112851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "blogs", force: :cascade do |t|
+  create_table "diaries", force: :cascade do |t|
     t.integer "new_contributor_id", null: false
     t.integer "last_updater_id"
     t.string "title", null: false
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 2022_04_13_100047) do
     t.text "photo"
     t.date "event_date", default: -> { "now()" }, null: false
     t.boolean "email_notice", default: true, null: false
-    t.index ["group_id"], name: "index_blogs_on_group_id"
-    t.index ["last_updater_id"], name: "index_blogs_on_last_updater_id"
-    t.index ["new_contributor_id"], name: "index_blogs_on_new_contributor_id"
+    t.index ["group_id"], name: "index_diaries_on_group_id"
+    t.index ["last_updater_id"], name: "index_diaries_on_last_updater_id"
+    t.index ["new_contributor_id"], name: "index_diaries_on_new_contributor_id"
   end
 
   create_table "groupings", force: :cascade do |t|
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(version: 2022_04_13_100047) do
     t.time "event_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "blog_id", null: false
+    t.bigint "diary_id", null: false
     t.bigint "group_id", null: false
-    t.index ["blog_id"], name: "index_maps_on_blog_id"
+    t.index ["diary_id"], name: "index_maps_on_diary_id"
     t.index ["group_id"], name: "index_maps_on_group_id"
   end
 
@@ -84,9 +84,9 @@ ActiveRecord::Schema.define(version: 2022_04_13_100047) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "blogs", "groups"
+  add_foreign_key "diaries", "groups"
   add_foreign_key "groupings", "groups"
   add_foreign_key "groupings", "users"
-  add_foreign_key "maps", "blogs"
+  add_foreign_key "maps", "diaries"
   add_foreign_key "maps", "groups"
 end

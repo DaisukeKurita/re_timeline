@@ -39,14 +39,14 @@ class GroupingsController < ApplicationController
 
   private
   
-  def email_exist? # すでにメンバー登録されている場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
+  def email_exist?
     if @group.members.exists?(email: @user.email)
       flash[:warning] = t('notice.registered_as_a_member', email: @user.email) 
       redirect_to group_path(@group)
     end
   end
   
-  def user_exist? # ユーザとして存在しない場合はグループ詳細画面に遷移する,リファクタリング（モデルに持っていく）
+  def user_exist?
     if !params[:email].present?
       flash[:warning] = t('notice.email_blank')
       redirect_to group_path(@group)
@@ -56,7 +56,7 @@ class GroupingsController < ApplicationController
     end
   end
 
-  def grouping_admin_grant_or_release # 管理者権限の付与・解除時に表示されるnoticeの条件分岐
+  def grouping_admin_grant_or_release
     if @grouping.admin
       flash[:success] = t('notice.grant_admin_privilege', email: @grouping.user.email)
       redirect_to group_path(@group)
@@ -66,7 +66,7 @@ class GroupingsController < ApplicationController
     end
   end
 
-  def group_admin_members? # グループ管理者ではない場合、グループ詳細画面にリダイレクトする
+  def group_admin_members?
     redirect_to group_path(@group) unless group_admin?
   end
 
@@ -74,7 +74,7 @@ class GroupingsController < ApplicationController
     @grouping = Grouping.find(params[:id])
   end
 
-  def update_destroy_else_render # update,destroyでelseの時にrenderで必要な情報
+  def update_destroy_else_render
     @groupings = @group.groupings.includes(:user)
     group_admin?
   end

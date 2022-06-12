@@ -1,9 +1,9 @@
-module BlogsHelper
+module DiariesHelper
   def choose_new_or_edit
     if action_name == 'new' || action_name == 'create'
-      confirm_group_blogs_path(@group)
+      confirm_group_diaries_path(@group)
     elsif action_name == 'edit'
-      group_blog_path(@group)
+      group_diary_path(@group)
     end
   end
 end

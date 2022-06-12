@@ -13,7 +13,7 @@
       <%= form.date_select :delivery_start_year, {discard_month: true, start_year: @one_hundred_years_ago, end_year: @last_year, default: { year: @last_year, month: 1, day: 1 }}, class: 'form-control font-size-ch' %>
     </div>
     <div class="text-right">
-    <%= form.submit t('.setup'), data: {confirm: t('blogs.index.do_you_want_to_set_up_with_this?')}, class: "btn font-size-ch btn-primary" %>
+    <%= form.submit t('.setup'), data: {confirm: t('diaries.index.do_you_want_to_set_up_with_this?')}, class: "btn font-size-ch btn-primary" %>
     </div >
   <% end %>
 </div>
@@ -35,5 +35,5 @@
 
 
 <div class="text-right p-4">
-  <%= link_to t('blogs.index.diary_index'), group_blogs_path(@group) %>
+  <%= link_to t('diaries.index.diary_index'), group_diaries_path(@group) %>
 </div>

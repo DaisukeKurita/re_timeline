@@ -1,4 +1,4 @@
-Blog.seed do |s|
+Diary.seed do |s|
   s.id = 1
   s.new_contributor_id = 1
   s.last_updater_id = nil
@@ -10,7 +10,7 @@ Blog.seed do |s|
   s.group_id = 1
 end
 
-Blog.seed do |s|
+Diary.seed do |s|
   s.id = 2
   s.new_contributor_id = 2
   s.last_updater_id = nil
@@ -22,7 +22,7 @@ Blog.seed do |s|
   s.group_id = 1
 end
 
-Blog.seed do |s|
+Diary.seed do |s|
   s.id = 3
   s.new_contributor_id = 1
   s.last_updater_id = nil
@@ -34,7 +34,7 @@ Blog.seed do |s|
   s.group_id = 1
 end
 
-Blog.seed do |s|
+Diary.seed do |s|
   s.id = 4
   s.new_contributor_id = 6
   s.last_updater_id = nil
@@ -46,7 +46,7 @@ Blog.seed do |s|
   s.group_id = 2
 end
 
-Blog.seed do |s|
+Diary.seed do |s|
   s.id = 5
   s.new_contributor_id = 6
   s.last_updater_id = nil

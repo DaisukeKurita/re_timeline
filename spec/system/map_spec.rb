@@ -17,8 +17,8 @@ RSpec.describe Map, type: :system do
       fill_in 'グループ説明', with: 'cat'
       click_button '登録する'
       find("body header").click_link '所属グループ一覧'
-      click_link 'グループブログ一覧'
-      find('#blog_new_link').click
+      click_link 'グループ日記一覧'
+      find('#diary_new_link').click
       sleep 1
       fill_in 'タイトル', with: 'aaaaaa'
       fill_in 'イベント年月日', with: '002017/07/12'
@@ -51,7 +51,7 @@ RSpec.describe Map, type: :system do
     describe 'マップ情報編集・更新機能' do
       context 'マップ情報を編集・更新した場合' do
         it 'マップ情報が登録される' do
-          click_link 'ブログ編集'
+          click_link '日記編集'
           fill_in 'address', with: '沼津駅'
           click_button '地図検索'
           sleep 0.5
@@ -63,10 +63,10 @@ RSpec.describe Map, type: :system do
     end
 
     describe 'マップ情報削除機能' do
-      context 'ブログを削除するとマップ情報が一緒に削除される' do
+      context '日記を削除するとマップ情報が一緒に削除される' do
         it 'マップ情報が削除される' do
           expect{
-            click_link 'ブログ削除'
+            click_link '日記削除'
             page.accept_confirm '本当に削除しますか？'
             sleep 0.5
           }.to change{Map.count}.by(-1)

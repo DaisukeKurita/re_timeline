@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :blog do
+  factory :diary do
     last_updater_id { nil }
     title { "title1" }
     content { "content1" }
@@ -10,7 +10,7 @@ FactoryBot.define do
     association :group
   end
 
-  factory :blog2, class: Blog  do
+  factory :diary2, class: Diary do
     last_updater_id { nil }
     title { "title2" }
     content { "content2" }
@@ -21,7 +21,7 @@ FactoryBot.define do
     association :group
   end
 
-  factory :blog3, class: Blog  do
+  factory :diary3, class: Diary do
     new_contributor_id { nil }
     last_updater_id { nil }
     title { "title3" }
@@ -33,7 +33,7 @@ FactoryBot.define do
     association :group2
   end
 
-  factory :blog4, class: Blog  do
+  factory :diary4, class: Diary do
     new_contributor_id { nil }
     last_updater_id { nil }
     title { "title4" }

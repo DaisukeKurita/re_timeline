@@ -6,8 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :groupings, dependent: :destroy
   has_many :groups, through: :groupings
-  has_many :new_contributor_blogs, foreign_key: :new_contributor_id, class_name: 'Blog'
-  has_many :last_updater_blogs, foreign_key: :last_updater_id, class_name: 'Blog'
+  has_many :new_contributor_diaries, foreign_key: :new_contributor_id, class_name: 'Diary'
+  has_many :last_updater_diaries, foreign_key: :last_updater_id, class_name: 'Diary'
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

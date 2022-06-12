@@ -1,8 +1,8 @@
 <h1 class="mb-5"><%= @group.name %><%= t '.diary_index' %></h1> 
 
 <div class="d-flex flex-row m-3">
-  <div class="p-2" id="blog_new_link">
-    <%= link_to t('.new_diary_contribution_here'), new_group_blog_path(@group), data: {"turbolinks"=>false}, class: "btn btn-primary btn-lg bi bi-pencil-fill" %>
+  <div class="p-2" id="diary_new_link">
+    <%= link_to t('.new_diary_contribution_here'), new_group_diary_path(@group), data: {"turbolinks"=>false}, class: "btn btn-primary btn-lg bi bi-pencil-fill" %>
   </div>
 
   <div class="p-2">
@@ -56,43 +56,43 @@
   </thead>
   <tbody>
     <% num = 0 %>
-    <% @blogs.each do |blog| %>
+    <% @diaries.each do |diary| %>
       <tr>
         <td class="align-middle"><%= num += 1 %></td>
         <td class="align-middle">
-          <%= link_to blog.title, group_blog_path(@group, blog), data: {"turbolinks"=>false}, class: "text-primary" %>
+          <%= link_to diary.title, group_diary_path(@group, diary), data: {"turbolinks"=>false}, class: "text-primary" %>
         </td>
-        <td class="align-middle"><%= l blog.event_date, format: :long %></td>
-        <% if blog.new_contributor.present? %>
-          <td class="align-middle"><%= blog.new_contributor.name %></td>
+        <td class="align-middle"><%= l diary.event_date, format: :long %></td>
+        <% if diary.new_contributor.present? %>
+          <td class="align-middle"><%= diary.new_contributor.name %></td>
         <% else %>
           <td class="align-middle"><%= t '.absence' %></td>
         <% end %>
-        <% if blog.last_updater.present? %>
-          <td class="align-middle"><%= blog.last_updater.name %></td>
+        <% if diary.last_updater.present? %>
+          <td class="align-middle"><%= diary.last_updater.name %></td>
         <% else %>
           <td class="align-middle"><%= t '.absence' %></td>
         <% end %>
-        <td class="align-middle"><%= image_tag blog.photo.url if blog.photo && blog.photo.url %>
+        <td class="align-middle"><%= image_tag diary.photo.url if diary.photo && diary.photo.url %>
         <% if @group_admin %>
-          <% if blog.email_notice %>
+          <% if diary.email_notice %>
             <td class="align-middle">
-              <%= link_to t('.stop_notification'), notice_switching_group_blog_path(@group, blog, email_notice: false), method: :patch, data: { confirm: t('.stop_notification?') }, class: "btn btn-dark btn-lg bi bi-envelope-slash-fill font-weight-bold" %>
+              <%= link_to t('.stop_notification'), notice_switching_group_diary_path(@group, diary, email_notice: false), method: :patch, data: { confirm: t('.stop_notification?') }, class: "btn btn-dark btn-lg bi bi-envelope-slash-fill font-weight-bold" %>
             </td>
           <% else %>
             <td class="align-middle">
-              <%= link_to t('.notify'), notice_switching_group_blog_path(@group, blog, email_notice: true), method: :patch, data: { confirm: t('.notify?') }, class: "btn btn-warning btn-lg bi bi-envelope-plus-fill font-weight-bold" %>
+              <%= link_to t('.notify'), notice_switching_group_diary_path(@group, diary, email_notice: true), method: :patch, data: { confirm: t('.notify?') }, class: "btn btn-warning btn-lg bi bi-envelope-plus-fill font-weight-bold" %>
             </td>
           <% end %>
         <% end %>
-        <% if current_user.id == blog.new_contributor_id || @group_admin %>
+        <% if current_user.id == diary.new_contributor_id || @group_admin %>
           <td class="align-middle">
-            <%= link_to t('.diary_editing'),  edit_group_blog_path(@group, blog), data: {"turbolinks"=>false}, class: "btn btn-outline-secondary btn-lg bi bi-pencil font-weight-bold" %>
+            <%= link_to t('.diary_editing'),  edit_group_diary_path(@group, diary), data: {"turbolinks"=>false}, class: "btn btn-outline-secondary btn-lg bi bi-pencil font-weight-bold" %>
           </td>
           <td class="align-middle">
-            <%= link_to t('.diary_deletion'),  group_blog_path(@group, blog), method: :delete, data: { confirm: t('groups.index.really_deleted?') }, class: "btn btn-outline-danger btn-lg bi bi-eraser font-weight-bold" %>
+            <%= link_to t('.diary_deletion'),  group_diary_path(@group, diary), method: :delete, data: { confirm: t('groups.index.really_deleted?') }, class: "btn btn-outline-danger btn-lg bi bi-eraser font-weight-bold" %>
           </td>
-        <% elsif current_user.id != blog.new_contributor_id && !@group_admin %>
+        <% elsif current_user.id != diary.new_contributor_id && !@group_admin %>
           <td></td>
           <td></td>
         <% end %>
