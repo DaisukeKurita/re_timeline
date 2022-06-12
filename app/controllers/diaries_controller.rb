@@ -8,7 +8,7 @@ class DiariesController < ApplicationController
   before_action :diaries_new_contributor_or_group_admin?, only: %i[ edit ]
   
   def index
-    @diaries = @group.diaries.includes(:new_contributor, :last_updater)
+    @diaries = @group.diaries.includes(:new_contributor, :last_updater).order(event_date: "DESC")
     @new_group_diary_contributor = Diary.find_by(new_contributor: current_user.id, group_id: @group.id).present?
   end
 

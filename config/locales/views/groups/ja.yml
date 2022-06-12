@@ -29,8 +29,8 @@ ja:
       group_admin_granting_releasing: 'グループ管理権限の付与・解除'
       about_group_admin_granting_releasing: 'グループ管理権限の付与・解除について'
       group_diary_index_from_here: 'ここからグループ日記の一覧を見ることができます'
-      grant_admin_privilege: '管理者権限を付与する'
-      grant_admin_privilege?: '管理者権限を付与しますか？'
+      grant_admin_privilege: '管理権限を付与する'
+      grant_admin_privilege?: '管理権限を付与しますか？'
       release_admin_privilege: '管理権限を解除する'
       release_admin_privilege?: '管理権限を解除しますか？'
       new_group_diary_contribution_from_here: 'ここからグループ日記の新規投稿ができます'
@@ -46,4 +46,4 @@ ja:
       not_yet_set_up: 'まだ設定がされていません...'
       next_delivery: "次回の配信は"
       be_done_on: "に行われます。"
-      diaries_delivered_by: '配信される日記は「%{start_year}年〜%{prev_year}年間の%{months}月の日記」です。'
+      diaries_delivered_by: '配信される日記は「%{start_year}年〜%{prev_year}年の%{months}月分の日記」です。'
