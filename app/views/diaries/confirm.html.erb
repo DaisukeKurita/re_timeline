@@ -2,7 +2,7 @@
   data-turbolinks="false"
 <% end %>
 
-<h2 class="mb-5"><%= @group.name %><%= t '.is_the_diary_content_okay?' %></h2>
+<h2 class="mb-5"><%= t '.is_the_diary_content_okay?', group_name: @group.name %></h2>
 
 <%= form_with(model:[@group, @diary], local: true) do |form| %>
   <div class="text-left mb-4">

@@ -2,6 +2,7 @@ ja:
   diaries:
     index:
       new_diary_contribution: '日記新規投稿'
+      group_name_new_diary_contribution: '『%{group_name}』日記新規投稿'
       new_diary_contribution_here: 'ここから日記の新規投稿ができます'
       title: 'タイトル'
       content: '内容'
@@ -11,8 +12,11 @@ ja:
       new_contributor: '新規投稿者'
       last_updater: '最終更新者'
       diary_index: '日記一覧'
+      group_name_diary_index: '『%{group_name}』日記一覧'
       diary_detail: '日記詳細'
+      group_name_diary_detail: '『%{group_name}』日記詳細'
       diary_editing: '日記編集'
+      group_name_diary_editing: '『%{group_name}』日記編集'
       diary_deletion: '日記削除'
       really_deleted?: '本当に削除しますか？'
       absence: '−'
@@ -28,7 +32,7 @@ ja:
       button_to_stop_an_email_notice_for_the_corresponding_diary: 'ボタンを押すと、該当する日記のメール通知を停止します。'
       button_to_initiate_an_email_notice_for_the_corresponding_diary: 'ボタンを押すと、該当する日記のメール通知を開始します。'
       refer_to_the_top_page_for_details_of_the_delivery_contents: '※配信内容の詳細については、トップページの「グループの日記をメールで自動配信」をご参照ください。'
-      event_location_map_index: 'イベント先地図一覧'
+      event_location_map_index: '『%{group_name}』イベント先地図一覧'
       do_you_want_to_set_up_with_this?: 'こちらで設定をしますか？'
     form:
       map_search: '地図検索'
@@ -39,10 +43,10 @@ ja:
       event_time: 'イベント時間'
       after_entering_the_event_destination_press_the_map_search_button: '※イベント先入力後は、地図検索ボタンを押してください'
     confirm:
-      is_the_diary_content_okay?: '日記を以下の内容で投稿して良いでしょうか？'
+      is_the_diary_content_okay?: '『%{group_name}』日記を以下の内容で投稿して良いでしょうか？'
       contribute: '投稿する'
       back: '戻る'
     diaries_notice:
       top_page_is_here_new_posts: 'Re: Timelineのトップページはこちらから！新しい思い出を記録しよう'
-      what_happened: '過去の%{month}月はこんな事があったよ！'
+      what_happened: '『%{group_name}』の過去の%{month}月はこんな事があったよ！'
 

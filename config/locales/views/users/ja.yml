@@ -1,7 +1,8 @@
 ja:
   users:
     show:
-      my_page: '%{name}のマイページ'
+      my_page: '『%{user_name}』マイページ'
       name: '名前'
       email: 'メールアドレス'
       edit_account_information: 'アカウント情報編集'
+      user_name_edit_account_information: '『%{user_name}』アカウント情報編集'

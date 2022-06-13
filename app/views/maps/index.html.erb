@@ -2,7 +2,7 @@
   data-turbolinks="false"
 <% end %>
 
-<h2 class="mb-5"><%= @group.name %> <%= t 'diaries.index.event_location_map_index' %></h2>
+<h2 class="mb-5"><%= t 'diaries.index.event_location_map_index', group_name: @group.name %></h2>
 
 <div id='map' class="mx-auto container-fluid" style='height: 600px;'></div>
 
