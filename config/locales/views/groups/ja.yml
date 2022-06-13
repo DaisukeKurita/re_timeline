@@ -12,8 +12,11 @@ ja:
       group_name: 'グループ名'
       explanation: 'グループ説明'
       list_of_affiliated_groups: '所属グループ一覧'
+      user_name_list_of_affiliated_groups: '『%{user_name}』所属グループ一覧'
       group_information_details: 'グループ情報詳細'
+      group_name_information_details: '『%{group_name}』グループ情報詳細'
       group_information_editing: 'グループ情報編集'
+      group_name_information_editing: '『%{group_name}』グループ情報編集'
       group_deletion: 'グループ削除'
       group_diary_index: 'グループ日記一覧'
       really_deleted?: '本当に削除しますか？'
@@ -39,7 +42,7 @@ ja:
       press_the_button_to_cancel_group_admin_privileges: 'ボタンを押すと、グループ管理権限が解除されます。'
       press_the_button_to_grant_group_admin_privileges: 'ボタンを押すと、グループ管理権限が付与されます。'
     delivery_setup:
-      group_delivery_setup: "%{group_name}の配信設定"
+      group_delivery_setup: "『%{group_name}』の配信設定"
       setup: '設定'
       can_be_set_up_for_email_delivery: 'こちらからメール配信の設定ができます。'
       the_setting_results_are_displayed_below: '設定結果は下記に表示されます。'

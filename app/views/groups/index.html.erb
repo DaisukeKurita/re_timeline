@@ -1,4 +1,4 @@
-<h1><%= t '.list_of_affiliated_groups' %></h1><br>
+<h1><%= t '.user_name_list_of_affiliated_groups', user_name: current_user.name %></h1><br>
 
 <p class="text-left">
   <%= link_to t('.new_group_registration_here'), new_group_path, class: "btn btn-primary bi bi-plus-circle btn-lg m-2" %>

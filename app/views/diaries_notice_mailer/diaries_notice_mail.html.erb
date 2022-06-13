@@ -1,5 +1,5 @@
 <%= link_to t('diaries.diaries_notice.top_page_is_here_new_posts'), root_url %>
-<h3><%= t 'diaries.diaries_notice.what_happened', month: @diaries_month %></h3>
+<h3><%= t 'diaries.diaries_notice.what_happened', group_name: @group.name, month: @diaries_month %></h3>
 <table>
   <tr>
     <th><%= t 'diaries.index.title' %></th>
