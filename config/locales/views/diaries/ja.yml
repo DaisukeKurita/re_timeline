@@ -46,6 +46,8 @@ ja:
       is_the_diary_content_okay?: '『%{group_name}』日記を以下の内容で投稿して良いでしょうか？'
       contribute: '投稿する'
       back: '戻る'
+    show:
+      click_to_enlarge_photo: '※クリックすると写真が大きくなります'
     diaries_notice:
       top_page_is_here_new_posts: 'Re: Timelineのトップページはこちらから！新しい思い出を記録しよう'
       what_happened: '『%{group_name}』の過去の%{month}月はこんな事があったよ！'

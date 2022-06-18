@@ -17,3 +17,8 @@ import '../stylesheets/bootstrap-custom';
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+window.addEventListener('popstate', function () {
+  window.location.reload();
+  console.log("Reload!");
+});
