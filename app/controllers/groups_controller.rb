@@ -1,24 +1,24 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
   include Common
-  before_action :set_group, only: %i[ show edit update destroy delivery_setup delivery_period]
-  before_action :group_admin_only, only: %i[ edit update destroy ]
-  before_action :current_user_belong_to_groups?, only: %i[ show edit delivery_setup ]
+  before_action :set_group, only: %i[show edit update destroy delivery_setup delivery_period]
+  before_action :group_admin_only, only: %i[edit update destroy]
+  before_action :current_user_belong_to_groups?, only: %i[show edit delivery_setup]
 
   def index
     @groups = current_user.groups
     @groupings_admin = current_user.groupings.where(admin: true).pluck(:group_id)
   end
-  
+
   def show
     @groupings = @group.groupings.includes(:user)
     group_admin?
   end
-  
+
   def new
     @group = Group.new
   end
-  
+
   def edit
   end
 
@@ -52,7 +52,7 @@ class GroupsController < ApplicationController
     today = Date.today
     @last_year = today.year - 1
     @one_hundred_years_ago = today.prev_year(100).year
-    
+
     if last_friday_of_the_month(0) < @now
       last_friday_of_the_month(1)
       diary_delivery_range(1)
@@ -66,8 +66,9 @@ class GroupsController < ApplicationController
     flash[:success] = t('notice.delivery_setup_complete')
     redirect_to delivery_setup_group_path(@group)
   end
-  
+
   private
+
   def group_params
     params.require(:group).permit(:name, :explanation, :delivery_start_year, :receiving_date)
   end
@@ -85,14 +86,12 @@ class GroupsController < ApplicationController
     relevant_date = @now.since(how_many_months.months)
     (0..6).each do |num|
       friday_check = relevant_date.end_of_month - num.days
-      if friday_check.wday == 5
-        return @last_friday = friday_check.beginning_of_day + 60 * 60 * 19
-      end
+      return @last_friday = friday_check.beginning_of_day + 60 * 60 * 19 if friday_check.wday == 5
     end
   end
 
   def diary_delivery_range(how_many_months)
-    case @group.receiving_date 
+    case @group.receiving_date
     when "one_month_ago"
       diary_of_which_year_and_month(how_many_months, 1)
     when "two_months_ago"
