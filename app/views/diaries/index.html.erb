@@ -5,9 +5,11 @@
     <%= link_to t('.new_diary_contribution_here'), new_group_diary_path(@group), data: {"turbolinks"=>false}, class: "btn btn-primary btn-lg bi bi-pencil-fill" %>
   </div>
 
-  <div class="p-2">
-    <%= link_to t('.diary_delivery_setting_here'), delivery_setup_group_path(@group), class: "btn btn-secondary btn-lg bi bi-stopwatch-fill" %>
-  </div>
+  <% if @group_admin %>
+    <div class="p-2">
+      <%= link_to t('.diary_delivery_setting_here'), delivery_setup_group_path(@group), class: "btn btn-secondary btn-lg bi bi-stopwatch-fill" %>
+    </div>
+  <% end %>
 
   <div class="p-2">
     <%= link_to t('.the_event_address_here'), group_maps_path(@group), data: {"turbolinks"=>false}, class: "btn btn-info btn-lg bi bi-map-fill" %>
