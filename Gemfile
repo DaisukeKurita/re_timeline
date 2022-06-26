@@ -25,6 +25,7 @@ gem 'enum_help'
 gem 'fog-aws'
 gem 'unicorn'
 gem 'seed-fu'
+gem 'rubocop', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

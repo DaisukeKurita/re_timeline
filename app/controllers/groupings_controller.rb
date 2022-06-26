@@ -2,11 +2,11 @@ class GroupingsController < ApplicationController
   before_action :authenticate_user!
   include Common
   before_action :set_group_id
-  before_action :set_grouping, only: %i[ update destroy ]
-  before_action :group_admin_members?, only: %i[ create update destroy ]
+  before_action :set_grouping, only: %i[update destroy]
+  before_action :group_admin_members?, only: %i[create update destroy]
 
   def create
-    @user = User.find_by(email: params[:email]) 
+    @user = User.find_by(email: params[:email])
     user_exist? and return
     email_exist? and return
     if @user
@@ -17,7 +17,7 @@ class GroupingsController < ApplicationController
       render template: "groups/show"
     end
   end
-  
+
   def update
     if @grouping.update(admin: params[:admin])
       grouping_admin_grant_or_release
@@ -38,14 +38,14 @@ class GroupingsController < ApplicationController
   end
 
   private
-  
+
   def email_exist?
-    if @group.members.exists?(email: @user.email)
-      flash[:warning] = t('notice.registered_as_a_member', email: @user.email) 
-      redirect_to group_path(@group)
-    end
+    return unless @group.members.exists?(email: @user.email)
+
+    flash[:warning] = t('notice.registered_as_a_member', email: @user.email)
+    redirect_to group_path(@group)
   end
-  
+
   def user_exist?
     if !params[:email].present?
       flash[:warning] = t('notice.email_blank')
@@ -59,11 +59,10 @@ class GroupingsController < ApplicationController
   def grouping_admin_grant_or_release
     if @grouping.admin
       flash[:success] = t('notice.grant_admin_privilege', email: @grouping.user.email)
-      redirect_to group_path(@group)
     else
       flash[:danger] = t('notice.release_admin_privilege', email: @grouping.user.email)
-      redirect_to group_path(@group)
     end
+    redirect_to group_path(@group)
   end
 
   def group_admin_members?

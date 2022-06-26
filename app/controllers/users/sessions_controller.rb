@@ -1,7 +1,7 @@
 class Users::SessionsController < Devise::SessionsController
   def guest_sign_in
     user = User.guest
-    guest_id = User.find_by(email:'guest@example.com').id
+    guest_id = User.find_by(email: 'guest@example.com').id
     unless Grouping.where(user_id: guest_id).present?
       num = 0
       5.times do

@@ -8,7 +8,7 @@ module DeviseHelper
     when "error"
       "danger"
     else
-      "#{key}"
+      key.to_s
     end
   end
 end
