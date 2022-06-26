@@ -27,9 +27,11 @@
           <div class="p-3">
             <%= link_to t('diaries.index.diary_index'), group_diaries_path(@group), class: "bi bi-clipboard-data" %>
           </div>
-          <div class="p-3">
-            <%= link_to t('diaries.index.delivery_setup'),  delivery_setup_group_path(@group), class: "bi bi-stopwatch-fill" %>
-          </div>
+          <% if @group_admin %>
+            <div class="p-3">
+              <%= link_to t('diaries.index.delivery_setup'),  delivery_setup_group_path(@group), class: "bi bi-stopwatch-fill" %>
+            </div>
+          <% end %>
         <% elsif controller_name == "groups" %>
           <div  class="p-3">
             <%= link_to t('groups.index.group_new_registration'), new_group_path, class: "bi bi-plus-circle" %>

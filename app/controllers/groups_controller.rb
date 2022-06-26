@@ -49,6 +49,8 @@ class GroupsController < ApplicationController
   end
 
   def delivery_setup
+    redirect_to group_diaries_path(@group) unless group_admin?
+
     today = Date.today
     @last_year = today.year - 1
     @one_hundred_years_ago = today.prev_year(100).year
